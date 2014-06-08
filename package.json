@@ -1,0 +1,24 @@
+{
+  "name": "typical",
+  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "version": "0.0.0",
+  "description": "For type-checking Javascript values.",
+  "repository": "https://github.com/75lb/typical.git",
+  "main": "./lib/typical.js",
+  "keywords": [
+    "type",
+    "checking",
+    "check",
+    "value",
+    "valid"
+  ],
+  "scripts": {
+    "test": "tape test/*.js",
+    "lint": "jshint lib/*.js test/*.js; echo",
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^0.1.0",
+    "tape": "^2.13.2"
+  }
+}
