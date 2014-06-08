@@ -17,12 +17,14 @@ For type-checking Javascript values.
 
 
 <a name="module_typical.isNumber"></a>
-###t.isNumber()
+###t.isNumber(n)
 Returns true if input is a number
 
 
+- n `*` the input to test  
 
 
+**Returns**: `boolean`
 
 ####Example
 ```js
@@ -38,8 +40,6 @@ true
 true
 > w.isNumber(6.2e5)
 true
-> w.isNumber(a)
-false
 > w.isNumber(NaN)
 false
 > w.isNumber(Infinity)
