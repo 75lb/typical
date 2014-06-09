@@ -7,8 +7,16 @@
 #typical
 For type-checking Javascript values.
 
+####Example
+```js
+var t = require("typical");
+```
 
 
+
+**Contents**
+* [isNumber(n)](#module_typical.isNumber)
+* [isPlainObject(input)](#module_typical.isPlainObject)
 
 
 
@@ -17,7 +25,7 @@ For type-checking Javascript values.
 
 
 <a name="module_typical.isNumber"></a>
-###t.isNumber(n)
+###isNumber(n)
 Returns true if input is a number
 
 
@@ -49,7 +57,7 @@ false
 
 
 <a name="module_typical.isPlainObject"></a>
-###t.isPlainObject(input)
+###isPlainObject(input)
 Returns true if input type is `object` and not an Array
 
 
