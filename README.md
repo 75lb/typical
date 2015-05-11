@@ -47,7 +47,7 @@ false
 ```
 <a name="module_typical.isPlainObject"></a>
 ### t.isPlainObject(input) ⇒ <code>boolean</code>
-Returns true if input type is `object` and not an Array
+Returns true if input `typeof` is `object` and directly decends from `Object` (and not `Array`, `RegExp` etc.)
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 

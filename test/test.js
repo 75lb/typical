@@ -14,11 +14,11 @@ test(".isNumber(value)", function(t){
 });
 
 test(".isPlainObject(value)", function(t){
-    t.equal(type.isPlainObject(new Date()), true, "new Date() is an object");
-    t.equal(type.isPlainObject({ clive: "hater" }), true, "{} is an object");
-    t.equal(type.isPlainObject([ 0, 1 ]), false, "Array is not an object");
-    t.equal(type.isPlainObject(/test/), false, "RegExp is not an object");
-    t.equal(type.isPlainObject(1), false, "1 is not an object");
-    t.equal(type.isPlainObject("one"), false, "'one' is not an object");
+    t.equal(type.isPlainObject(new Date()), false, "new Date() is not a plain object");
+    t.equal(type.isPlainObject({ clive: "hater" }), true, "{} is a plain object");
+    t.equal(type.isPlainObject([ 0, 1 ]), false, "Array is not a plain object");
+    t.equal(type.isPlainObject(/test/), false, "RegExp is not a plain object");
+    t.equal(type.isPlainObject(1), false, "1 is not a plain object");
+    t.equal(type.isPlainObject("one"), false, "'one' is not a plain object");
     t.end();
 });
