@@ -13,14 +13,14 @@ var t = require("typical");
 ```
 
 * [typical](#module_typical)
-  * [~isNumber(n)](#module_typical..isNumber) ⇒ <code>boolean</code>
-  * [~isPlainObject(input)](#module_typical..isPlainObject) ⇒ <code>boolean</code>
+  * [.isNumber(n)](#module_typical.isNumber) ⇒ <code>boolean</code>
+  * [.isPlainObject(input)](#module_typical.isPlainObject) ⇒ <code>boolean</code>
 
-<a name="module_typical..isNumber"></a>
-### typical~isNumber(n) ⇒ <code>boolean</code>
+<a name="module_typical.isNumber"></a>
+### t.isNumber(n) ⇒ <code>boolean</code>
 Returns true if input is a number
 
-**Kind**: inner method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of <code>[typical](#module_typical)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -45,11 +45,11 @@ false
 > t.isNumber(Infinity)
 false
 ```
-<a name="module_typical..isPlainObject"></a>
-### typical~isPlainObject(input) ⇒ <code>boolean</code>
+<a name="module_typical.isPlainObject"></a>
+### t.isPlainObject(input) ⇒ <code>boolean</code>
 Returns true if input type is `object` and not an Array
 
-**Kind**: inner method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of <code>[typical](#module_typical)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
