@@ -20,5 +20,6 @@ test(".isPlainObject(value)", function(t){
     t.equal(type.isPlainObject(/test/), false, "RegExp is false");
     t.equal(type.isPlainObject(1), false, "1 is false");
     t.equal(type.isPlainObject("one"), false, "'one' is false");
+    t.equal(type.isPlainObject(null), false, "null is false");
     t.end();
 });
