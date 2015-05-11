@@ -3,85 +3,72 @@
 [![Build Status](https://travis-ci.org/75lb/typical.svg?branch=master)](https://travis-ci.org/75lb/typical)
 [![Dependency Status](https://david-dm.org/75lb/typical.svg)](https://david-dm.org/75lb/typical)
 
-
-#typical
+<a name="module_typical"></a>
+## typical
 For type-checking Javascript values.
 
-####Example
+**Example**  
 ```js
 var t = require("typical");
 ```
 
+* [typical](#module_typical)
+  * [~isNumber(n)](#module_typical..isNumber) ⇒ <code>boolean</code>
+  * [~isPlainObject(input)](#module_typical..isPlainObject) ⇒ <code>boolean</code>
 
-
-**Contents**
-* [isNumber(n)](#module_typical.isNumber)
-* [isPlainObject(input)](#module_typical.isPlainObject)
-
-
-
-
-
-
-
-<a name="module_typical.isNumber"></a>
-###isNumber(n)
+<a name="module_typical..isNumber"></a>
+### typical~isNumber(n) ⇒ <code>boolean</code>
 Returns true if input is a number
 
+**Kind**: inner method of <code>[typical](#module_typical)</code>  
 
-- n `*` the input to test  
+| Param | Type | Description |
+| --- | --- | --- |
+| n | <code>\*</code> | the input to test |
 
-
-**Returns**: `boolean`
-
-####Example
+**Example**  
 ```js
-> w.isNumber(0)
+> t.isNumber(0)
 true
-> w.isNumber(1)
+> t.isNumber(1)
 true
-> w.isNumber(1.1)
+> t.isNumber(1.1)
 true
-> w.isNumber(0xff)
+> t.isNumber(0xff)
 true
-> w.isNumber(0644)
+> t.isNumber(0644)
 true
-> w.isNumber(6.2e5)
+> t.isNumber(6.2e5)
 true
-> w.isNumber(NaN)
+> t.isNumber(NaN)
 false
-> w.isNumber(Infinity)
+> t.isNumber(Infinity)
 false
 ```
-
-
-
-<a name="module_typical.isPlainObject"></a>
-###isPlainObject(input)
+<a name="module_typical..isPlainObject"></a>
+### typical~isPlainObject(input) ⇒ <code>boolean</code>
 Returns true if input type is `object` and not an Array
 
+**Kind**: inner method of <code>[typical](#module_typical)</code>  
 
-- input `*` the input to test  
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
 
-
-**Returns**: `boolean`
-
-####Example
+**Example**  
 ```js
-> w.isPlainObject(new Date())
+> t.isPlainObject(new Date())
 true
-> w.isPlainObject({ clive: "hater" })
+> t.isPlainObject({ clive: "hater" })
 true
-> w.isPlainObject([ 0, 1 ])
+> t.isPlainObject([ 0, 1 ])
+false
+> t.isPlainObject(1)
+false
+> t.isPlainObject(/test/)
 false
 ```
 
+* * *
 
-
-
-
-
-
-
-
-
+&copy; 2015 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
