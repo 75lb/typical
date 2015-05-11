@@ -57,10 +57,10 @@ Returns true if input `typeof` is `object` and directly decends from `Object` (a
 
 **Example**  
 ```js
-> t.isPlainObject(new Date())
-true
 > t.isPlainObject({ clive: "hater" })
 true
+> t.isPlainObject(new Date())
+false
 > t.isPlainObject([ 0, 1 ])
 false
 > t.isPlainObject(1)
