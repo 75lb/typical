@@ -15,6 +15,7 @@ var t = require("typical");
 * [typical](#module_typical)
   * [.isNumber(n)](#module_typical.isNumber) ⇒ <code>boolean</code>
   * [.isPlainObject(input)](#module_typical.isPlainObject) ⇒ <code>boolean</code>
+  * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 ### t.isNumber(n) ⇒ <code>boolean</code>
@@ -47,7 +48,7 @@ false
 ```
 <a name="module_typical.isPlainObject"></a>
 ### t.isPlainObject(input) ⇒ <code>boolean</code>
-Returns true if input `typeof` is `object` and directly decends from `Object` (and not `Array`, `RegExp` etc.)
+A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 
@@ -67,6 +68,23 @@ false
 false
 > t.isPlainObject(/test/)
 false
+```
+<a name="module_typical.isArrayLike"></a>
+### t.isArrayLike(input) ⇒ <code>boolean</code>
+An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+**Example**  
+```js
+function sum(x, y){
+    console.log(t.isArrayLike(arguments));
+    // prints `true`
+}
 ```
 
 * * *
