@@ -23,3 +23,12 @@ test(".isPlainObject(value)", function(t){
     t.equal(type.isPlainObject(null), false, "null is false");
     t.end();
 });
+
+test(".isPlainObject(value)", function(t){
+    t.strictEqual(type.isDefined({}), true);
+    t.strictEqual(type.isDefined({}.one), false);
+    t.strictEqual(type.isDefined(0), true);
+    t.strictEqual(type.isDefined(null), true);
+    t.strictEqual(type.isDefined(undefined), false);
+    t.end();
+});

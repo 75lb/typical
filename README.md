@@ -17,6 +17,7 @@ var t = require("typical");
   * [.isPlainObject(input)](#module_typical.isPlainObject) ⇒ <code>boolean</code>
   * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
   * [.isObject(input)](#module_typical.isObject) ⇒ <code>boolean</code>
+  * [.isDefined(input)](#module_typical.isDefined) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 ### t.isNumber(n) ⇒ <code>boolean</code>
@@ -90,6 +91,16 @@ function sum(x, y){
 <a name="module_typical.isObject"></a>
 ### t.isObject(input) ⇒ <code>boolean</code>
 returns true if the typeof input is `"object"`, but not null!
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isDefined"></a>
+### t.isDefined(input) ⇒ <code>boolean</code>
+Returns true if the input value is defined
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 
