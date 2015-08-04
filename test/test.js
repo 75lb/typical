@@ -32,3 +32,23 @@ test(".isPlainObject(value)", function(t){
     t.strictEqual(type.isDefined(undefined), false);
     t.end();
 });
+
+test(".isString(value)", function(t){
+    t.equal(type.isString(0), false);
+    t.equal(type.isString("1"), true);
+    t.equal(type.isString(1.1), false);
+    t.equal(type.isString(NaN), false);
+    t.equal(type.isString(Infinity), false);
+    t.end();
+});
+
+test(".isBoolean(value)", function(t){
+    t.equal(type.isBoolean(true), true);
+    t.equal(type.isBoolean(false), true);
+    t.equal(type.isBoolean(0), false);
+    t.equal(type.isBoolean("1"), false);
+    t.equal(type.isBoolean(1.1), false);
+    t.equal(type.isBoolean(NaN), false);
+    t.equal(type.isBoolean(Infinity), false);
+    t.end();
+});
