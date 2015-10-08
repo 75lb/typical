@@ -5,6 +5,7 @@
   "description": "For type-checking Javascript values.",
   "repository": "https://github.com/75lb/typical.git",
   "main": "./lib/typical.js",
+  "license": "MIT",
   "keywords": [
     "type",
     "checking",
@@ -14,7 +15,6 @@
   ],
   "scripts": {
     "test": "tape test/*.js",
-    "lint": "jshint lib/*.js test/*.js; echo",
     "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
   },
   "devDependencies": {

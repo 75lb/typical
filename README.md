@@ -2,6 +2,7 @@
 [![npm module downloads per month](http://img.shields.io/npm/dm/typical.svg)](https://www.npmjs.org/package/typical)
 [![Build Status](https://travis-ci.org/75lb/typical.svg?branch=master)](https://travis-ci.org/75lb/typical)
 [![Dependency Status](https://david-dm.org/75lb/typical.svg)](https://david-dm.org/75lb/typical)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 <a name="module_typical"></a>
 ## typical
@@ -9,7 +10,7 @@ For type-checking Javascript values.
 
 **Example**  
 ```js
-var t = require("typical");
+var t = require("typical")
 ```
 
 * [typical](#module_typical)
@@ -86,7 +87,7 @@ An array-like value has all the properties of an array, but is not an array inst
 **Example**  
 ```js
 function sum(x, y){
-    console.log(t.isArrayLike(arguments));
+    console.log(t.isArrayLike(arguments))
     // prints `true`
 }
 ```
