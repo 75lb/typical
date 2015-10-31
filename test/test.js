@@ -52,3 +52,16 @@ test('.isBoolean(value)', function (t) {
   t.equal(type.isBoolean(Infinity), false)
   t.end()
 })
+
+test('.isFunction(value)', function (t) {
+  t.equal(type.isFunction(true), false)
+  t.equal(type.isFunction({}), false)
+  t.equal(type.isFunction(0), false)
+  t.equal(type.isFunction('1'), false)
+  t.equal(type.isFunction(1.1), false)
+  t.equal(type.isFunction(NaN), false)
+  t.equal(type.isFunction(Infinity), false)
+  t.equal(type.isFunction(function(){}), true)
+  t.equal(type.isFunction(Date), true)
+  t.end()
+})

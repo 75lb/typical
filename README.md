@@ -21,6 +21,7 @@ var t = require("typical")
   * [.isDefined(input)](#module_typical.isDefined) ⇒ <code>boolean</code>
   * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
   * [.isBoolean(input)](#module_typical.isBoolean) ⇒ <code>boolean</code>
+  * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 ### t.isNumber(n) ⇒ <code>boolean</code>
@@ -124,6 +125,16 @@ Returns true if the input value is a string
 <a name="module_typical.isBoolean"></a>
 ### t.isBoolean(input) ⇒ <code>boolean</code>
 Returns true if the input value is a boolean
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isFunction"></a>
+### t.isFunction(input) ⇒ <code>boolean</code>
+Returns true if the input value is a function
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 
