@@ -14,14 +14,14 @@ var t = require("typical")
 ```
 
 * [typical](#module_typical)
-  * [.isNumber(n)](#module_typical.isNumber) ⇒ <code>boolean</code>
-  * [.isPlainObject(input)](#module_typical.isPlainObject) ⇒ <code>boolean</code>
-  * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
-  * [.isObject(input)](#module_typical.isObject) ⇒ <code>boolean</code>
-  * [.isDefined(input)](#module_typical.isDefined) ⇒ <code>boolean</code>
-  * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
-  * [.isBoolean(input)](#module_typical.isBoolean) ⇒ <code>boolean</code>
-  * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
+    * [.isNumber(n)](#module_typical.isNumber) ⇒ <code>boolean</code>
+    * [.isPlainObject(input)](#module_typical.isPlainObject) ⇒ <code>boolean</code>
+    * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
+    * [.isObject(input)](#module_typical.isObject) ⇒ <code>boolean</code>
+    * [.isDefined(input)](#module_typical.isDefined) ⇒ <code>boolean</code>
+    * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
+    * [.isBoolean(input)](#module_typical.isBoolean) ⇒ <code>boolean</code>
+    * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 ### t.isNumber(n) ⇒ <code>boolean</code>
