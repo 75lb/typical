@@ -65,3 +65,18 @@ test('.isFunction(value)', function (t) {
   t.equal(type.isFunction(Date), true)
   t.end()
 })
+
+test('.isClass(value)', function (t) {
+  t.equal(type.isClass(true), false)
+  t.equal(type.isClass({}), false)
+  t.equal(type.isClass(0), false)
+  t.equal(type.isClass('1'), false)
+  t.equal(type.isClass(1.1), false)
+  t.equal(type.isClass(NaN), false)
+  t.equal(type.isClass(Infinity), false)
+  t.equal(type.isClass(function(){}), false)
+  t.equal(type.isClass(class {}), true)
+  t.equal(type.isClass(Date), false)
+  t.equal(type.isClass(), false)
+  t.end()
+})
