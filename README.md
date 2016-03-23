@@ -5,6 +5,7 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 <a name="module_typical"></a>
+
 ## typical
 For type-checking Javascript values.
 
@@ -24,6 +25,7 @@ var t = require("typical")
     * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
+
 ### t.isNumber(n) ⇒ <code>boolean</code>
 Returns true if input is a number
 
@@ -53,6 +55,7 @@ false
 false
 ```
 <a name="module_typical.isPlainObject"></a>
+
 ### t.isPlainObject(input) ⇒ <code>boolean</code>
 A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
 
@@ -76,6 +79,7 @@ false
 false
 ```
 <a name="module_typical.isArrayLike"></a>
+
 ### t.isArrayLike(input) ⇒ <code>boolean</code>
 An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
 
@@ -93,6 +97,7 @@ function sum(x, y){
 }
 ```
 <a name="module_typical.isObject"></a>
+
 ### t.isObject(input) ⇒ <code>boolean</code>
 returns true if the typeof input is `"object"`, but not null!
 
@@ -103,6 +108,7 @@ returns true if the typeof input is `"object"`, but not null!
 | input | <code>\*</code> | the input to test |
 
 <a name="module_typical.isDefined"></a>
+
 ### t.isDefined(input) ⇒ <code>boolean</code>
 Returns true if the input value is defined
 
@@ -113,6 +119,7 @@ Returns true if the input value is defined
 | input | <code>\*</code> | the input to test |
 
 <a name="module_typical.isString"></a>
+
 ### t.isString(input) ⇒ <code>boolean</code>
 Returns true if the input value is a string
 
@@ -123,6 +130,7 @@ Returns true if the input value is a string
 | input | <code>\*</code> | the input to test |
 
 <a name="module_typical.isBoolean"></a>
+
 ### t.isBoolean(input) ⇒ <code>boolean</code>
 Returns true if the input value is a boolean
 
@@ -133,6 +141,7 @@ Returns true if the input value is a boolean
 | input | <code>\*</code> | the input to test |
 
 <a name="module_typical.isFunction"></a>
+
 ### t.isFunction(input) ⇒ <code>boolean</code>
 Returns true if the input value is a function
 
@@ -145,4 +154,4 @@ Returns true if the input value is a function
 
 * * *
 
-&copy; 2015 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2014-16 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
