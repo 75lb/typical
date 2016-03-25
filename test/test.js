@@ -89,6 +89,11 @@ if (evaluates('class Something {}')) {
     t.equal(result, true)
     t.equal(type.isClass(Date), false)
     t.equal(type.isClass(), false)
+
+    function broken () { }
+    broken.toString = function () { throw new Error() }
+    t.equal(type.isClass(broken), false)
+
     t.end()
   })
 }
