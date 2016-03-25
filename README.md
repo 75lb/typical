@@ -11,7 +11,7 @@ For type-checking Javascript values.
 
 **Example**  
 ```js
-var t = require("typical")
+var t = require('typical')
 ```
 
 * [typical](#module_typical)
@@ -67,7 +67,7 @@ A plain object is a simple object literal, it is not an instance of a class. Ret
 
 **Example**  
 ```js
-> t.isPlainObject({ clive: "hater" })
+> t.isPlainObject({ clive: 'hater' })
 true
 > t.isPlainObject(new Date())
 false
@@ -99,7 +99,7 @@ function sum(x, y){
 <a name="module_typical.isObject"></a>
 
 ### t.isObject(input) ⇒ <code>boolean</code>
-returns true if the typeof input is `"object"`, but not null!
+returns true if the typeof input is `'object'`, but not null!
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 
