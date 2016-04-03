@@ -1,6 +1,7 @@
 'use strict'
 var test = require('tape')
 var type = require('../')
+var detect = require('feature-detect-es6')
 
 function evaluates (statement) {
   try {
@@ -86,30 +87,40 @@ test('.isPrimitive(value)', function (t) {
   t.equal(type.isPrimitive(function () {}), false)
   t.equal(type.isPrimitive(Date), false)
   t.equal(type.isPrimitive(null), true)
-  t.equal(type.isPrimitive(Symbol()), true)
   t.equal(type.isPrimitive(undefined), true)
   t.end()
 })
 
-if (evaluates('class Something {}')) {
-  test('.isClass(value)', function (t) {
-    t.equal(type.isClass(true), false)
-    t.equal(type.isClass({}), false)
-    t.equal(type.isClass(0), false)
-    t.equal(type.isClass('1'), false)
-    t.equal(type.isClass(1.1), false)
-    t.equal(type.isClass(NaN), false)
-    t.equal(type.isClass(Infinity), false)
-    t.equal(type.isClass(function () {}), false)
+if (detect.symbols()) {
+  test('.isPrimitive(value) ES6', function (t) {
+    t.equal(type.isPrimitive(Symbol()), true)
+    t.end()
+  })
+}
+
+test('.isClass(value)', function (t) {
+  t.equal(type.isClass(true), false)
+  t.equal(type.isClass({}), false)
+  t.equal(type.isClass(0), false)
+  t.equal(type.isClass('1'), false)
+  t.equal(type.isClass(1.1), false)
+  t.equal(type.isClass(NaN), false)
+  t.equal(type.isClass(Infinity), false)
+  t.equal(type.isClass(function () {}), false)
+  t.equal(type.isClass(Date), false)
+  t.equal(type.isClass(), false)
+
+  function broken () { }
+  broken.toString = function () { throw new Error() }
+  t.equal(type.isClass(broken), false)
+
+  t.end()
+})
+
+if (detect.class()) {
+  test('.isClass(value) ES6', function (t) {
     var result = eval('type.isClass(class {})')
     t.equal(result, true)
-    t.equal(type.isClass(Date), false)
-    t.equal(type.isClass(), false)
-
-    function broken () { }
-    broken.toString = function () { throw new Error() }
-    t.equal(type.isClass(broken), false)
-
     t.end()
   })
 }
