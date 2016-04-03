@@ -75,6 +75,22 @@ test('.isFunction(value)', function (t) {
   t.end()
 })
 
+test('.isPrimitive(value)', function (t) {
+  t.equal(type.isPrimitive(true), true)
+  t.equal(type.isPrimitive({}), false)
+  t.equal(type.isPrimitive(0), true)
+  t.equal(type.isPrimitive('1'), true)
+  t.equal(type.isPrimitive(1.1), true)
+  t.equal(type.isPrimitive(NaN), true)
+  t.equal(type.isPrimitive(Infinity), true)
+  t.equal(type.isPrimitive(function () {}), false)
+  t.equal(type.isPrimitive(Date), false)
+  t.equal(type.isPrimitive(null), true)
+  t.equal(type.isPrimitive(Symbol()), true)
+  t.equal(type.isPrimitive(undefined), true)
+  t.end()
+})
+
 if (evaluates('class Something {}')) {
   test('.isClass(value)', function (t) {
     t.equal(type.isClass(true), false)
