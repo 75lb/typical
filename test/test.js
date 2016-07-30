@@ -124,3 +124,22 @@ if (detect.class()) {
     t.end()
   })
 }
+
+if (detect.promises()) {
+  test('.isPromise', function (t) {
+    t.strictEqual(type.isPromise(Promise.resolve()), true)
+    t.strictEqual(type.isPromise(Promise), false)
+    t.strictEqual(type.isPromise(true), false)
+    t.strictEqual(type.isPromise({}), false)
+    t.strictEqual(type.isPromise(0), false)
+    t.strictEqual(type.isPromise('1'), false)
+    t.strictEqual(type.isPromise(1.1), false)
+    t.strictEqual(type.isPromise(NaN), false)
+    t.strictEqual(type.isPromise(Infinity), false)
+    t.strictEqual(type.isPromise(function () {}), false)
+    t.strictEqual(type.isPromise(Date), false)
+    t.strictEqual(type.isPromise(), false)
+    t.strictEqual(type.isPromise({ then: function () {} }), true)
+    t.end()
+  })
+}

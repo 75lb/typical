@@ -23,6 +23,9 @@ var t = require('typical')
     * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
     * [.isBoolean(input)](#module_typical.isBoolean) ⇒ <code>boolean</code>
     * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
+    * [.isClass(input)](#module_typical.isClass) ⇒ <code>boolean</code>
+    * [.isPrimitive(input)](#module_typical.isPrimitive) ⇒ <code>boolean</code>
+    * [.isPromise(input)](#module_typical.isPromise) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 
@@ -144,6 +147,39 @@ Returns true if the input value is a boolean
 
 ### t.isFunction(input) ⇒ <code>boolean</code>
 Returns true if the input value is a function
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isClass"></a>
+
+### t.isClass(input) ⇒ <code>boolean</code>
+Returns true if the input value is an es2015 `class`.
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isPrimitive"></a>
+
+### t.isPrimitive(input) ⇒ <code>boolean</code>
+Returns true if the input is a string, number, symbol, boolean, null or undefined value.
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isPromise"></a>
+
+### t.isPromise(input) ⇒ <code>boolean</code>
+Returns true if the input is a string, number, symbol, boolean, null or undefined value.
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 
