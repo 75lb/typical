@@ -11,7 +11,7 @@ For type-checking Javascript values.
 
 **Example**  
 ```js
-var t = require('typical')
+const t = require('typical')
 ```
 
 * [typical](#module_typical)
