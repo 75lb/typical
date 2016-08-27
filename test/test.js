@@ -86,7 +86,7 @@ runner.test('.isPrimitive(value)', function () {
   a.strictEqual(type.isPrimitive(undefined), true)
 })
 
-if (detect.symbols()) {
+if (detect.symbols() && typeof Symbol() === 'symbol') {
   runner.test('.isPrimitive(value) ES6', function () {
     a.strictEqual(type.isPrimitive(Symbol()), true)
   })
