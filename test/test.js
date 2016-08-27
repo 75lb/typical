@@ -1,7 +1,9 @@
 'use strict'
-var test = require('tape')
+var TestRunner = require('test-runner')
 var type = require('../')
 var detect = require('feature-detect-es6')
+var runner = new TestRunner()
+var a = require('core-assert')
 
 function evaluates (statement) {
   try {
@@ -12,134 +14,142 @@ function evaluates (statement) {
   }
 }
 
-test('.isNumber(value)', function (t) {
-  t.equal(type.isNumber(0), true)
-  t.equal(type.isNumber(1), true)
-  t.equal(type.isNumber(1.1), true)
-  t.equal(type.isNumber(0xff), true)
-  t.equal(type.isNumber(6.2e5), true)
-  t.equal(type.isNumber(NaN), false)
-  t.equal(type.isNumber(Infinity), false)
-  t.end()
+runner.test('.isNumber(value)', function () {
+  a.strictEqual(type.isNumber(0), true)
+  a.strictEqual(type.isNumber(1), true)
+  a.strictEqual(type.isNumber(1.1), true)
+  a.strictEqual(type.isNumber(0xff), true)
+  a.strictEqual(type.isNumber(6.2e5), true)
+  a.strictEqual(type.isNumber(NaN), false)
+  a.strictEqual(type.isNumber(Infinity), false)
 })
 
-test('.isPlainObject(value)', function (t) {
-  t.equal(type.isPlainObject({ clive: 'hater' }), true, '{} is true')
-  t.equal(type.isPlainObject(new Date()), false, 'new Date() is false')
-  t.equal(type.isPlainObject([ 0, 1 ]), false, 'Array is false')
-  t.equal(type.isPlainObject(/test/), false, 'RegExp is false')
-  t.equal(type.isPlainObject(1), false, '1 is false')
-  t.equal(type.isPlainObject('one'), false, "'one' is false")
-  t.equal(type.isPlainObject(null), false, 'null is false')
-  t.end()
+runner.test('.isPlainObject(value)', function () {
+  a.strictEqual(type.isPlainObject({ clive: 'hater' }), true, '{} is true')
+  a.strictEqual(type.isPlainObject(new Date()), false, 'new Date() is false')
+  a.strictEqual(type.isPlainObject([ 0, 1 ]), false, 'Array is false')
+  a.strictEqual(type.isPlainObject(/test/), false, 'RegExp is false')
+  a.strictEqual(type.isPlainObject(1), false, '1 is false')
+  a.strictEqual(type.isPlainObject('one'), false, "'one' is false")
+  a.strictEqual(type.isPlainObject(null), false, 'null is false')
 })
 
-test('.isPlainObject(value)', function (t) {
-  t.strictEqual(type.isDefined({}), true)
-  t.strictEqual(type.isDefined({}.one), false)
-  t.strictEqual(type.isDefined(0), true)
-  t.strictEqual(type.isDefined(null), true)
-  t.strictEqual(type.isDefined(undefined), false)
-  t.end()
+runner.test('.isDefined(value)', function () {
+  a.strictEqual(type.isDefined({}), true)
+  a.strictEqual(type.isDefined({}.one), false)
+  a.strictEqual(type.isDefined(0), true)
+  a.strictEqual(type.isDefined(null), true)
+  a.strictEqual(type.isDefined(undefined), false)
 })
 
-test('.isString(value)', function (t) {
-  t.equal(type.isString(0), false)
-  t.equal(type.isString('1'), true)
-  t.equal(type.isString(1.1), false)
-  t.equal(type.isString(NaN), false)
-  t.equal(type.isString(Infinity), false)
-  t.end()
+runner.test('.isString(value)', function () {
+  a.strictEqual(type.isString(0), false)
+  a.strictEqual(type.isString('1'), true)
+  a.strictEqual(type.isString(1.1), false)
+  a.strictEqual(type.isString(NaN), false)
+  a.strictEqual(type.isString(Infinity), false)
 })
 
-test('.isBoolean(value)', function (t) {
-  t.equal(type.isBoolean(true), true)
-  t.equal(type.isBoolean(false), true)
-  t.equal(type.isBoolean(0), false)
-  t.equal(type.isBoolean('1'), false)
-  t.equal(type.isBoolean(1.1), false)
-  t.equal(type.isBoolean(NaN), false)
-  t.equal(type.isBoolean(Infinity), false)
-  t.end()
+runner.test('.isBoolean(value)', function () {
+  a.strictEqual(type.isBoolean(true), true)
+  a.strictEqual(type.isBoolean(false), true)
+  a.strictEqual(type.isBoolean(0), false)
+  a.strictEqual(type.isBoolean('1'), false)
+  a.strictEqual(type.isBoolean(1.1), false)
+  a.strictEqual(type.isBoolean(NaN), false)
+  a.strictEqual(type.isBoolean(Infinity), false)
 })
 
-test('.isFunction(value)', function (t) {
-  t.equal(type.isFunction(true), false)
-  t.equal(type.isFunction({}), false)
-  t.equal(type.isFunction(0), false)
-  t.equal(type.isFunction('1'), false)
-  t.equal(type.isFunction(1.1), false)
-  t.equal(type.isFunction(NaN), false)
-  t.equal(type.isFunction(Infinity), false)
-  t.equal(type.isFunction(function () {}), true)
-  t.equal(type.isFunction(Date), true)
-  t.end()
+runner.test('.isFunction(value)', function () {
+  a.strictEqual(type.isFunction(true), false)
+  a.strictEqual(type.isFunction({}), false)
+  a.strictEqual(type.isFunction(0), false)
+  a.strictEqual(type.isFunction('1'), false)
+  a.strictEqual(type.isFunction(1.1), false)
+  a.strictEqual(type.isFunction(NaN), false)
+  a.strictEqual(type.isFunction(Infinity), false)
+  a.strictEqual(type.isFunction(function () {}), true)
+  a.strictEqual(type.isFunction(Date), true)
 })
 
-test('.isPrimitive(value)', function (t) {
-  t.equal(type.isPrimitive(true), true)
-  t.equal(type.isPrimitive({}), false)
-  t.equal(type.isPrimitive(0), true)
-  t.equal(type.isPrimitive('1'), true)
-  t.equal(type.isPrimitive(1.1), true)
-  t.equal(type.isPrimitive(NaN), true)
-  t.equal(type.isPrimitive(Infinity), true)
-  t.equal(type.isPrimitive(function () {}), false)
-  t.equal(type.isPrimitive(Date), false)
-  t.equal(type.isPrimitive(null), true)
-  t.equal(type.isPrimitive(undefined), true)
-  t.end()
+runner.test('.isPrimitive(value)', function () {
+  a.strictEqual(type.isPrimitive(true), true)
+  a.strictEqual(type.isPrimitive({}), false)
+  a.strictEqual(type.isPrimitive(0), true)
+  a.strictEqual(type.isPrimitive('1'), true)
+  a.strictEqual(type.isPrimitive(1.1), true)
+  a.strictEqual(type.isPrimitive(NaN), true)
+  a.strictEqual(type.isPrimitive(Infinity), true)
+  a.strictEqual(type.isPrimitive(function () {}), false)
+  a.strictEqual(type.isPrimitive(Date), false)
+  a.strictEqual(type.isPrimitive(null), true)
+  a.strictEqual(type.isPrimitive(undefined), true)
 })
 
 if (detect.symbols()) {
-  test('.isPrimitive(value) ES6', function (t) {
-    t.equal(type.isPrimitive(Symbol()), true)
-    t.end()
+  runner.test('.isPrimitive(value) ES6', function () {
+    a.strictEqual(type.isPrimitive(Symbol()), true)
   })
 }
 
-test('.isClass(value)', function (t) {
-  t.equal(type.isClass(true), false)
-  t.equal(type.isClass({}), false)
-  t.equal(type.isClass(0), false)
-  t.equal(type.isClass('1'), false)
-  t.equal(type.isClass(1.1), false)
-  t.equal(type.isClass(NaN), false)
-  t.equal(type.isClass(Infinity), false)
-  t.equal(type.isClass(function () {}), false)
-  t.equal(type.isClass(Date), false)
-  t.equal(type.isClass(), false)
+runner.test('.isClass(value)', function () {
+  a.strictEqual(type.isClass(true), false)
+  a.strictEqual(type.isClass({}), false)
+  a.strictEqual(type.isClass(0), false)
+  a.strictEqual(type.isClass('1'), false)
+  a.strictEqual(type.isClass(1.1), false)
+  a.strictEqual(type.isClass(NaN), false)
+  a.strictEqual(type.isClass(Infinity), false)
+  a.strictEqual(type.isClass(function () {}), false)
+  a.strictEqual(type.isClass(Date), false)
+  a.strictEqual(type.isClass(), false)
 
   function broken () { }
   broken.toString = function () { throw new Error() }
-  t.equal(type.isClass(broken), false)
-
-  t.end()
+  a.strictEqual(type.isClass(broken), false)
 })
 
 if (detect.class()) {
-  test('.isClass(value) ES6', function (t) {
+  runner.test('.isClass(value) ES6', function () {
     var result = eval('type.isClass(class {})')
-    t.equal(result, true)
-    t.end()
+    a.strictEqual(result, true)
   })
 }
 
 if (detect.promises()) {
-  test('.isPromise', function (t) {
-    t.strictEqual(type.isPromise(Promise.resolve()), true)
-    t.strictEqual(type.isPromise(Promise), false)
-    t.strictEqual(type.isPromise(true), false)
-    t.strictEqual(type.isPromise({}), false)
-    t.strictEqual(type.isPromise(0), false)
-    t.strictEqual(type.isPromise('1'), false)
-    t.strictEqual(type.isPromise(1.1), false)
-    t.strictEqual(type.isPromise(NaN), false)
-    t.strictEqual(type.isPromise(Infinity), false)
-    t.strictEqual(type.isPromise(function () {}), false)
-    t.strictEqual(type.isPromise(Date), false)
-    t.strictEqual(type.isPromise(), false)
-    t.strictEqual(type.isPromise({ then: function () {} }), true)
-    t.end()
+  runner.test('.isPromise', function () {
+    a.strictEqual(type.isPromise(Promise.resolve()), true)
+    a.strictEqual(type.isPromise(Promise), false)
+    a.strictEqual(type.isPromise(true), false)
+    a.strictEqual(type.isPromise({}), false)
+    a.strictEqual(type.isPromise(0), false)
+    a.strictEqual(type.isPromise('1'), false)
+    a.strictEqual(type.isPromise(1.1), false)
+    a.strictEqual(type.isPromise(NaN), false)
+    a.strictEqual(type.isPromise(Infinity), false)
+    a.strictEqual(type.isPromise(function () {}), false)
+    a.strictEqual(type.isPromise(Date), false)
+    a.strictEqual(type.isPromise(), false)
+    a.strictEqual(type.isPromise({ then: function () {} }), true)
+  })
+}
+
+if (detect.collections()) {
+  runner.test('.isIterable', function () {
+    a.strictEqual(type.isIterable(Promise.resolve()), false)
+    a.strictEqual(type.isIterable(Promise), false)
+    a.strictEqual(type.isIterable(true), false)
+    a.strictEqual(type.isIterable({}), false)
+    a.strictEqual(type.isIterable(0), false)
+    a.strictEqual(type.isIterable('1'), true)
+    a.strictEqual(type.isIterable(1.1), false)
+    a.strictEqual(type.isIterable(NaN), false)
+    a.strictEqual(type.isIterable(Infinity), false)
+    a.strictEqual(type.isIterable(function () {}), false)
+    a.strictEqual(type.isIterable(Date), false)
+    a.strictEqual(type.isIterable(), false)
+    a.strictEqual(type.isIterable(new Map()), true)
+    a.strictEqual(type.isIterable([]), true)
+    a.strictEqual(type.isIterable({ then: function () {} }), false)
   })
 }

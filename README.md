@@ -26,6 +26,7 @@ const t = require('typical')
     * [.isClass(input)](#module_typical.isClass) ⇒ <code>boolean</code>
     * [.isPrimitive(input)](#module_typical.isPrimitive) ⇒ <code>boolean</code>
     * [.isPromise(input)](#module_typical.isPromise) ⇒ <code>boolean</code>
+    * [.isIterable(input)](#module_typical.isIterable) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 
@@ -180,6 +181,17 @@ Returns true if the input is a string, number, symbol, boolean, null or undefine
 
 ### t.isPromise(input) ⇒ <code>boolean</code>
 Returns true if the input is a string, number, symbol, boolean, null or undefined value.
+
+**Kind**: static method of <code>[typical](#module_typical)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isIterable"></a>
+
+### t.isIterable(input) ⇒ <code>boolean</code>
+Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
 
 **Kind**: static method of <code>[typical](#module_typical)</code>  
 
