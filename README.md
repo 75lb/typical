@@ -33,7 +33,7 @@ const t = require('typical')
 ### t.isNumber(n) ⇒ <code>boolean</code>
 Returns true if input is a number
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -63,7 +63,7 @@ false
 ### t.isPlainObject(input) ⇒ <code>boolean</code>
 A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -87,7 +87,7 @@ false
 ### t.isArrayLike(input) ⇒ <code>boolean</code>
 An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -105,7 +105,7 @@ function sum(x, y){
 ### t.isObject(input) ⇒ <code>boolean</code>
 returns true if the typeof input is `'object'`, but not null!
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -116,7 +116,7 @@ returns true if the typeof input is `'object'`, but not null!
 ### t.isDefined(input) ⇒ <code>boolean</code>
 Returns true if the input value is defined
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -127,7 +127,7 @@ Returns true if the input value is defined
 ### t.isString(input) ⇒ <code>boolean</code>
 Returns true if the input value is a string
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -138,7 +138,7 @@ Returns true if the input value is a string
 ### t.isBoolean(input) ⇒ <code>boolean</code>
 Returns true if the input value is a boolean
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -149,7 +149,7 @@ Returns true if the input value is a boolean
 ### t.isFunction(input) ⇒ <code>boolean</code>
 Returns true if the input value is a function
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -160,7 +160,7 @@ Returns true if the input value is a function
 ### t.isClass(input) ⇒ <code>boolean</code>
 Returns true if the input value is an es2015 `class`.
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -171,7 +171,7 @@ Returns true if the input value is an es2015 `class`.
 ### t.isPrimitive(input) ⇒ <code>boolean</code>
 Returns true if the input is a string, number, symbol, boolean, null or undefined value.
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -180,9 +180,9 @@ Returns true if the input is a string, number, symbol, boolean, null or undefine
 <a name="module_typical.isPromise"></a>
 
 ### t.isPromise(input) ⇒ <code>boolean</code>
-Returns true if the input is a string, number, symbol, boolean, null or undefined value.
+Returns true if the input is a Promise.
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -193,7 +193,7 @@ Returns true if the input is a string, number, symbol, boolean, null or undefine
 ### t.isIterable(input) ⇒ <code>boolean</code>
 Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
 
-**Kind**: static method of <code>[typical](#module_typical)</code>  
+**Kind**: static method of [<code>typical</code>](#module_typical)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -202,4 +202,4 @@ Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
 
 * * *
 
-&copy; 2014-16 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2014-17 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
