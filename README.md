@@ -1,6 +1,7 @@
 [![view on npm](http://img.shields.io/npm/v/typical.svg)](https://www.npmjs.org/package/typical)
 [![npm module downloads](http://img.shields.io/npm/dt/typical.svg)](https://www.npmjs.org/package/typical)
 [![Build Status](https://travis-ci.org/75lb/typical.svg?branch=master)](https://travis-ci.org/75lb/typical)
+[![Coverage Status](https://coveralls.io/repos/github/75lb/typical/badge.svg?branch=master)](https://coveralls.io/github/75lb/typical?branch=master)
 [![Dependency Status](https://david-dm.org/75lb/typical.svg)](https://david-dm.org/75lb/typical)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
@@ -202,4 +203,4 @@ Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
 
 * * *
 
-&copy; 2014-17 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2014-18 Lloyd Brookes \<75pound@gmail.com\>. Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).

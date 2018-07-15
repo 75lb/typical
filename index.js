@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * For type-checking Javascript values.
  * @module typical
@@ -177,8 +175,8 @@ function isPrimitive (input) {
  */
 function isPromise (input) {
   if (input) {
-    var isPromise = isDefined(Promise) && input instanceof Promise
-    var isThenable = input.then && typeof input.then === 'function'
+    const isPromise = isDefined(Promise) && input instanceof Promise
+    const isThenable = input.then && typeof input.then === 'function'
     return isPromise || isThenable ? true : false
   } else {
     return false
