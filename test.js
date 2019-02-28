@@ -142,6 +142,9 @@ runner.test('.isIterable', function () {
   a.strictEqual(t.isIterable(new Map()), true)
   a.strictEqual(t.isIterable([]), true)
   a.strictEqual(t.isIterable({ then: function () {} }), false)
+  // Enable these tests once the minimum supported version is Node.js 10
+  //a.strictEqual(t.isIterable((function * () {})()), true)
+  //a.strictEqual(t.isIterable((async function * () {})()), true)
 })
 
 runner.test('.isObject', function () {

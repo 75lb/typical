@@ -184,7 +184,7 @@ function isPromise (input) {
 }
 
 /**
- * Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
+ * Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
@@ -193,6 +193,7 @@ function isIterable (input) {
   if (input === null || !isDefined(input)) {
     return false
   } else {
-    return typeof input[Symbol.iterator] === 'function'
+    return typeof input[Symbol.iterator] === 'function' ||
+      typeof input[Symbol.asyncIterator] === 'function'
   }
 }
