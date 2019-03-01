@@ -38,5 +38,8 @@
     "coveralls": "^3.0.3",
     "jsdoc-to-markdown": "^4.0.1",
     "test-runner": "^0.5.1"
-  }
+  },
+  "files": [
+    "index.js"
+  ]
 }
