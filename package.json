@@ -1,7 +1,7 @@
 {
   "name": "typical",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Robust Javascript type-checking",
   "repository": "https://github.com/75lb/typical",
   "license": "MIT",
