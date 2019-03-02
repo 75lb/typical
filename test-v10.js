@@ -1,8 +1,9 @@
-const TestRunner = require('test-runner')
+const Tom = require('test-runner').Tom
 const t = require('./')
-const runner = new TestRunner()
 const a = require('assert')
 
-runner.test('.isIterable [v10]', function () {
+const tom = module.exports = new Tom('typical-v10')
+
+tom.test('.isIterable [v10]', function () {
   a.strictEqual(t.isIterable((async function * () {})()), true)
 })

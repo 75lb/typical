@@ -1,18 +1,10 @@
-const TestRunner = require('test-runner')
+const Tom = require('test-runner').Tom
 const t = require('./')
-const runner = new TestRunner()
 const a = require('assert')
 
-function evaluates (statement) {
-  try {
-    eval(statement)
-    return true
-  } catch (err) {
-    return false
-  }
-}
+const tom = module.exports = new Tom('typical')
 
-runner.test('.isNumber(value)', function () {
+tom.test('.isNumber(value)', function () {
   a.strictEqual(t.isNumber(0), true)
   a.strictEqual(t.isNumber(1), true)
   a.strictEqual(t.isNumber(1.1), true)
@@ -22,7 +14,7 @@ runner.test('.isNumber(value)', function () {
   a.strictEqual(t.isNumber(Infinity), false)
 })
 
-runner.test('.isPlainObject(value)', function () {
+tom.test('.isPlainObject(value)', function () {
   a.strictEqual(t.isPlainObject({ clive: 'hater' }), true, '{} is true')
   a.strictEqual(t.isPlainObject(new Date()), false, 'new Date() is false')
   a.strictEqual(t.isPlainObject([ 0, 1 ]), false, 'Array is false')
@@ -32,7 +24,7 @@ runner.test('.isPlainObject(value)', function () {
   a.strictEqual(t.isPlainObject(null), false, 'null is false')
 })
 
-runner.test('.isDefined(value)', function () {
+tom.test('.isDefined(value)', function () {
   a.strictEqual(t.isDefined({}), true)
   a.strictEqual(t.isDefined({}.one), false)
   a.strictEqual(t.isDefined(0), true)
@@ -40,7 +32,7 @@ runner.test('.isDefined(value)', function () {
   a.strictEqual(t.isDefined(undefined), false)
 })
 
-runner.test('.isString(value)', function () {
+tom.test('.isString(value)', function () {
   a.strictEqual(t.isString(0), false)
   a.strictEqual(t.isString('1'), true)
   a.strictEqual(t.isString(1.1), false)
@@ -48,7 +40,7 @@ runner.test('.isString(value)', function () {
   a.strictEqual(t.isString(Infinity), false)
 })
 
-runner.test('.isBoolean(value)', function () {
+tom.test('.isBoolean(value)', function () {
   a.strictEqual(t.isBoolean(true), true)
   a.strictEqual(t.isBoolean(false), true)
   a.strictEqual(t.isBoolean(0), false)
@@ -58,7 +50,7 @@ runner.test('.isBoolean(value)', function () {
   a.strictEqual(t.isBoolean(Infinity), false)
 })
 
-runner.test('.isFunction(value)', function () {
+tom.test('.isFunction(value)', function () {
   a.strictEqual(t.isFunction(true), false)
   a.strictEqual(t.isFunction({}), false)
   a.strictEqual(t.isFunction(0), false)
@@ -70,7 +62,7 @@ runner.test('.isFunction(value)', function () {
   a.strictEqual(t.isFunction(Date), true)
 })
 
-runner.test('.isPrimitive(value)', function () {
+tom.test('.isPrimitive(value)', function () {
   a.strictEqual(t.isPrimitive(true), true)
   a.strictEqual(t.isPrimitive({}), false)
   a.strictEqual(t.isPrimitive(0), true)
@@ -84,11 +76,11 @@ runner.test('.isPrimitive(value)', function () {
   a.strictEqual(t.isPrimitive(undefined), true)
 })
 
-runner.test('.isPrimitive(value) ES6', function () {
+tom.test('.isPrimitive(value) ES6', function () {
   a.strictEqual(t.isPrimitive(Symbol()), true)
 })
 
-runner.test('.isClass(value)', function () {
+tom.test('.isClass(value)', function () {
   a.strictEqual(t.isClass(true), false)
   a.strictEqual(t.isClass({}), false)
   a.strictEqual(t.isClass(0), false)
@@ -105,12 +97,12 @@ runner.test('.isClass(value)', function () {
   a.strictEqual(t.isClass(broken), false)
 })
 
-runner.test('.isClass(value) ES6', function () {
+tom.test('.isClass(value) ES6', function () {
   const result = eval('t.isClass(class {})')
   a.strictEqual(result, true)
 })
 
-runner.test('.isPromise', function () {
+tom.test('.isPromise', function () {
   a.strictEqual(t.isPromise(Promise.resolve()), true)
   a.strictEqual(t.isPromise(Promise), false)
   a.strictEqual(t.isPromise(true), false)
@@ -126,7 +118,7 @@ runner.test('.isPromise', function () {
   a.strictEqual(t.isPromise({ then: function () {} }), true)
 })
 
-runner.test('.isIterable', function () {
+tom.test('.isIterable', function () {
   a.strictEqual(t.isIterable(Promise.resolve()), false)
   a.strictEqual(t.isIterable(Promise), false)
   a.strictEqual(t.isIterable(true), false)
@@ -145,7 +137,7 @@ runner.test('.isIterable', function () {
   a.strictEqual(t.isIterable((function * () {})()), true)
 })
 
-runner.test('.isObject', function () {
+tom.test('.isObject', function () {
   a.strictEqual(t.isObject(Promise.resolve()), true)
   a.strictEqual(t.isObject(Promise), false)
   a.strictEqual(t.isObject(true), false)
@@ -163,7 +155,7 @@ runner.test('.isObject', function () {
   a.strictEqual(t.isObject({ then: function () {} }), true)
 })
 
-runner.test('.isArrayLike', function () {
+tom.test('.isArrayLike', function () {
   a.strictEqual(t.isArrayLike(arguments), true)
   a.strictEqual(t.isArrayLike(Promise.resolve()), false)
   a.strictEqual(t.isArrayLike(Promise), false)

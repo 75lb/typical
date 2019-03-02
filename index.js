@@ -156,11 +156,11 @@ function isClass (input) {
 function isPrimitive (input) {
   if (input === null) return true
   switch (typeof input) {
-    case "string":
-    case "number":
-    case "symbol":
-    case "undefined":
-    case "boolean":
+    case 'string':
+    case 'number':
+    case 'symbol':
+    case 'undefined':
+    case 'boolean':
       return true
     default:
       return false
@@ -177,7 +177,7 @@ function isPromise (input) {
   if (input) {
     const isPromise = isDefined(Promise) && input instanceof Promise
     const isThenable = input.then && typeof input.then === 'function'
-    return isPromise || isThenable ? true : false
+    return !!(isPromise || isThenable)
   } else {
     return false
   }

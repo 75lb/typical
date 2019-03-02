@@ -30,14 +30,14 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "test-runner test.js",
+    "test": "test-runner test*.js",
     "docs": "jsdoc2md -t README.hbs index.js > README.md; echo",
     "cover": "nyc --reporter=text-lcov test-runner test.js | coveralls"
   },
   "devDependencies": {
     "coveralls": "^3.0.3",
     "jsdoc-to-markdown": "^4.0.1",
-    "test-runner": "^0.5.1"
+    "test-runner": "^0.6.0-11"
   },
   "files": [
     "index.js"
