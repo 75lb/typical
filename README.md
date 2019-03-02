@@ -192,7 +192,7 @@ Returns true if the input is a Promise.
 <a name="module_typical.isIterable"></a>
 
 ### t.isIterable(input) ⇒ <code>boolean</code>
-Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
+Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
@@ -200,6 +200,34 @@ Returns true if the input is an iterable (`Map`, `Set`, `Array` etc.).
 | --- | --- | --- |
 | input | <code>\*</code> | the input to test |
 
+
+### Load anywhere
+
+This library is compatible with Node.js, the Web and any style of module loader. It can be loaded anywhere, natively without transpilation.
+
+Node.js:
+
+```js
+const typical = require('typical')
+```
+
+Within Node.js with ECMAScript Module support enabled:
+
+```js
+import typical from 'typical'
+```
+
+Within a modern browser ECMAScript Module:
+
+```js
+import typical from './node_modules/typical/index.mjs'
+```
+
+Old browser (adds `window.typical`):
+
+```html
+<script nomodule src="./node_modules/typical/dist/index.js"></script>
+```
 
 * * *
 
