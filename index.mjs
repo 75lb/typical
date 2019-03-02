@@ -5,18 +5,6 @@
  * @example
  * const t = require('typical')
  */
-exports.isNumber = isNumber
-exports.isString = isString
-exports.isBoolean = isBoolean
-exports.isPlainObject = isPlainObject
-exports.isArrayLike = isArrayLike
-exports.isObject = isObject
-exports.isDefined = isDefined
-exports.isFunction = isFunction
-exports.isClass = isClass
-exports.isPrimitive = isPrimitive
-exports.isPromise = isPromise
-exports.isIterable = isIterable
 
 /**
  * Returns true if input is a number
@@ -196,4 +184,19 @@ function isIterable (input) {
     return typeof input[Symbol.iterator] === 'function' ||
       typeof input[Symbol.asyncIterator] === 'function'
   }
+}
+
+export default {
+  isNumber,
+  isString,
+  isBoolean,
+  isPlainObject,
+  isArrayLike,
+  isObject,
+  isDefined,
+  isFunction,
+  isClass,
+  isPrimitive,
+  isPromise,
+  isIterable
 }
