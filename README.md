@@ -201,7 +201,7 @@ Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.)
 | input | <code>\*</code> | the input to test |
 
 
-### Load anywhere
+## Load anywhere
 
 This library is compatible with Node.js, the Web and any style of module loader. It can be loaded anywhere, natively without transpilation.
 
