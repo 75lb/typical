@@ -499,7 +499,12 @@ function flatten (prev, curr) {
  */
 class Test extends createMixin(Composite)(StateMachine) {
   constructor (name, testFn, options) {
-    if (typeof name === 'string') ; else if (typeof name === 'function') {
+    if (typeof name === 'string') {
+      if (isPlainObject(testFn)) {
+        options = testFn;
+        testFn = undefined;
+      }
+    } else if (typeof name === 'function') {
       options = testFn;
       testFn = name;
       name = '';
@@ -720,6 +725,10 @@ class TestContext {
   }
 }
 
+function isPlainObject (input) {
+  return input !== null && typeof input === 'object' && input.constructor === Object
+}
+
 /**
  * For type-checking Javascript values.
  * @module typical
@@ -773,7 +782,7 @@ function isNumber (n) {
  * > t.isPlainObject(/test/)
  * false
  */
-function isPlainObject (input) {
+function isPlainObject$1 (input) {
   return input !== null && typeof input === 'object' && input.constructor === Object
 }
 
@@ -912,7 +921,7 @@ var t = {
   isNumber,
   isString,
   isBoolean,
-  isPlainObject,
+  isPlainObject: isPlainObject$1,
   isArrayLike: isArrayLike$1,
   isObject: isObject$1,
   isDefined,
