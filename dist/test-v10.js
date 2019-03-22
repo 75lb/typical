@@ -771,15 +771,23 @@ function isNumber (n) {
  * @returns {boolean}
  * @static
  * @example
- * > t.isPlainObject({ clive: 'hater' })
+ * > t.isPlainObject({ something: 'one' })
  * true
  * > t.isPlainObject(new Date())
  * false
  * > t.isPlainObject([ 0, 1 ])
  * false
+ * > t.isPlainObject(/test/)
+ * false
  * > t.isPlainObject(1)
  * false
- * > t.isPlainObject(/test/)
+ * > t.isPlainObject('one')
+ * false
+ * > t.isPlainObject(null)
+ * false
+ * > t.isPlainObject((function * () {})())
+ * false
+ * > t.isPlainObject(function * () {})
  * false
  */
 function isPlainObject$1 (input) {
@@ -907,6 +915,39 @@ function isPromise (input) {
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
+ * @example
+ * > t.isIterable('string')
+ * true
+ * > t.isIterable(new Map())
+ * true
+ * > t.isIterable([])
+ * true
+ * > t.isIterable((function * () {})())
+ * true
+ * > t.isIterable(Promise.resolve())
+ * false
+ * > t.isIterable(Promise)
+ * false
+ * > t.isIterable(true)
+ * false
+ * > t.isIterable({})
+ * false
+ * > t.isIterable(0)
+ * false
+ * > t.isIterable(1.1)
+ * false
+ * > t.isIterable(NaN)
+ * false
+ * > t.isIterable(Infinity)
+ * false
+ * > t.isIterable(function () {})
+ * false
+ * > t.isIterable(Date)
+ * false
+ * > t.isIterable()
+ * false
+ * > t.isIterable({ then: function () {} })
+ * false
  */
 function isIterable (input) {
   if (input === null || !isDefined(input)) {
