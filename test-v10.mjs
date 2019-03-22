@@ -4,6 +4,7 @@ const tom = new Tom('typical-v10')
 let a
 
 async function start () {
+  /* isomorphic: load assertion library */
   if (typeof window === 'undefined') {
     a = await import('assert')
   } else {

@@ -187,8 +187,10 @@
     if (input === null || !isDefined(input)) {
       return false
     } else {
-      return typeof input[Symbol.iterator] === 'function' ||
+      return (
+        typeof input[Symbol.iterator] === 'function' ||
         typeof input[Symbol.asyncIterator] === 'function'
+      )
     }
   }
 

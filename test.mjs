@@ -4,6 +4,7 @@ const tom = new Tom('typical')
 let a
 
 async function start () {
+  /* isomorphic: load assertion library */
   if (typeof window === 'undefined') {
     a = await import('assert')
   } else {
@@ -30,6 +31,8 @@ async function start () {
     a.strictEqual(t.isPlainObject(1), false, '1 is false')
     a.strictEqual(t.isPlainObject('one'), false, "'one' is false")
     a.strictEqual(t.isPlainObject(null), false, 'null is false')
+    a.strictEqual(t.isPlainObject((function * () {})()), false)
+    a.strictEqual(t.isPlainObject(function * () {}), false)
   })
 
   tom.test('.isDefined(value)', function () {
@@ -122,25 +125,6 @@ async function start () {
     a.strictEqual(t.isPromise({ then: function () {} }), true)
   })
 
-  tom.test('.isIterable', function () {
-    a.strictEqual(t.isIterable(Promise.resolve()), false)
-    a.strictEqual(t.isIterable(Promise), false)
-    a.strictEqual(t.isIterable(true), false)
-    a.strictEqual(t.isIterable({}), false)
-    a.strictEqual(t.isIterable(0), false)
-    a.strictEqual(t.isIterable('1'), true)
-    a.strictEqual(t.isIterable(1.1), false)
-    a.strictEqual(t.isIterable(NaN), false)
-    a.strictEqual(t.isIterable(Infinity), false)
-    a.strictEqual(t.isIterable(function () {}), false)
-    a.strictEqual(t.isIterable(Date), false)
-    a.strictEqual(t.isIterable(), false)
-    a.strictEqual(t.isIterable(new Map()), true)
-    a.strictEqual(t.isIterable([]), true)
-    a.strictEqual(t.isIterable({ then: function () {} }), false)
-    a.strictEqual(t.isIterable((function * () {})()), true)
-  })
-
   tom.test('.isObject', function () {
     a.strictEqual(t.isObject(Promise.resolve()), true)
     a.strictEqual(t.isObject(Promise), false)
@@ -176,6 +160,27 @@ async function start () {
     a.strictEqual(t.isArrayLike(new Map()), false)
     a.strictEqual(t.isArrayLike([]), true)
     a.strictEqual(t.isArrayLike({ then: function () {} }), false)
+  })
+
+  tom.test('.isIterable', function () {
+    a.strictEqual(t.isIterable(Promise.resolve()), false)
+    a.strictEqual(t.isIterable(Promise), false)
+    a.strictEqual(t.isIterable(true), false)
+    a.strictEqual(t.isIterable({}), false)
+    a.strictEqual(t.isIterable(0), false)
+    a.strictEqual(t.isIterable('1'), true)
+    a.strictEqual(t.isIterable(1.1), false)
+    a.strictEqual(t.isIterable(null), false)
+    a.strictEqual(t.isIterable(undefined), false)
+    a.strictEqual(t.isIterable(NaN), false)
+    a.strictEqual(t.isIterable(Infinity), false)
+    a.strictEqual(t.isIterable(function () {}), false)
+    a.strictEqual(t.isIterable(Date), false)
+    a.strictEqual(t.isIterable(), false)
+    a.strictEqual(t.isIterable(new Map()), true)
+    a.strictEqual(t.isIterable([]), true)
+    a.strictEqual(t.isIterable({ then: function () {} }), false)
+    a.strictEqual(t.isIterable((function * () {})()), true)
   })
 }
 

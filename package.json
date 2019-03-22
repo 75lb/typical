@@ -50,6 +50,6 @@
   },
   "files": [
     "index.mjs",
-    "dist"
+    "dist/index.js"
   ]
 }

@@ -912,8 +912,10 @@ function isIterable (input) {
   if (input === null || !isDefined(input)) {
     return false
   } else {
-    return typeof input[Symbol.iterator] === 'function' ||
+    return (
+      typeof input[Symbol.iterator] === 'function' ||
       typeof input[Symbol.asyncIterator] === 'function'
+    )
   }
 }
 
@@ -936,6 +938,7 @@ const tom = new Test('typical-v10');
 let a;
 
 async function start () {
+  /* isomorphic: load assertion library */
   if (typeof window === 'undefined') {
     a = await Promise.resolve(require('assert'));
   } else {
