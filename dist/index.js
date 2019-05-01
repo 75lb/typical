@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.typical = factory());
-}(this, function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = global || self, factory(global.typical = {}));
+}(this, function (exports) { 'use strict';
 
   /**
    * For type-checking Javascript values.
@@ -77,8 +77,8 @@
    * @static
    * @example
    * function sum(x, y){
-   *     console.log(t.isArrayLike(arguments))
-   *     // prints `true`
+   *   console.log(t.isArrayLike(arguments))
+   *   // prints `true`
    * }
    */
   function isArrayLike (input) {
@@ -106,43 +106,13 @@
   }
 
   /**
-   * Returns true if the input value is a string
-   * @param {*} - the input to test
-   * @returns {boolean}
-   * @static
-   */
-  function isString (input) {
-    return typeof input === 'string'
-  }
-
-  /**
-   * Returns true if the input value is a boolean
-   * @param {*} - the input to test
-   * @returns {boolean}
-   * @static
-   */
-  function isBoolean (input) {
-    return typeof input === 'boolean'
-  }
-
-  /**
-   * Returns true if the input value is a function
-   * @param {*} - the input to test
-   * @returns {boolean}
-   * @static
-   */
-  function isFunction (input) {
-    return typeof input === 'function'
-  }
-
-  /**
-   * Returns true if the input value is an es2015 `class`.
+   * Returns true if the input value is an ES2015 `class`.
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
    */
   function isClass (input) {
-    if (isFunction(input)) {
+    if (typeof input === 'function') {
       return /^class /.test(Function.prototype.toString.call(input))
     } else {
       return false
@@ -235,21 +205,16 @@
     }
   }
 
-  var index = {
-    isNumber,
-    isString,
-    isBoolean,
-    isPlainObject,
-    isArrayLike,
-    isObject,
-    isDefined,
-    isFunction,
-    isClass,
-    isPrimitive,
-    isPromise,
-    isIterable
-  };
+  exports.isArrayLike = isArrayLike;
+  exports.isClass = isClass;
+  exports.isDefined = isDefined;
+  exports.isIterable = isIterable;
+  exports.isNumber = isNumber;
+  exports.isObject = isObject;
+  exports.isPlainObject = isPlainObject;
+  exports.isPrimitive = isPrimitive;
+  exports.isPromise = isPromise;
 
-  return index;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));

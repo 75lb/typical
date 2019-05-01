@@ -487,17 +487,36 @@ function flatten (prev, curr) {
 }
 
 /**
+ * The test context, available as `this` within each test function.
+ */
+class TestContext {
+  constructor (context) {
+    /**
+     * The name given to this test.
+     */
+    this.name = context.name;
+    /**
+     * The test index within the current set.
+     */
+    this.index = context.index;
+  }
+}
+
+/**
  * @module test-object-model
  */
 
 /**
- * @param {string} [name]
- * @param {function} [testFn]
+ * @param {string} [name] - The test name.
+ * @param {function} [testFn] - A function which will either complete successfully, reject or throw.
  * @param {object} [options]
- * @param {number} [options.timeout]
+ * @param {number} [options.timeout] - A time limit for the test in ms.
+ * @param {number} [options.maxConcurrency] - The max concurrency that asynchronous child jobs can run.
+ * @param {boolean} [options.skip] - Skip this test.
+ * @param {boolean} [options.only] - Only run this test.
  * @alias module:test-object-model
  */
-class Test extends createMixin(Composite)(StateMachine) {
+class Tom extends createMixin(Composite)(StateMachine) {
   constructor (name, testFn, options) {
     if (typeof name === 'string') {
       if (isPlainObject(testFn)) {
@@ -513,12 +532,12 @@ class Test extends createMixin(Composite)(StateMachine) {
       testFn = undefined;
       name = '';
     }
-    options = options || {};
+    options = Object.assign({ timeout: 10000 }, options);
     name = name || 'tom';
     super ([
       { from: undefined, to: 'pending' },
       { from: 'pending', to: 'in-progress' },
-      { from: 'pending', to: 'skip' },
+      { from: 'pending', to: 'skipped' },
       { from: 'pending', to: 'ignored' },
       { from: 'in-progress', to: 'pass' },
       { from: 'in-progress', to: 'fail' },
@@ -526,7 +545,7 @@ class Test extends createMixin(Composite)(StateMachine) {
       { from: 'in-progress', to: 'pending' },
       { from: 'pass', to: 'pending' },
       { from: 'fail', to: 'pending' },
-      { from: 'skip', to: 'pending' },
+      { from: 'skipped', to: 'pending' },
       { from: 'ignored', to: 'pending' },
     ]);
     /**
@@ -536,29 +555,46 @@ class Test extends createMixin(Composite)(StateMachine) {
     this.name = name;
 
     /**
-     * Test function
+     * A function which will either complete successfully, reject or throw.
      * @type {function}
      */
     this.testFn = testFn;
 
     /**
      * Position of this test within its parents children
+     * @type {number}
      */
     this.index = 1;
 
     /**
      * Test state: pending, start, skip, pass or fail.
+     * @type {string}
      */
     this.state = 'pending';
-    this._markSkip = options._markSkip;
-    this._skip = null;
-    this._only = options.only;
-    this.options = Object.assign({ timeout: 10000 }, options);
 
     /**
-     * True if ended
+     * A time limit for the test in ms.
+     * @type {number}
+     */
+    this.timeout = options.timeout;
+
+    /**
+     * True if the test has ended.
+     * @type {boolean}
      */
     this.ended = false;
+
+    /**
+     * The max concurrency that asynchronous child jobs can run.
+     * @type {number}
+     * @default 10
+     */
+    this.maxConcurrency = options.maxConcurrency || 10;
+
+    this.markedSkip = options.skip || false;
+    this.markedOnly = options.only || false;
+
+    this.options = options;
   }
 
   toString () {
@@ -567,8 +603,10 @@ class Test extends createMixin(Composite)(StateMachine) {
 
   /**
    * Add a test.
+   * @return {module:test-object-model}
    */
   test (name, testFn, options) {
+    /* validation */
     for (const child of this) {
       if (child.name === name) {
         throw new Error('Duplicate name: ' + name)
@@ -583,16 +621,18 @@ class Test extends createMixin(Composite)(StateMachine) {
 
   /**
    * Add a skipped test
+   * @return {module:test-object-model}
    */
   skip (name, testFn, options) {
     options = options || {};
-    options._markSkip = true;
+    options.skip = true;
     const test = this.test(name, testFn, options);
     return test
   }
 
   /**
    * Add an only test
+   * @return {module:test-object-model}
    */
   only (name, testFn, options) {
     options = options || {};
@@ -602,21 +642,13 @@ class Test extends createMixin(Composite)(StateMachine) {
   }
 
   _onlyExists () {
-    return Array.from(this.root()).some(t => t._only)
+    return Array.from(this.root()).some(t => t.markedOnly)
   }
 
   _skipLogic () {
     if (this._onlyExists()) {
       for (const test of this.root()) {
-        if (test._markSkip) {
-          test._skip = true;
-        } else {
-          test._skip = !test._only;
-        }
-      }
-    } else {
-      for (const test of this.root()) {
-        test._skip = test._markSkip;
+        test.markedSkip = !test.markedOnly;
       }
     }
   }
@@ -634,11 +666,12 @@ class Test extends createMixin(Composite)(StateMachine) {
   /**
    * Execute the stored test function.
    * @returns {Promise}
+   * @fulfil {*}
    */
   run () {
     if (this.testFn) {
-      if (this._skip) {
-        this.setState('skip', this);
+      if (this.markedSkip) {
+        this.setState('skipped', this);
         return Promise.resolve()
       } else {
         this.setState('in-progress', this);
@@ -669,7 +702,7 @@ class Test extends createMixin(Composite)(StateMachine) {
             reject(err);
           }
         });
-        return Promise.race([ testFnResult, raceTimeout(this.options.timeout) ])
+        return Promise.race([ testFnResult, raceTimeout(this.timeout) ])
       }
     } else {
       this.setState('ignored', this);
@@ -688,16 +721,16 @@ class Test extends createMixin(Composite)(StateMachine) {
     } else {
       this.index = 1;
       this.state = 'pending';
-      this._skip = null;
-      this._only = null;
+      this.markedSkip = this.options.skip || false;
+      this.markedOnly = this.options.only || false;
     }
   }
 
   /**
    * Combine several TOM instances into a common root
-   * @param {Array.<Test>} tests
+   * @param {Array.<Tom>} tests
    * @param {string} [name]
-   * @return {Test}
+   * @return {Tom}
    */
   static combine (tests, name) {
     let test;
@@ -715,16 +748,6 @@ class Test extends createMixin(Composite)(StateMachine) {
   }
 }
 
-/**
- * The test context, available as `this` within each test function.
- */
-class TestContext {
-  constructor (context) {
-    this.name = context.name;
-    this.index = context.index;
-  }
-}
-
 function isPlainObject (input) {
   return input !== null && typeof input === 'object' && input.constructor === Object
 }
@@ -738,89 +761,6 @@ function isPlainObject (input) {
  */
 
 /**
- * Returns true if input is a number
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isNumber(0)
- * true
- * > t.isNumber(1)
- * true
- * > t.isNumber(1.1)
- * true
- * > t.isNumber(0xff)
- * true
- * > t.isNumber(0644)
- * true
- * > t.isNumber(6.2e5)
- * true
- * > t.isNumber(NaN)
- * false
- * > t.isNumber(Infinity)
- * false
- */
-function isNumber (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n)
-}
-
-/**
- * A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
- *
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isPlainObject({ something: 'one' })
- * true
- * > t.isPlainObject(new Date())
- * false
- * > t.isPlainObject([ 0, 1 ])
- * false
- * > t.isPlainObject(/test/)
- * false
- * > t.isPlainObject(1)
- * false
- * > t.isPlainObject('one')
- * false
- * > t.isPlainObject(null)
- * false
- * > t.isPlainObject((function * () {})())
- * false
- * > t.isPlainObject(function * () {})
- * false
- */
-function isPlainObject$1 (input) {
-  return input !== null && typeof input === 'object' && input.constructor === Object
-}
-
-/**
- * An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
- *
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- * @example
- * function sum(x, y){
- *     console.log(t.isArrayLike(arguments))
- *     // prints `true`
- * }
- */
-function isArrayLike$1 (input) {
-  return isObject$1(input) && typeof input.length === 'number'
-}
-
-/**
- * returns true if the typeof input is `'object'`, but not null!
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isObject$1 (input) {
-  return typeof input === 'object' && input !== null
-}
-
-/**
  * Returns true if the input value is defined
  * @param {*} - the input to test
  * @returns {boolean}
@@ -828,86 +768,6 @@ function isObject$1 (input) {
  */
 function isDefined (input) {
   return typeof input !== 'undefined'
-}
-
-/**
- * Returns true if the input value is a string
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isString (input) {
-  return typeof input === 'string'
-}
-
-/**
- * Returns true if the input value is a boolean
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isBoolean (input) {
-  return typeof input === 'boolean'
-}
-
-/**
- * Returns true if the input value is a function
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isFunction (input) {
-  return typeof input === 'function'
-}
-
-/**
- * Returns true if the input value is an es2015 `class`.
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isClass (input) {
-  if (isFunction(input)) {
-    return /^class /.test(Function.prototype.toString.call(input))
-  } else {
-    return false
-  }
-}
-
-/**
- * Returns true if the input is a string, number, symbol, boolean, null or undefined value.
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isPrimitive (input) {
-  if (input === null) return true
-  switch (typeof input) {
-    case 'string':
-    case 'number':
-    case 'symbol':
-    case 'undefined':
-    case 'boolean':
-      return true
-    default:
-      return false
-  }
-}
-
-/**
- * Returns true if the input is a Promise.
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isPromise (input) {
-  if (input) {
-    const isPromise = isDefined(Promise) && input instanceof Promise;
-    const isThenable = input.then && typeof input.then === 'function';
-    return !!(isPromise || isThenable)
-  } else {
-    return false
-  }
 }
 
 /**
@@ -960,22 +820,7 @@ function isIterable (input) {
   }
 }
 
-var t = {
-  isNumber,
-  isString,
-  isBoolean,
-  isPlainObject: isPlainObject$1,
-  isArrayLike: isArrayLike$1,
-  isObject: isObject$1,
-  isDefined,
-  isFunction,
-  isClass,
-  isPrimitive,
-  isPromise,
-  isIterable
-};
-
-const tom = new Test('typical-v10');
+const tom = new Tom('typical-v10');
 let a;
 
 async function start () {
@@ -989,7 +834,7 @@ async function start () {
   }
 
   tom.test('.isIterable [v10]', function () {
-    a.strictEqual(t.isIterable((async function * () {})()), true);
+    a.strictEqual(isIterable((async function * () {})()), true);
   });
 }
 

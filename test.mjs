@@ -1,5 +1,5 @@
 import Tom from './node_modules/test-object-model/dist/index.mjs'
-import t from './index.mjs'
+import * as t from './index.mjs'
 const tom = new Tom('typical')
 let a
 
@@ -41,36 +41,6 @@ async function start () {
     a.strictEqual(t.isDefined(0), true)
     a.strictEqual(t.isDefined(null), true)
     a.strictEqual(t.isDefined(undefined), false)
-  })
-
-  tom.test('.isString(value)', function () {
-    a.strictEqual(t.isString(0), false)
-    a.strictEqual(t.isString('1'), true)
-    a.strictEqual(t.isString(1.1), false)
-    a.strictEqual(t.isString(NaN), false)
-    a.strictEqual(t.isString(Infinity), false)
-  })
-
-  tom.test('.isBoolean(value)', function () {
-    a.strictEqual(t.isBoolean(true), true)
-    a.strictEqual(t.isBoolean(false), true)
-    a.strictEqual(t.isBoolean(0), false)
-    a.strictEqual(t.isBoolean('1'), false)
-    a.strictEqual(t.isBoolean(1.1), false)
-    a.strictEqual(t.isBoolean(NaN), false)
-    a.strictEqual(t.isBoolean(Infinity), false)
-  })
-
-  tom.test('.isFunction(value)', function () {
-    a.strictEqual(t.isFunction(true), false)
-    a.strictEqual(t.isFunction({}), false)
-    a.strictEqual(t.isFunction(0), false)
-    a.strictEqual(t.isFunction('1'), false)
-    a.strictEqual(t.isFunction(1.1), false)
-    a.strictEqual(t.isFunction(NaN), false)
-    a.strictEqual(t.isFunction(Infinity), false)
-    a.strictEqual(t.isFunction(function () {}), true)
-    a.strictEqual(t.isFunction(Date), true)
   })
 
   tom.test('.isPrimitive(value)', function () {

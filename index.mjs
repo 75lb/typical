@@ -29,7 +29,7 @@
  * > t.isNumber(Infinity)
  * false
  */
-function isNumber (n) {
+export function isNumber (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
 
@@ -59,7 +59,7 @@ function isNumber (n) {
  * > t.isPlainObject(function * () {})
  * false
  */
-function isPlainObject (input) {
+export function isPlainObject (input) {
   return input !== null && typeof input === 'object' && input.constructor === Object
 }
 
@@ -71,11 +71,11 @@ function isPlainObject (input) {
  * @static
  * @example
  * function sum(x, y){
- *     console.log(t.isArrayLike(arguments))
- *     // prints `true`
+ *   console.log(t.isArrayLike(arguments))
+ *   // prints `true`
  * }
  */
-function isArrayLike (input) {
+export function isArrayLike (input) {
   return isObject(input) && typeof input.length === 'number'
 }
 
@@ -85,7 +85,7 @@ function isArrayLike (input) {
  * @returns {boolean}
  * @static
  */
-function isObject (input) {
+export function isObject (input) {
   return typeof input === 'object' && input !== null
 }
 
@@ -95,48 +95,18 @@ function isObject (input) {
  * @returns {boolean}
  * @static
  */
-function isDefined (input) {
+export function isDefined (input) {
   return typeof input !== 'undefined'
 }
 
 /**
- * Returns true if the input value is a string
+ * Returns true if the input value is an ES2015 `class`.
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
  */
-function isString (input) {
-  return typeof input === 'string'
-}
-
-/**
- * Returns true if the input value is a boolean
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isBoolean (input) {
-  return typeof input === 'boolean'
-}
-
-/**
- * Returns true if the input value is a function
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isFunction (input) {
-  return typeof input === 'function'
-}
-
-/**
- * Returns true if the input value is an es2015 `class`.
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isClass (input) {
-  if (isFunction(input)) {
+export function isClass (input) {
+  if (typeof input === 'function') {
     return /^class /.test(Function.prototype.toString.call(input))
   } else {
     return false
@@ -149,7 +119,7 @@ function isClass (input) {
  * @returns {boolean}
  * @static
  */
-function isPrimitive (input) {
+export function isPrimitive (input) {
   if (input === null) return true
   switch (typeof input) {
     case 'string':
@@ -169,7 +139,7 @@ function isPrimitive (input) {
  * @returns {boolean}
  * @static
  */
-function isPromise (input) {
+export function isPromise (input) {
   if (input) {
     const isPromise = isDefined(Promise) && input instanceof Promise
     const isThenable = input.then && typeof input.then === 'function'
@@ -218,7 +188,7 @@ function isPromise (input) {
  * > t.isIterable({ then: function () {} })
  * false
  */
-function isIterable (input) {
+export function isIterable (input) {
   if (input === null || !isDefined(input)) {
     return false
   } else {
@@ -227,19 +197,4 @@ function isIterable (input) {
       typeof input[Symbol.asyncIterator] === 'function'
     )
   }
-}
-
-export default {
-  isNumber,
-  isString,
-  isBoolean,
-  isPlainObject,
-  isArrayLike,
-  isObject,
-  isDefined,
-  isFunction,
-  isClass,
-  isPrimitive,
-  isPromise,
-  isIterable
 }

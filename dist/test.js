@@ -487,17 +487,36 @@ function flatten (prev, curr) {
 }
 
 /**
+ * The test context, available as `this` within each test function.
+ */
+class TestContext {
+  constructor (context) {
+    /**
+     * The name given to this test.
+     */
+    this.name = context.name;
+    /**
+     * The test index within the current set.
+     */
+    this.index = context.index;
+  }
+}
+
+/**
  * @module test-object-model
  */
 
 /**
- * @param {string} [name]
- * @param {function} [testFn]
+ * @param {string} [name] - The test name.
+ * @param {function} [testFn] - A function which will either complete successfully, reject or throw.
  * @param {object} [options]
- * @param {number} [options.timeout]
+ * @param {number} [options.timeout] - A time limit for the test in ms.
+ * @param {number} [options.maxConcurrency] - The max concurrency that asynchronous child jobs can run.
+ * @param {boolean} [options.skip] - Skip this test.
+ * @param {boolean} [options.only] - Only run this test.
  * @alias module:test-object-model
  */
-class Test extends createMixin(Composite)(StateMachine) {
+class Tom extends createMixin(Composite)(StateMachine) {
   constructor (name, testFn, options) {
     if (typeof name === 'string') {
       if (isPlainObject(testFn)) {
@@ -513,12 +532,12 @@ class Test extends createMixin(Composite)(StateMachine) {
       testFn = undefined;
       name = '';
     }
-    options = options || {};
+    options = Object.assign({ timeout: 10000 }, options);
     name = name || 'tom';
     super ([
       { from: undefined, to: 'pending' },
       { from: 'pending', to: 'in-progress' },
-      { from: 'pending', to: 'skip' },
+      { from: 'pending', to: 'skipped' },
       { from: 'pending', to: 'ignored' },
       { from: 'in-progress', to: 'pass' },
       { from: 'in-progress', to: 'fail' },
@@ -526,7 +545,7 @@ class Test extends createMixin(Composite)(StateMachine) {
       { from: 'in-progress', to: 'pending' },
       { from: 'pass', to: 'pending' },
       { from: 'fail', to: 'pending' },
-      { from: 'skip', to: 'pending' },
+      { from: 'skipped', to: 'pending' },
       { from: 'ignored', to: 'pending' },
     ]);
     /**
@@ -536,29 +555,46 @@ class Test extends createMixin(Composite)(StateMachine) {
     this.name = name;
 
     /**
-     * Test function
+     * A function which will either complete successfully, reject or throw.
      * @type {function}
      */
     this.testFn = testFn;
 
     /**
      * Position of this test within its parents children
+     * @type {number}
      */
     this.index = 1;
 
     /**
      * Test state: pending, start, skip, pass or fail.
+     * @type {string}
      */
     this.state = 'pending';
-    this._markSkip = options._markSkip;
-    this._skip = null;
-    this._only = options.only;
-    this.options = Object.assign({ timeout: 10000 }, options);
 
     /**
-     * True if ended
+     * A time limit for the test in ms.
+     * @type {number}
+     */
+    this.timeout = options.timeout;
+
+    /**
+     * True if the test has ended.
+     * @type {boolean}
      */
     this.ended = false;
+
+    /**
+     * The max concurrency that asynchronous child jobs can run.
+     * @type {number}
+     * @default 10
+     */
+    this.maxConcurrency = options.maxConcurrency || 10;
+
+    this.markedSkip = options.skip || false;
+    this.markedOnly = options.only || false;
+
+    this.options = options;
   }
 
   toString () {
@@ -567,8 +603,10 @@ class Test extends createMixin(Composite)(StateMachine) {
 
   /**
    * Add a test.
+   * @return {module:test-object-model}
    */
   test (name, testFn, options) {
+    /* validation */
     for (const child of this) {
       if (child.name === name) {
         throw new Error('Duplicate name: ' + name)
@@ -583,16 +621,18 @@ class Test extends createMixin(Composite)(StateMachine) {
 
   /**
    * Add a skipped test
+   * @return {module:test-object-model}
    */
   skip (name, testFn, options) {
     options = options || {};
-    options._markSkip = true;
+    options.skip = true;
     const test = this.test(name, testFn, options);
     return test
   }
 
   /**
    * Add an only test
+   * @return {module:test-object-model}
    */
   only (name, testFn, options) {
     options = options || {};
@@ -602,21 +642,13 @@ class Test extends createMixin(Composite)(StateMachine) {
   }
 
   _onlyExists () {
-    return Array.from(this.root()).some(t => t._only)
+    return Array.from(this.root()).some(t => t.markedOnly)
   }
 
   _skipLogic () {
     if (this._onlyExists()) {
       for (const test of this.root()) {
-        if (test._markSkip) {
-          test._skip = true;
-        } else {
-          test._skip = !test._only;
-        }
-      }
-    } else {
-      for (const test of this.root()) {
-        test._skip = test._markSkip;
+        test.markedSkip = !test.markedOnly;
       }
     }
   }
@@ -634,11 +666,12 @@ class Test extends createMixin(Composite)(StateMachine) {
   /**
    * Execute the stored test function.
    * @returns {Promise}
+   * @fulfil {*}
    */
   run () {
     if (this.testFn) {
-      if (this._skip) {
-        this.setState('skip', this);
+      if (this.markedSkip) {
+        this.setState('skipped', this);
         return Promise.resolve()
       } else {
         this.setState('in-progress', this);
@@ -669,7 +702,7 @@ class Test extends createMixin(Composite)(StateMachine) {
             reject(err);
           }
         });
-        return Promise.race([ testFnResult, raceTimeout(this.options.timeout) ])
+        return Promise.race([ testFnResult, raceTimeout(this.timeout) ])
       }
     } else {
       this.setState('ignored', this);
@@ -688,16 +721,16 @@ class Test extends createMixin(Composite)(StateMachine) {
     } else {
       this.index = 1;
       this.state = 'pending';
-      this._skip = null;
-      this._only = null;
+      this.markedSkip = this.options.skip || false;
+      this.markedOnly = this.options.only || false;
     }
   }
 
   /**
    * Combine several TOM instances into a common root
-   * @param {Array.<Test>} tests
+   * @param {Array.<Tom>} tests
    * @param {string} [name]
-   * @return {Test}
+   * @return {Tom}
    */
   static combine (tests, name) {
     let test;
@@ -712,16 +745,6 @@ class Test extends createMixin(Composite)(StateMachine) {
     }
     test._skipLogic();
     return test
-  }
-}
-
-/**
- * The test context, available as `this` within each test function.
- */
-class TestContext {
-  constructor (context) {
-    this.name = context.name;
-    this.index = context.index;
   }
 }
 
@@ -802,8 +825,8 @@ function isPlainObject$1 (input) {
  * @static
  * @example
  * function sum(x, y){
- *     console.log(t.isArrayLike(arguments))
- *     // prints `true`
+ *   console.log(t.isArrayLike(arguments))
+ *   // prints `true`
  * }
  */
 function isArrayLike$1 (input) {
@@ -831,43 +854,13 @@ function isDefined (input) {
 }
 
 /**
- * Returns true if the input value is a string
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isString (input) {
-  return typeof input === 'string'
-}
-
-/**
- * Returns true if the input value is a boolean
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isBoolean (input) {
-  return typeof input === 'boolean'
-}
-
-/**
- * Returns true if the input value is a function
- * @param {*} - the input to test
- * @returns {boolean}
- * @static
- */
-function isFunction (input) {
-  return typeof input === 'function'
-}
-
-/**
- * Returns true if the input value is an es2015 `class`.
+ * Returns true if the input value is an ES2015 `class`.
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
  */
 function isClass (input) {
-  if (isFunction(input)) {
+  if (typeof input === 'function') {
     return /^class /.test(Function.prototype.toString.call(input))
   } else {
     return false
@@ -960,22 +953,7 @@ function isIterable (input) {
   }
 }
 
-var t = {
-  isNumber,
-  isString,
-  isBoolean,
-  isPlainObject: isPlainObject$1,
-  isArrayLike: isArrayLike$1,
-  isObject: isObject$1,
-  isDefined,
-  isFunction,
-  isClass,
-  isPrimitive,
-  isPromise,
-  isIterable
-};
-
-const tom = new Test('typical');
+const tom = new Tom('typical');
 let a;
 
 async function start () {
@@ -989,173 +967,143 @@ async function start () {
   }
 
   tom.test('.isNumber(value)', function () {
-    a.strictEqual(t.isNumber(0), true);
-    a.strictEqual(t.isNumber(1), true);
-    a.strictEqual(t.isNumber(1.1), true);
-    a.strictEqual(t.isNumber(0xff), true);
-    a.strictEqual(t.isNumber(6.2e5), true);
-    a.strictEqual(t.isNumber(NaN), false);
-    a.strictEqual(t.isNumber(Infinity), false);
+    a.strictEqual(isNumber(0), true);
+    a.strictEqual(isNumber(1), true);
+    a.strictEqual(isNumber(1.1), true);
+    a.strictEqual(isNumber(0xff), true);
+    a.strictEqual(isNumber(6.2e5), true);
+    a.strictEqual(isNumber(NaN), false);
+    a.strictEqual(isNumber(Infinity), false);
   });
 
   tom.test('.isPlainObject(value)', function () {
-    a.strictEqual(t.isPlainObject({ clive: 'hater' }), true, '{} is true');
-    a.strictEqual(t.isPlainObject(new Date()), false, 'new Date() is false');
-    a.strictEqual(t.isPlainObject([ 0, 1 ]), false, 'Array is false');
-    a.strictEqual(t.isPlainObject(/test/), false, 'RegExp is false');
-    a.strictEqual(t.isPlainObject(1), false, '1 is false');
-    a.strictEqual(t.isPlainObject('one'), false, "'one' is false");
-    a.strictEqual(t.isPlainObject(null), false, 'null is false');
-    a.strictEqual(t.isPlainObject((function * () {})()), false);
-    a.strictEqual(t.isPlainObject(function * () {}), false);
+    a.strictEqual(isPlainObject$1({ clive: 'hater' }), true, '{} is true');
+    a.strictEqual(isPlainObject$1(new Date()), false, 'new Date() is false');
+    a.strictEqual(isPlainObject$1([ 0, 1 ]), false, 'Array is false');
+    a.strictEqual(isPlainObject$1(/test/), false, 'RegExp is false');
+    a.strictEqual(isPlainObject$1(1), false, '1 is false');
+    a.strictEqual(isPlainObject$1('one'), false, "'one' is false");
+    a.strictEqual(isPlainObject$1(null), false, 'null is false');
+    a.strictEqual(isPlainObject$1((function * () {})()), false);
+    a.strictEqual(isPlainObject$1(function * () {}), false);
   });
 
   tom.test('.isDefined(value)', function () {
-    a.strictEqual(t.isDefined({}), true);
-    a.strictEqual(t.isDefined({}.one), false);
-    a.strictEqual(t.isDefined(0), true);
-    a.strictEqual(t.isDefined(null), true);
-    a.strictEqual(t.isDefined(undefined), false);
-  });
-
-  tom.test('.isString(value)', function () {
-    a.strictEqual(t.isString(0), false);
-    a.strictEqual(t.isString('1'), true);
-    a.strictEqual(t.isString(1.1), false);
-    a.strictEqual(t.isString(NaN), false);
-    a.strictEqual(t.isString(Infinity), false);
-  });
-
-  tom.test('.isBoolean(value)', function () {
-    a.strictEqual(t.isBoolean(true), true);
-    a.strictEqual(t.isBoolean(false), true);
-    a.strictEqual(t.isBoolean(0), false);
-    a.strictEqual(t.isBoolean('1'), false);
-    a.strictEqual(t.isBoolean(1.1), false);
-    a.strictEqual(t.isBoolean(NaN), false);
-    a.strictEqual(t.isBoolean(Infinity), false);
-  });
-
-  tom.test('.isFunction(value)', function () {
-    a.strictEqual(t.isFunction(true), false);
-    a.strictEqual(t.isFunction({}), false);
-    a.strictEqual(t.isFunction(0), false);
-    a.strictEqual(t.isFunction('1'), false);
-    a.strictEqual(t.isFunction(1.1), false);
-    a.strictEqual(t.isFunction(NaN), false);
-    a.strictEqual(t.isFunction(Infinity), false);
-    a.strictEqual(t.isFunction(function () {}), true);
-    a.strictEqual(t.isFunction(Date), true);
+    a.strictEqual(isDefined({}), true);
+    a.strictEqual(isDefined({}.one), false);
+    a.strictEqual(isDefined(0), true);
+    a.strictEqual(isDefined(null), true);
+    a.strictEqual(isDefined(undefined), false);
   });
 
   tom.test('.isPrimitive(value)', function () {
-    a.strictEqual(t.isPrimitive(true), true);
-    a.strictEqual(t.isPrimitive({}), false);
-    a.strictEqual(t.isPrimitive(0), true);
-    a.strictEqual(t.isPrimitive('1'), true);
-    a.strictEqual(t.isPrimitive(1.1), true);
-    a.strictEqual(t.isPrimitive(NaN), true);
-    a.strictEqual(t.isPrimitive(Infinity), true);
-    a.strictEqual(t.isPrimitive(function () {}), false);
-    a.strictEqual(t.isPrimitive(Date), false);
-    a.strictEqual(t.isPrimitive(null), true);
-    a.strictEqual(t.isPrimitive(undefined), true);
+    a.strictEqual(isPrimitive(true), true);
+    a.strictEqual(isPrimitive({}), false);
+    a.strictEqual(isPrimitive(0), true);
+    a.strictEqual(isPrimitive('1'), true);
+    a.strictEqual(isPrimitive(1.1), true);
+    a.strictEqual(isPrimitive(NaN), true);
+    a.strictEqual(isPrimitive(Infinity), true);
+    a.strictEqual(isPrimitive(function () {}), false);
+    a.strictEqual(isPrimitive(Date), false);
+    a.strictEqual(isPrimitive(null), true);
+    a.strictEqual(isPrimitive(undefined), true);
   });
 
   tom.test('.isPrimitive(value) ES6', function () {
-    a.strictEqual(t.isPrimitive(Symbol()), true);
+    a.strictEqual(isPrimitive(Symbol()), true);
   });
 
   tom.test('.isClass(value)', function () {
-    a.strictEqual(t.isClass(true), false);
-    a.strictEqual(t.isClass({}), false);
-    a.strictEqual(t.isClass(0), false);
-    a.strictEqual(t.isClass('1'), false);
-    a.strictEqual(t.isClass(1.1), false);
-    a.strictEqual(t.isClass(NaN), false);
-    a.strictEqual(t.isClass(Infinity), false);
-    a.strictEqual(t.isClass(function () {}), false);
-    a.strictEqual(t.isClass(Date), false);
-    a.strictEqual(t.isClass(), false);
-    a.strictEqual(t.isClass(class {}), true);
+    a.strictEqual(isClass(true), false);
+    a.strictEqual(isClass({}), false);
+    a.strictEqual(isClass(0), false);
+    a.strictEqual(isClass('1'), false);
+    a.strictEqual(isClass(1.1), false);
+    a.strictEqual(isClass(NaN), false);
+    a.strictEqual(isClass(Infinity), false);
+    a.strictEqual(isClass(function () {}), false);
+    a.strictEqual(isClass(Date), false);
+    a.strictEqual(isClass(), false);
+    a.strictEqual(isClass(class {}), true);
 
     function broken () { }
     broken.toString = function () { throw new Error() };
-    a.strictEqual(t.isClass(broken), false);
+    a.strictEqual(isClass(broken), false);
   });
 
   tom.test('.isPromise', function () {
-    a.strictEqual(t.isPromise(Promise.resolve()), true);
-    a.strictEqual(t.isPromise(Promise), false);
-    a.strictEqual(t.isPromise(true), false);
-    a.strictEqual(t.isPromise({}), false);
-    a.strictEqual(t.isPromise(0), false);
-    a.strictEqual(t.isPromise('1'), false);
-    a.strictEqual(t.isPromise(1.1), false);
-    a.strictEqual(t.isPromise(NaN), false);
-    a.strictEqual(t.isPromise(Infinity), false);
-    a.strictEqual(t.isPromise(function () {}), false);
-    a.strictEqual(t.isPromise(Date), false);
-    a.strictEqual(t.isPromise(), false);
-    a.strictEqual(t.isPromise({ then: function () {} }), true);
+    a.strictEqual(isPromise(Promise.resolve()), true);
+    a.strictEqual(isPromise(Promise), false);
+    a.strictEqual(isPromise(true), false);
+    a.strictEqual(isPromise({}), false);
+    a.strictEqual(isPromise(0), false);
+    a.strictEqual(isPromise('1'), false);
+    a.strictEqual(isPromise(1.1), false);
+    a.strictEqual(isPromise(NaN), false);
+    a.strictEqual(isPromise(Infinity), false);
+    a.strictEqual(isPromise(function () {}), false);
+    a.strictEqual(isPromise(Date), false);
+    a.strictEqual(isPromise(), false);
+    a.strictEqual(isPromise({ then: function () {} }), true);
   });
 
   tom.test('.isObject', function () {
-    a.strictEqual(t.isObject(Promise.resolve()), true);
-    a.strictEqual(t.isObject(Promise), false);
-    a.strictEqual(t.isObject(true), false);
-    a.strictEqual(t.isObject({}), true);
-    a.strictEqual(t.isObject(0), false);
-    a.strictEqual(t.isObject('1'), false);
-    a.strictEqual(t.isObject(1.1), false);
-    a.strictEqual(t.isObject(NaN), false);
-    a.strictEqual(t.isObject(Infinity), false);
-    a.strictEqual(t.isObject(function () {}), false);
-    a.strictEqual(t.isObject(Date), false);
-    a.strictEqual(t.isObject(), false);
-    a.strictEqual(t.isObject(new Map()), true);
-    a.strictEqual(t.isObject([]), true);
-    a.strictEqual(t.isObject({ then: function () {} }), true);
+    a.strictEqual(isObject$1(Promise.resolve()), true);
+    a.strictEqual(isObject$1(Promise), false);
+    a.strictEqual(isObject$1(true), false);
+    a.strictEqual(isObject$1({}), true);
+    a.strictEqual(isObject$1(0), false);
+    a.strictEqual(isObject$1('1'), false);
+    a.strictEqual(isObject$1(1.1), false);
+    a.strictEqual(isObject$1(NaN), false);
+    a.strictEqual(isObject$1(Infinity), false);
+    a.strictEqual(isObject$1(function () {}), false);
+    a.strictEqual(isObject$1(Date), false);
+    a.strictEqual(isObject$1(), false);
+    a.strictEqual(isObject$1(new Map()), true);
+    a.strictEqual(isObject$1([]), true);
+    a.strictEqual(isObject$1({ then: function () {} }), true);
   });
 
   tom.test('.isArrayLike', function () {
-    a.strictEqual(t.isArrayLike(arguments), true);
-    a.strictEqual(t.isArrayLike(Promise.resolve()), false);
-    a.strictEqual(t.isArrayLike(Promise), false);
-    a.strictEqual(t.isArrayLike(true), false);
-    a.strictEqual(t.isArrayLike({}), false);
-    a.strictEqual(t.isArrayLike(0), false);
-    a.strictEqual(t.isArrayLike('1'), false);
-    a.strictEqual(t.isArrayLike(1.1), false);
-    a.strictEqual(t.isArrayLike(NaN), false);
-    a.strictEqual(t.isArrayLike(Infinity), false);
-    a.strictEqual(t.isArrayLike(function () {}), false);
-    a.strictEqual(t.isArrayLike(Date), false);
-    a.strictEqual(t.isArrayLike(), false);
-    a.strictEqual(t.isArrayLike(new Map()), false);
-    a.strictEqual(t.isArrayLike([]), true);
-    a.strictEqual(t.isArrayLike({ then: function () {} }), false);
+    a.strictEqual(isArrayLike$1(arguments), true);
+    a.strictEqual(isArrayLike$1(Promise.resolve()), false);
+    a.strictEqual(isArrayLike$1(Promise), false);
+    a.strictEqual(isArrayLike$1(true), false);
+    a.strictEqual(isArrayLike$1({}), false);
+    a.strictEqual(isArrayLike$1(0), false);
+    a.strictEqual(isArrayLike$1('1'), false);
+    a.strictEqual(isArrayLike$1(1.1), false);
+    a.strictEqual(isArrayLike$1(NaN), false);
+    a.strictEqual(isArrayLike$1(Infinity), false);
+    a.strictEqual(isArrayLike$1(function () {}), false);
+    a.strictEqual(isArrayLike$1(Date), false);
+    a.strictEqual(isArrayLike$1(), false);
+    a.strictEqual(isArrayLike$1(new Map()), false);
+    a.strictEqual(isArrayLike$1([]), true);
+    a.strictEqual(isArrayLike$1({ then: function () {} }), false);
   });
 
   tom.test('.isIterable', function () {
-    a.strictEqual(t.isIterable(Promise.resolve()), false);
-    a.strictEqual(t.isIterable(Promise), false);
-    a.strictEqual(t.isIterable(true), false);
-    a.strictEqual(t.isIterable({}), false);
-    a.strictEqual(t.isIterable(0), false);
-    a.strictEqual(t.isIterable('1'), true);
-    a.strictEqual(t.isIterable(1.1), false);
-    a.strictEqual(t.isIterable(null), false);
-    a.strictEqual(t.isIterable(undefined), false);
-    a.strictEqual(t.isIterable(NaN), false);
-    a.strictEqual(t.isIterable(Infinity), false);
-    a.strictEqual(t.isIterable(function () {}), false);
-    a.strictEqual(t.isIterable(Date), false);
-    a.strictEqual(t.isIterable(), false);
-    a.strictEqual(t.isIterable(new Map()), true);
-    a.strictEqual(t.isIterable([]), true);
-    a.strictEqual(t.isIterable({ then: function () {} }), false);
-    a.strictEqual(t.isIterable((function * () {})()), true);
+    a.strictEqual(isIterable(Promise.resolve()), false);
+    a.strictEqual(isIterable(Promise), false);
+    a.strictEqual(isIterable(true), false);
+    a.strictEqual(isIterable({}), false);
+    a.strictEqual(isIterable(0), false);
+    a.strictEqual(isIterable('1'), true);
+    a.strictEqual(isIterable(1.1), false);
+    a.strictEqual(isIterable(null), false);
+    a.strictEqual(isIterable(undefined), false);
+    a.strictEqual(isIterable(NaN), false);
+    a.strictEqual(isIterable(Infinity), false);
+    a.strictEqual(isIterable(function () {}), false);
+    a.strictEqual(isIterable(Date), false);
+    a.strictEqual(isIterable(), false);
+    a.strictEqual(isIterable(new Map()), true);
+    a.strictEqual(isIterable([]), true);
+    a.strictEqual(isIterable({ then: function () {} }), false);
+    a.strictEqual(isIterable((function * () {})()), true);
   });
 }
 
