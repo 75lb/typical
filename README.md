@@ -21,9 +21,6 @@ const t = require('typical')
     * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
     * [.isObject(input)](#module_typical.isObject) ⇒ <code>boolean</code>
     * [.isDefined(input)](#module_typical.isDefined) ⇒ <code>boolean</code>
-    * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
-    * [.isBoolean(input)](#module_typical.isBoolean) ⇒ <code>boolean</code>
-    * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
     * [.isClass(input)](#module_typical.isClass) ⇒ <code>boolean</code>
     * [.isPrimitive(input)](#module_typical.isPrimitive) ⇒ <code>boolean</code>
     * [.isPromise(input)](#module_typical.isPromise) ⇒ <code>boolean</code>
@@ -105,8 +102,8 @@ An array-like value has all the properties of an array, but is not an array inst
 **Example**  
 ```js
 function sum(x, y){
-    console.log(t.isArrayLike(arguments))
-    // prints `true`
+  console.log(t.isArrayLike(arguments))
+  // prints `true`
 }
 ```
 <a name="module_typical.isObject"></a>
@@ -131,43 +128,10 @@ Returns true if the input value is defined
 | --- | --- | --- |
 | input | <code>\*</code> | the input to test |
 
-<a name="module_typical.isString"></a>
-
-### t.isString(input) ⇒ <code>boolean</code>
-Returns true if the input value is a string
-
-**Kind**: static method of [<code>typical</code>](#module_typical)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| input | <code>\*</code> | the input to test |
-
-<a name="module_typical.isBoolean"></a>
-
-### t.isBoolean(input) ⇒ <code>boolean</code>
-Returns true if the input value is a boolean
-
-**Kind**: static method of [<code>typical</code>](#module_typical)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| input | <code>\*</code> | the input to test |
-
-<a name="module_typical.isFunction"></a>
-
-### t.isFunction(input) ⇒ <code>boolean</code>
-Returns true if the input value is a function
-
-**Kind**: static method of [<code>typical</code>](#module_typical)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| input | <code>\*</code> | the input to test |
-
 <a name="module_typical.isClass"></a>
 
 ### t.isClass(input) ⇒ <code>boolean</code>
-Returns true if the input value is an es2015 `class`.
+Returns true if the input value is an ES2015 `class`.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
