@@ -1,5 +1,5 @@
-import Tom from './node_modules/test-object-model/dist/index.mjs'
-import * as t from './index.mjs'
+import Tom from '../node_modules/test-object-model/dist/index.mjs'
+import * as t from '../index.mjs'
 const tom = new Tom('typical-v10')
 let a
 

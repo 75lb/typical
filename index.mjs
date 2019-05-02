@@ -198,3 +198,15 @@ export function isIterable (input) {
     )
   }
 }
+
+export default {
+  isNumber,
+  isPlainObject,
+  isArrayLike,
+  isObject,
+  isDefined,
+  isClass,
+  isPrimitive,
+  isPromise,
+  isIterable
+}

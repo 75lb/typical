@@ -2,3 +2,5 @@ tmp
 out
 coverage
 .nyc_output
+tmp
+node_modules
