@@ -80,7 +80,7 @@ export function isArrayLike (input) {
 }
 
 /**
- * returns true if the typeof input is `'object'`, but not null!
+ * Returns true if the typeof input is `'object'` but not null.
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
@@ -90,7 +90,7 @@ export function isObject (input) {
 }
 
 /**
- * Returns true if the input value is defined
+ * Returns true if the input value is defined.
  * @param {*} - the input to test
  * @returns {boolean}
  * @static

@@ -109,7 +109,7 @@ function sum(x, y){
 <a name="module_typical.isObject"></a>
 
 ### t.isObject(input) ⇒ <code>boolean</code>
-returns true if the typeof input is `'object'`, but not null!
+Returns true if the typeof input is `'object'` but not null.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
@@ -120,7 +120,7 @@ returns true if the typeof input is `'object'`, but not null!
 <a name="module_typical.isDefined"></a>
 
 ### t.isDefined(input) ⇒ <code>boolean</code>
-Returns true if the input value is defined
+Returns true if the input value is defined.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
