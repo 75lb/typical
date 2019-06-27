@@ -25,6 +25,8 @@ const t = require('typical')
     * [.isPrimitive(input)](#module_typical.isPrimitive) ⇒ <code>boolean</code>
     * [.isPromise(input)](#module_typical.isPromise) ⇒ <code>boolean</code>
     * [.isIterable(input)](#module_typical.isIterable) ⇒ <code>boolean</code>
+    * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
+    * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 
@@ -207,6 +209,28 @@ false
 > t.isIterable({ then: function () {} })
 false
 ```
+<a name="module_typical.isString"></a>
+
+### t.isString(input) ⇒ <code>boolean</code>
+Returns true if the input value is a string. The equivalent of `typeof input === 'string'`` for use in funcitonal contexts.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isFunction"></a>
+
+### t.isFunction(input) ⇒ <code>boolean</code>
+Returns true if the input value is a function. The equivalent of `typeof input === 'function'`` for use in funcitonal contexts.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
 
 ## Load anywhere
 
