@@ -1,7 +1,7 @@
 {
   "name": "typical",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Functional, isomorphic, load-anywhere type checking for Javascript",
   "repository": "https://github.com/75lb/typical",
   "license": "MIT",
