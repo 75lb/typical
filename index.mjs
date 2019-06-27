@@ -199,6 +199,26 @@ export function isIterable (input) {
   }
 }
 
+/**
+ * Returns true if the input value is a string. The equivalent of `typeof input === 'string'`` for use in funcitonal contexts.
+ * @param {*} - the input to test
+ * @returns {boolean}
+ * @static
+ */
+export function isString (input) {
+  return typeof input === 'string'
+}
+
+/**
+ * Returns true if the input value is a function. The equivalent of `typeof input === 'function'`` for use in funcitonal contexts.
+ * @param {*} - the input to test
+ * @returns {boolean}
+ * @static
+ */
+export function isFunction (input) {
+  return typeof input === 'function'
+}
+
 export default {
   isNumber,
   isPlainObject,
@@ -208,5 +228,7 @@ export default {
   isClass,
   isPrimitive,
   isPromise,
-  isIterable
+  isIterable,
+  isString,
+  isFunction
 }

@@ -152,6 +152,16 @@ async function start () {
     a.strictEqual(t.isIterable({ then: function () {} }), false)
     a.strictEqual(t.isIterable((function * () {})()), true)
   })
+
+  tom.test('.isString', function () {
+    a.strictEqual(t.isString('1'), true)
+    a.strictEqual(t.isString(1), false)
+  })
+
+  tom.test('.isFunction', function () {
+    a.strictEqual(t.isFunction(function () {}), true)
+    a.strictEqual(t.isFunction('function () {}'), false)
+  })
 }
 
 start().catch(console.error)

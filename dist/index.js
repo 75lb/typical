@@ -86,7 +86,7 @@
   }
 
   /**
-   * returns true if the typeof input is `'object'`, but not null!
+   * Returns true if the typeof input is `'object'` but not null.
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
@@ -96,7 +96,7 @@
   }
 
   /**
-   * Returns true if the input value is defined
+   * Returns true if the input value is defined.
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
@@ -205,15 +205,52 @@
     }
   }
 
+  /**
+   * Returns true if the input value is a string. The equivalent of `typeof input === 'string'`` for use in funcitonal contexts.
+   * @param {*} - the input to test
+   * @returns {boolean}
+   * @static
+   */
+  function isString (input) {
+    return typeof input === 'string'
+  }
+
+  /**
+   * Returns true if the input value is a function. The equivalent of `typeof input === 'function'`` for use in funcitonal contexts.
+   * @param {*} - the input to test
+   * @returns {boolean}
+   * @static
+   */
+  function isFunction (input) {
+    return typeof input === 'function'
+  }
+
+  var index = {
+    isNumber,
+    isPlainObject,
+    isArrayLike,
+    isObject,
+    isDefined,
+    isClass,
+    isPrimitive,
+    isPromise,
+    isIterable,
+    isString,
+    isFunction
+  };
+
+  exports.default = index;
   exports.isArrayLike = isArrayLike;
   exports.isClass = isClass;
   exports.isDefined = isDefined;
+  exports.isFunction = isFunction;
   exports.isIterable = isIterable;
   exports.isNumber = isNumber;
   exports.isObject = isObject;
   exports.isPlainObject = isPlainObject;
   exports.isPrimitive = isPrimitive;
   exports.isPromise = isPromise;
+  exports.isString = isString;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
