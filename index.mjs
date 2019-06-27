@@ -1,5 +1,5 @@
 /**
- * For type-checking Javascript values.
+ * Functional, isomorphic, load-anywhere type checking for Javascript.
  * @module typical
  * @typicalname t
  * @example

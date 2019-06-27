@@ -2,7 +2,7 @@
   "name": "typical",
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "5.0.0",
-  "description": "Robust Javascript type-checking",
+  "description": "Functional, isomorphic, load-anywhere type checking for Javascript",
   "repository": "https://github.com/75lb/typical",
   "license": "MIT",
   "main": "dist/index.js",
@@ -25,7 +25,13 @@
     "promise",
     "iterable",
     "class",
-    "primitive"
+    "primitive",
+    "isstring",
+    "isclass",
+    "isiterable",
+    "isdefined",
+    "isobject",
+    "isomorphic"
   ],
   "engines": {
     "node": ">=8"
@@ -39,13 +45,13 @@
     "test:v8": "rollup test/test.mjs test/test-default.mjs -f cjs -d tmp/test && test-runner tmp/test/test*.js",
     "dist": "rollup index.mjs -f umd -n typical -o dist/index.js --exports named",
     "docs": "jsdoc2md -c jsdoc.conf -t README.hbs index.mjs > README.md; echo",
-    "cover": "nyc --reporter=text-lcov test-runner test.js | coveralls"
+    "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
-    "@test-runner/web": "^0.1.4",
     "coveralls": "^3.0.4",
     "esm-runner": "^0.1.4",
     "jsdoc-to-markdown": "^5.0.0",
+    "nyc": "^14.1.1",
     "rollup": "^1.16.2",
     "test-object-model": "^0.4.4",
     "test-runner": "^0.6.0"

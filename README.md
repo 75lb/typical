@@ -8,7 +8,7 @@
 <a name="module_typical"></a>
 
 ## typical
-For type-checking Javascript values.
+Functional, isomorphic, load-anywhere type checking for Javascript.
 
 **Example**  
 ```js
