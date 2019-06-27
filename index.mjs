@@ -200,7 +200,7 @@ export function isIterable (input) {
 }
 
 /**
- * Returns true if the input value is a string. The equivalent of `typeof input === 'string'`` for use in funcitonal contexts.
+ * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
@@ -210,7 +210,7 @@ export function isString (input) {
 }
 
 /**
- * Returns true if the input value is a function. The equivalent of `typeof input === 'function'`` for use in funcitonal contexts.
+ * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
  * @param {*} - the input to test
  * @returns {boolean}
  * @static

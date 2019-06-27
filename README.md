@@ -212,7 +212,7 @@ false
 <a name="module_typical.isString"></a>
 
 ### t.isString(input) ⇒ <code>boolean</code>
-Returns true if the input value is a string. The equivalent of `typeof input === 'string'`` for use in funcitonal contexts.
+Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
@@ -223,7 +223,7 @@ Returns true if the input value is a string. The equivalent of `typeof input ===
 <a name="module_typical.isFunction"></a>
 
 ### t.isFunction(input) ⇒ <code>boolean</code>
-Returns true if the input value is a function. The equivalent of `typeof input === 'function'`` for use in funcitonal contexts.
+Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
