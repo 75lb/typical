@@ -7,7 +7,8 @@
  */
 
 /**
- * Returns true if input is a number
+ * Returns true if input is a number. It is a more reasonable alternative to `typeof n` which returns `number` for `NaN` and `Infinity`.
+ *
  * @param {*} - the input to test
  * @returns {boolean}
  * @static
@@ -64,7 +65,7 @@ export function isPlainObject (input) {
 }
 
 /**
- * An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
+ * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
  *
  * @param {*} - the input to test
  * @returns {boolean}

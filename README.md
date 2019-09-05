@@ -31,7 +31,7 @@ const t = require('typical')
 <a name="module_typical.isNumber"></a>
 
 ### t.isNumber(n) ⇒ <code>boolean</code>
-Returns true if input is a number
+Returns true if input is a number. It is a more reasonable alternative to `typeof n` which returns `number` for `NaN` and `Infinity`.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
@@ -93,7 +93,7 @@ false
 <a name="module_typical.isArrayLike"></a>
 
 ### t.isArrayLike(input) ⇒ <code>boolean</code>
-An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
+An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 
