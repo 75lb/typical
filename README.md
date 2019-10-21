@@ -8,11 +8,12 @@
 <a name="module_typical"></a>
 
 ## typical
-Functional, isomorphic, load-anywhere type checking for Javascript.
+Isomorphic, functional type-checking for Javascript.
 
 **Example**  
 ```js
 const t = require('typical')
+const allDefined = array.every(t.isDefined)
 ```
 
 * [typical](#module_typical)
@@ -21,6 +22,9 @@ const t = require('typical')
     * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
     * [.isObject(input)](#module_typical.isObject) ⇒ <code>boolean</code>
     * [.isDefined(input)](#module_typical.isDefined) ⇒ <code>boolean</code>
+    * [.isUndefined(input)](#module_typical.isUndefined) ⇒ <code>boolean</code>
+    * [.isNull(input)](#module_typical.isNull) ⇒ <code>boolean</code>
+    * [.isDefinedValue(input)](#module_typical.isDefinedValue) ⇒ <code>boolean</code>
     * [.isClass(input)](#module_typical.isClass) ⇒ <code>boolean</code>
     * [.isPrimitive(input)](#module_typical.isPrimitive) ⇒ <code>boolean</code>
     * [.isPromise(input)](#module_typical.isPromise) ⇒ <code>boolean</code>
@@ -123,6 +127,39 @@ Returns true if the typeof input is `'object'` but not null.
 
 ### t.isDefined(input) ⇒ <code>boolean</code>
 Returns true if the input value is defined.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isUndefined"></a>
+
+### t.isUndefined(input) ⇒ <code>boolean</code>
+Returns true if the input value is undefined.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isNull"></a>
+
+### t.isNull(input) ⇒ <code>boolean</code>
+Returns true if the input value is null.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | the input to test |
+
+<a name="module_typical.isDefinedValue"></a>
+
+### t.isDefinedValue(input) ⇒ <code>boolean</code>
+Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
 

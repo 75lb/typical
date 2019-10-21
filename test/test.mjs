@@ -43,6 +43,22 @@ async function start () {
     a.strictEqual(t.isDefined(undefined), false)
   })
 
+  tom.test('.isUndefined(value)', function () {
+    a.strictEqual(t.isUndefined({}), false)
+    a.strictEqual(t.isUndefined({}.one), true)
+    a.strictEqual(t.isUndefined(0), false)
+    a.strictEqual(t.isUndefined(null), false)
+    a.strictEqual(t.isUndefined(undefined), true)
+  })
+
+  tom.test('.isNull(value)', function () {
+    a.strictEqual(t.isNull({}), false)
+    a.strictEqual(t.isNull({}.one), false)
+    a.strictEqual(t.isNull(0), false)
+    a.strictEqual(t.isNull(null), true)
+    a.strictEqual(t.isNull(undefined), false)
+  })
+
   tom.test('.isPrimitive(value)', function () {
     a.strictEqual(t.isPrimitive(true), true)
     a.strictEqual(t.isPrimitive({}), false)
@@ -55,6 +71,20 @@ async function start () {
     a.strictEqual(t.isPrimitive(Date), false)
     a.strictEqual(t.isPrimitive(null), true)
     a.strictEqual(t.isPrimitive(undefined), true)
+  })
+
+  tom.test('.isDefinedValue(value)', function () {
+    a.strictEqual(t.isDefinedValue(true), true)
+    a.strictEqual(t.isDefinedValue({}), true)
+    a.strictEqual(t.isDefinedValue(0), true)
+    a.strictEqual(t.isDefinedValue('1'), true)
+    a.strictEqual(t.isDefinedValue(1.1), true)
+    a.strictEqual(t.isDefinedValue(NaN), false)
+    a.strictEqual(t.isDefinedValue(Infinity), true)
+    a.strictEqual(t.isDefinedValue(function () {}), true)
+    a.strictEqual(t.isDefinedValue(Date), true)
+    a.strictEqual(t.isDefinedValue(null), false)
+    a.strictEqual(t.isDefinedValue(undefined), false)
   })
 
   tom.test('.isPrimitive(value) ES6', function () {

@@ -1,9 +1,10 @@
 /**
- * Functional, isomorphic, load-anywhere type checking for Javascript.
+ * Isomorphic, functional type-checking for Javascript.
  * @module typical
  * @typicalname t
  * @example
  * const t = require('typical')
+ * const allDefined = array.every(t.isDefined)
  */
 
 /**
@@ -98,6 +99,36 @@ export function isObject (input) {
  */
 export function isDefined (input) {
   return typeof input !== 'undefined'
+}
+
+/**
+ * Returns true if the input value is undefined.
+ * @param {*} - the input to test
+ * @returns {boolean}
+ * @static
+ */
+export function isUndefined (input) {
+  return !isDefined(input)
+}
+
+/**
+ * Returns true if the input value is null.
+ * @param {*} - the input to test
+ * @returns {boolean}
+ * @static
+ */
+export function isNull (input) {
+ return input === null
+}
+
+/**
+ * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
+ * @param {*} - the input to test
+ * @returns {boolean}
+ * @static
+ */
+export function isDefinedValue (input) {
+ return isDefined(input) && !isNull(input) && !Number.isNaN(input)
 }
 
 /**
@@ -226,6 +257,9 @@ export default {
   isArrayLike,
   isObject,
   isDefined,
+  isUndefined,
+  isNull,
+  isDefinedValue,
   isClass,
   isPrimitive,
   isPromise,

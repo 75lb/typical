@@ -5,15 +5,17 @@
 }(this, function (exports) { 'use strict';
 
   /**
-   * For type-checking Javascript values.
+   * Isomorphic, functional type-checking for Javascript.
    * @module typical
    * @typicalname t
    * @example
    * const t = require('typical')
+   * const allDefined = array.every(t.isDefined)
    */
 
   /**
-   * Returns true if input is a number
+   * Returns true if input is a number. It is a more reasonable alternative to `typeof n` which returns `number` for `NaN` and `Infinity`.
+   *
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
@@ -70,7 +72,7 @@
   }
 
   /**
-   * An array-like value has all the properties of an array, but is not an array instance. Examples in the `arguments` object. Returns true if the input value is an object, not null and has a `length` property with a numeric value.
+   * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
    *
    * @param {*} - the input to test
    * @returns {boolean}
@@ -103,6 +105,36 @@
    */
   function isDefined (input) {
     return typeof input !== 'undefined'
+  }
+
+  /**
+   * Returns true if the input value is undefined.
+   * @param {*} - the input to test
+   * @returns {boolean}
+   * @static
+   */
+  function isUndefined (input) {
+    return !isDefined(input)
+  }
+
+  /**
+   * Returns true if the input value is null.
+   * @param {*} - the input to test
+   * @returns {boolean}
+   * @static
+   */
+  function isNull (input) {
+   return input === null
+  }
+
+  /**
+   * Returns true if the input value is both defined and not null.
+   * @param {*} - the input to test
+   * @returns {boolean}
+   * @static
+   */
+  function isDefinedValue (input) {
+   return isDefined(input) && !isNull(input) && !Number.isNaN(input)
   }
 
   /**
@@ -206,7 +238,7 @@
   }
 
   /**
-   * Returns true if the input value is a string. The equivalent of `typeof input === 'string'`` for use in funcitonal contexts.
+   * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
@@ -216,7 +248,7 @@
   }
 
   /**
-   * Returns true if the input value is a function. The equivalent of `typeof input === 'function'`` for use in funcitonal contexts.
+   * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
@@ -231,6 +263,9 @@
     isArrayLike,
     isObject,
     isDefined,
+    isUndefined,
+    isNull,
+    isDefinedValue,
     isClass,
     isPrimitive,
     isPromise,
@@ -243,14 +278,17 @@
   exports.isArrayLike = isArrayLike;
   exports.isClass = isClass;
   exports.isDefined = isDefined;
+  exports.isDefinedValue = isDefinedValue;
   exports.isFunction = isFunction;
   exports.isIterable = isIterable;
+  exports.isNull = isNull;
   exports.isNumber = isNumber;
   exports.isObject = isObject;
   exports.isPlainObject = isPlainObject;
   exports.isPrimitive = isPrimitive;
   exports.isPromise = isPromise;
   exports.isString = isString;
+  exports.isUndefined = isUndefined;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
