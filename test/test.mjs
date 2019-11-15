@@ -1,4 +1,4 @@
-import Tom from '../node_modules/test-object-model/dist/index.mjs'
+import Tom from 'test-object-model'
 import * as t from '../index.mjs'
 const tom = new Tom('typical')
 let a
@@ -181,6 +181,10 @@ async function start () {
     a.strictEqual(t.isIterable([]), true)
     a.strictEqual(t.isIterable({ then: function () {} }), false)
     a.strictEqual(t.isIterable((function * () {})()), true)
+  })
+
+  tom.test('.isIterable [v10]', function () {
+    a.strictEqual(t.isIterable((async function * () {})()), true)
   })
 
   tom.test('.isString', function () {

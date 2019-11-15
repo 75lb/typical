@@ -1,4 +1,4 @@
-import Tom from '../node_modules/test-object-model/dist/index.mjs'
+import Tom from 'test-object-model'
 import t from '../index.mjs'
 const tom = new Tom('import-default')
 let a

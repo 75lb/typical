@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (global = global || self, factory(global.typical = {}));
-}(this, function (exports) { 'use strict';
+}(this, (function (exports) { 'use strict';
 
   /**
    * Isomorphic, functional type-checking for Javascript.
@@ -128,7 +128,7 @@
   }
 
   /**
-   * Returns true if the input value is both defined and not null.
+   * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
    * @param {*} - the input to test
    * @returns {boolean}
    * @static
@@ -292,4 +292,4 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
