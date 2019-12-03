@@ -1,22 +1,16 @@
 import Tom from 'test-object-model'
 import t from '../index.mjs'
-const tom = new Tom('import-default')
-let a
+import getAssert from 'isomorphic-assert'
 
-async function start () {
-  /* isomorphic: load assertion library */
-  if (typeof window === 'undefined') {
-    a = await import('assert')
-  } else {
-    await import('https://www.chaijs.com/chai.js')
-    a = window.chai.assert
-    window.tom = tom
-  }
+async function getTom () {
+  const tom = new Tom()
+  const a = await getAssert()
 
   tom.test('isClass exported', function () {
     a.ok(t.isClass)
   })
+
+  return tom
 }
 
-start().catch(console.error)
-export default tom
+export default getTom()
