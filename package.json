@@ -46,14 +46,14 @@
     "cover": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
-    "@test-runner/web": "^0.3.2",
-    "coveralls": "^3.0.9",
-    "esm-runner": "^0.3.3",
+    "@test-runner/web": "^0.3.5",
+    "coveralls": "^3.1.0",
+    "esm-runner": "^0.3.4",
     "isomorphic-assert": "^0.1.1",
     "jsdoc-to-markdown": "^5.0.3",
-    "nyc": "^14.1.1",
-    "rollup": "^1.27.8",
-    "test-object-model": "^0.5.9"
+    "nyc": "^15.0.1",
+    "rollup": "^2.11.2",
+    "test-object-model": "^0.6.1"
   },
   "files": [
     "index.mjs",
