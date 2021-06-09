@@ -12,16 +12,16 @@
 
 This library is compatible with Node.js, the Web and any style of module loader. It can be loaded anywhere, natively without transpilation.
 
-Node.js:
+Within a Node.js ECMAScript Module:
 
 ```js
-const typical = require('typical')
+import * as typical from 'typical'
 ```
 
-Within Node.js with ECMAScript Module support enabled:
+or
 
 ```js
-import typical from 'typical'
+import { isNumber } from 'typical'
 ```
 
 Within a modern browser ECMAScript Module:
@@ -30,14 +30,8 @@ Within a modern browser ECMAScript Module:
 import typical from './node_modules/typical/index.mjs'
 ```
 
-Old browser (adds `window.typical`):
-
-```html
-<script nomodule src="./node_modules/typical/dist/index.js"></script>
-```
-
 * * *
 
-&copy; 2014-20 Lloyd Brookes \<75pound@gmail.com\>.
+&copy; 2014-21 Lloyd Brookes \<75pound@gmail.com\>.
 
 Isomorphic test suite by [esm-runner](https://github.com/test-runner-js/esm-runner) and [web-runner](https://github.com/test-runner-js/web-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
