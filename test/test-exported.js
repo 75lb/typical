@@ -1,13 +1,13 @@
 import Tom from 'test-object-model'
-import t from '../index.mjs'
 import getAssert from 'isomorphic-assert'
+import { isClass } from '../index.js'
 
 async function getTom () {
   const tom = new Tom()
   const a = await getAssert()
 
   tom.test('isClass exported', function () {
-    a.ok(t.isClass)
+    a.ok(isClass)
   })
 
   return tom

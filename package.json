@@ -5,8 +5,9 @@
   "description": "Isomorphic, functional type-checking for Javascript",
   "repository": "https://github.com/75lb/typical",
   "license": "MIT",
-  "main": "./index.mjs",
-  "exports": "./index.mjs",
+  "type": "module",
+  "main": "./index.js",
+  "exports": "./index.js",
   "keywords": [
     "type",
     "checking",
