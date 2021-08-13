@@ -175,7 +175,7 @@ export function isClass (input) {
 
 /**
  * Returns true if the input is a string, number, symbol, boolean, null or undefined value.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -195,7 +195,7 @@ export function isPrimitive (input) {
 
 /**
  * Returns true if the input is a Promise.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -211,7 +211,7 @@ export function isPromise (input) {
 
 /**
  * Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -261,7 +261,7 @@ export function isIterable (input) {
 
 /**
  * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -271,7 +271,7 @@ export function isString (input) {
 
 /**
  * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
