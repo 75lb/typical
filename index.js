@@ -131,7 +131,7 @@ export function isDefined (input) {
 
 /**
  * Returns true if the input value is undefined.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -141,7 +141,7 @@ export function isUndefined (input) {
 
 /**
  * Returns true if the input value is null.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -151,7 +151,7 @@ export function isNull (input) {
 
 /**
  * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -161,7 +161,7 @@ export function isDefinedValue (input) {
 
 /**
  * Returns true if the input value is an ES2015 `class`.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
