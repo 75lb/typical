@@ -10,7 +10,7 @@
 /**
  * Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
  *
- * @param {*} n the input to test
+ * @param {*} n - The input to test
  * @returns {boolean} - true if input is a number
  * @static
  * @example
@@ -38,7 +38,7 @@ export function isNumber (n) {
 /**
  * Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
  *
- * @param {*} n the input to test
+ * @param {*} n - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -66,7 +66,7 @@ export function isFiniteNumber (n) {
 /**
  * A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
  *
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -96,7 +96,7 @@ export function isPlainObject (input) {
 /**
  * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
  *
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -111,7 +111,7 @@ export function isArrayLike (input) {
 
 /**
  * Returns true if the typeof input is `'object'` but not null.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -121,7 +121,7 @@ export function isObject (input) {
 
 /**
  * Returns true if the input value is defined.
- * @param {*} input the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
