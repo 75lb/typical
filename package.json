@@ -54,6 +54,6 @@
     "test-object-model": "^0.7.1"
   },
   "files": [
-    "index.mjs"
+    "index.js"
   ]
 }
