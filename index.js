@@ -10,8 +10,8 @@
 /**
  * Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
  *
- * @param {*} - the input to test
- * @returns {boolean}
+ * @param {*} n - The input to test
+ * @returns {boolean} - true if input is a number
  * @static
  * @example
  * > t.isNumber(0)
@@ -38,7 +38,7 @@ export function isNumber (n) {
 /**
  * Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
  *
- * @param {*} - the input to test
+ * @param {*} n - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -66,7 +66,7 @@ export function isFiniteNumber (n) {
 /**
  * A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
  *
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -96,7 +96,7 @@ export function isPlainObject (input) {
 /**
  * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
  *
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -111,7 +111,7 @@ export function isArrayLike (input) {
 
 /**
  * Returns true if the typeof input is `'object'` but not null.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -121,7 +121,7 @@ export function isObject (input) {
 
 /**
  * Returns true if the input value is defined.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -131,7 +131,7 @@ export function isDefined (input) {
 
 /**
  * Returns true if the input value is undefined.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -141,7 +141,7 @@ export function isUndefined (input) {
 
 /**
  * Returns true if the input value is null.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -151,7 +151,7 @@ export function isNull (input) {
 
 /**
  * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -161,7 +161,7 @@ export function isDefinedValue (input) {
 
 /**
  * Returns true if the input value is an ES2015 `class`.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -175,7 +175,7 @@ export function isClass (input) {
 
 /**
  * Returns true if the input is a string, number, symbol, boolean, null or undefined value.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -195,7 +195,7 @@ export function isPrimitive (input) {
 
 /**
  * Returns true if the input is a Promise.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -211,7 +211,7 @@ export function isPromise (input) {
 
 /**
  * Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
@@ -261,7 +261,7 @@ export function isIterable (input) {
 
 /**
  * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */
@@ -271,7 +271,7 @@ export function isString (input) {
 
 /**
  * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
- * @param {*} - the input to test
+ * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  */

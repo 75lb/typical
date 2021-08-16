@@ -1,6 +1,6 @@
 import Tom from 'test-object-model'
-import * as t from '../index.mjs'
 import getAssert from 'isomorphic-assert'
+import * as t from '../index.js'
 
 async function getTom () {
   const tom = new Tom()
