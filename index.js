@@ -3,7 +3,7 @@
  * @module typical
  * @typicalname t
  * @example
- * const t = require('typical')
+ * import * as t from 'typical'
  * const allDefined = array.every(t.isDefined)
  */
 
@@ -11,7 +11,7 @@
  * Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
  *
  * @param {*} n - The input to test
- * @returns {boolean} - true if input is a number
+ * @returns {boolean} `true` if input is a number
  * @static
  * @example
  * > t.isNumber(0)
@@ -146,7 +146,7 @@ export function isUndefined (input) {
  * @static
  */
 export function isNull (input) {
- return input === null
+  return input === null
 }
 
 /**
@@ -156,7 +156,7 @@ export function isNull (input) {
  * @static
  */
 export function isDefinedValue (input) {
- return isDefined(input) && !isNull(input) && !Number.isNaN(input)
+  return isDefined(input) && !isNull(input) && !Number.isNaN(input)
 }
 
 /**

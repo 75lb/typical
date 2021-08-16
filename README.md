@@ -13,12 +13,13 @@ Isomorphic, functional type-checking for Javascript.
 
 **Example**  
 ```js
-const t = require('typical')
+import * as t from 'typical'
 const allDefined = array.every(t.isDefined)
 ```
 
 * [typical](#module_typical)
     * [.isNumber(n)](#module_typical.isNumber) ⇒ <code>boolean</code>
+    * [.isFiniteNumber(n)](#module_typical.isFiniteNumber) ⇒ <code>boolean</code>
     * [.isPlainObject(input)](#module_typical.isPlainObject) ⇒ <code>boolean</code>
     * [.isArrayLike(input)](#module_typical.isArrayLike) ⇒ <code>boolean</code>
     * [.isObject(input)](#module_typical.isObject) ⇒ <code>boolean</code>
@@ -36,13 +37,14 @@ const allDefined = array.every(t.isDefined)
 <a name="module_typical.isNumber"></a>
 
 ### t.isNumber(n) ⇒ <code>boolean</code>
-Returns true if input is a number. It is a more reasonable alternative to `typeof n` which returns `number` for `NaN` and `Infinity`.
+Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
 
 **Kind**: static method of [<code>typical</code>](#module_typical)  
+**Returns**: <code>boolean</code> - `true` if input is a number  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| n | <code>\*</code> | the input to test |
+| n | <code>\*</code> | The input to test |
 
 **Example**  
 ```js
@@ -61,6 +63,36 @@ true
 > t.isNumber(NaN)
 false
 > t.isNumber(Infinity)
+true
+```
+<a name="module_typical.isFiniteNumber"></a>
+
+### t.isFiniteNumber(n) ⇒ <code>boolean</code>
+Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| n | <code>\*</code> | The input to test |
+
+**Example**  
+```js
+> t.isFiniteNumber(0)
+true
+> t.isFiniteNumber(1)
+true
+> t.isFiniteNumber(1.1)
+true
+> t.isFiniteNumber(0xff)
+true
+> t.isFiniteNumber(0644)
+true
+> t.isFiniteNumber(6.2e5)
+true
+> t.isFiniteNumber(NaN)
+false
+> t.isFiniteNumber(Infinity)
 false
 ```
 <a name="module_typical.isPlainObject"></a>
@@ -72,7 +104,7 @@ A plain object is a simple object literal, it is not an instance of a class. Ret
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 **Example**  
 ```js
@@ -104,7 +136,7 @@ An array-like value has all the properties of an array yet is not an array insta
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 **Example**  
 ```js
@@ -122,7 +154,7 @@ Returns true if the typeof input is `'object'` but not null.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isDefined"></a>
 
@@ -133,7 +165,7 @@ Returns true if the input value is defined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isUndefined"></a>
 
@@ -144,7 +176,7 @@ Returns true if the input value is undefined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isNull"></a>
 
@@ -155,7 +187,7 @@ Returns true if the input value is null.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isDefinedValue"></a>
 
@@ -166,7 +198,7 @@ Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isClass"></a>
 
@@ -177,7 +209,7 @@ Returns true if the input value is an ES2015 `class`.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isPrimitive"></a>
 
@@ -188,7 +220,7 @@ Returns true if the input is a string, number, symbol, boolean, null or undefine
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isPromise"></a>
 
@@ -199,7 +231,7 @@ Returns true if the input is a Promise.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isIterable"></a>
 
@@ -210,7 +242,7 @@ Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 **Example**  
 ```js
@@ -256,7 +288,7 @@ Returns true if the input value is a string. The equivalent of `typeof input ===
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 <a name="module_typical.isFunction"></a>
 
@@ -267,23 +299,23 @@ Returns true if the input value is a function. The equivalent of `typeof input =
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>\*</code> | the input to test |
+| input | <code>\*</code> | The input to test |
 
 
 ## Load anywhere
 
 This library is compatible with Node.js, the Web and any style of module loader. It can be loaded anywhere, natively without transpilation.
 
-Node.js:
+Within a Node.js ECMAScript Module:
 
 ```js
-const typical = require('typical')
+import * as typical from 'typical'
 ```
 
-Within Node.js with ECMAScript Module support enabled:
+or
 
 ```js
-import typical from 'typical'
+import { isNumber } from 'typical'
 ```
 
 Within a modern browser ECMAScript Module:
@@ -292,14 +324,8 @@ Within a modern browser ECMAScript Module:
 import typical from './node_modules/typical/index.mjs'
 ```
 
-Old browser (adds `window.typical`):
-
-```html
-<script nomodule src="./node_modules/typical/dist/index.js"></script>
-```
-
 * * *
 
-&copy; 2014-20 Lloyd Brookes \<75pound@gmail.com\>.
+&copy; 2014-21 Lloyd Brookes \<75pound@gmail.com\>.
 
-Isomorphic test suite by [esm-runner](https://github.com/test-runner-js/esm-runner) and [web-runner](https://github.com/test-runner-js/web-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+Isomorphic test suite by [test-runner](https://github.com/test-runner-js/test-runner) and [web-runner](https://github.com/test-runner-js/web-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).

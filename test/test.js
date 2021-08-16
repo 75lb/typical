@@ -1,6 +1,6 @@
 import Tom from 'test-object-model'
 import getAssert from 'isomorphic-assert'
-import * as t from '../index.js'
+import * as t from 'typical'
 
 async function getTom () {
   const tom = new Tom()
@@ -29,7 +29,7 @@ async function getTom () {
   tom.test('.isPlainObject(value)', function () {
     a.equal(t.isPlainObject({ clive: 'hater' }), true, '{} is true')
     a.equal(t.isPlainObject(new Date()), false, 'new Date() is false')
-    a.equal(t.isPlainObject([ 0, 1 ]), false, 'Array is false')
+    a.equal(t.isPlainObject([0, 1]), false, 'Array is false')
     a.equal(t.isPlainObject(/test/), false, 'RegExp is false')
     a.equal(t.isPlainObject(1), false, '1 is false')
     a.equal(t.isPlainObject('one'), false, "'one' is false")
