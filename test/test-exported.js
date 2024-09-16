@@ -1,16 +1,10 @@
-import Tom from 'test-object-model'
-import getAssert from 'isomorphic-assert'
-import { isClass } from '../index.js'
+import { isClass } from 'typical'
+import { strict as a } from 'assert'
 
-async function getTom () {
-  const tom = new Tom()
-  const a = await getAssert()
+const [test, only, skip] = [new Map(), new Map(), new Map()]
 
-  tom.test('isClass exported', function () {
-    a.ok(isClass)
-  })
+test.set('isClass exported', function () {
+  a.ok(isClass)
+})
 
-  return tom
-}
-
-export default getTom()
+export { test, only, skip }
