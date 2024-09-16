@@ -12,7 +12,7 @@ Isomorphic, functional type-checking for Javascript.
 
 **Example**  
 ```js
-import * as t from 'typical'
+import t from 'typical'
 const allDefined = array.every(t.isDefined)
 ```
 
@@ -308,7 +308,7 @@ This library is compatible with Node.js, the Web and any style of module loader.
 Within a Node.js ECMAScript Module:
 
 ```js
-import * as typical from 'typical'
+import t from 'typical'
 ```
 
 or
@@ -317,10 +317,16 @@ or
 import { isNumber } from 'typical'
 ```
 
+CommonJS:
+
+```js
+const { isNumber } = require('typical')
+```
+
 Within a modern browser ECMAScript Module:
 
 ```js
-import typical from './node_modules/typical/index.mjs'
+import typical from './node_modules/typical/index.js'
 ```
 
 * * *

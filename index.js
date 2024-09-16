@@ -3,7 +3,7 @@
  * @module typical
  * @typicalname t
  * @example
- * import * as t from 'typical'
+ * import t from 'typical'
  * const allDefined = array.every(t.isDefined)
  */
 
