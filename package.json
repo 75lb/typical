@@ -1,6 +1,6 @@
 {
   "name": "typical",
-  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "author": "Lloyd Brookes <opensource@75lb.com>",
   "version": "7.2.0",
   "description": "Isomorphic, functional type-checking for Javascript",
   "repository": {
