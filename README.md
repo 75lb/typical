@@ -32,6 +32,7 @@ const allDefined = array.every(t.isDefined)
     * [.isIterable(input)](#module_typical.isIterable) ⇒ <code>boolean</code>
     * [.isString(input)](#module_typical.isString) ⇒ <code>boolean</code>
     * [.isFunction(input)](#module_typical.isFunction) ⇒ <code>boolean</code>
+    * [.isAsyncFunction(input)](#module_typical.isAsyncFunction) ⇒ <code>boolean</code>
 
 <a name="module_typical.isNumber"></a>
 
@@ -300,6 +301,36 @@ Returns true if the input value is a function. The equivalent of `typeof input =
 | --- | --- | --- |
 | input | <code>\*</code> | The input to test |
 
+<a name="module_typical.isAsyncFunction"></a>
+
+### t.isAsyncFunction(input) ⇒ <code>boolean</code>
+Returns true if the input value is an async function or method.
+
+**Kind**: static method of [<code>typical</code>](#module_typical)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| input | <code>\*</code> | The input to test |
+
+**Example**  
+```js
+> t.isAsyncFunction(function () {})
+false
+> t.isAsyncFunction(new Function())
+false
+> t.isAsyncFunction(() => {})
+false
+> t.isAsyncFunction(async function () {})
+true
+> const AsyncFunction = async function () {}.constructor
+> t.isAsyncFunction(new AsyncFunction())
+true
+> t.isAsyncFunction(async () => {})
+true
+> class Command { async execute () {} }
+> t.isAsyncFunction(new Command().execute)
+true
+```
 
 ## Load anywhere
 

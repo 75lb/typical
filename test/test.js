@@ -194,7 +194,18 @@ test.set('.isString', function () {
 
 test.set('.isFunction', function () {
   a.equal(t.isFunction(function () {}), true)
-  a.equal(t.isFunction('function () {}'), false)
+  a.equal(t.isFunction(new Function()), true)
+  a.equal(t.isFunction(() => {}), true)
+})
+
+test.set('.isAsyncFunction', function () {
+  a.equal(t.isAsyncFunction(function () {}), false)
+  a.equal(t.isAsyncFunction(new Function()), false)
+  a.equal(t.isAsyncFunction(() => {}), false)
+  a.equal(t.isAsyncFunction(async function () {}), true)
+  const AsyncFunction = async function () {}.constructor
+  a.equal(t.isAsyncFunction(new AsyncFunction()), true)
+  a.equal(t.isAsyncFunction(async () => {}), true)
 })
 
 export { test, only, skip }

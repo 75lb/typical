@@ -20,6 +20,7 @@
     "value",
     "valid",
     "is",
+    "detect",
     "number",
     "object",
     "plainobject",
@@ -38,7 +39,11 @@
     "isiterable",
     "isdefined",
     "isobject",
-    "isomorphic"
+    "isomorphic",
+    "async",
+    "is-async",
+    "es6",
+    "es2015"
   ],
   "engines": {
     "node": ">=12.17"

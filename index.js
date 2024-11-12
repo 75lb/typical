@@ -279,6 +279,33 @@ export function isFunction (input) {
   return typeof input === 'function'
 }
 
+/**
+ * Returns true if the input value is an async function or method.
+ * @param {*} input - The input to test
+ * @returns {boolean}
+ * @static
+ * @example
+ * > t.isAsyncFunction(function () {})
+ * false
+ * > t.isAsyncFunction(new Function())
+ * false
+ * > t.isAsyncFunction(() => {})
+ * false
+ * > t.isAsyncFunction(async function () {})
+ * true
+ * > const AsyncFunction = async function () {}.constructor
+ * > t.isAsyncFunction(new AsyncFunction())
+ * true
+ * > t.isAsyncFunction(async () => {})
+ * true
+ * > class Command { async execute () {} }
+ * > t.isAsyncFunction(new Command().execute)
+ * true
+ */
+export function isAsyncFunction (input) {
+  return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')
+}
+
 export default {
   isNumber,
   isFiniteNumber,
@@ -294,5 +321,6 @@ export default {
   isPromise,
   isIterable,
   isString,
-  isFunction
+  isFunction,
+  isAsyncFunction
 }
