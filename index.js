@@ -64,12 +64,16 @@ export function isFiniteNumber (n) {
 }
 
 /**
- * A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
+ * A plain object is a simple object literal not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a prototype of `Object.prototype` or `null`.
  *
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
  * @example
+ * > t.isPlainObject({ something: 'one' }) // object literal
+ * true
+ * > t.isPlainObject(Object.create(null)) // null-prototype plain object
+ * true
  * > t.isPlainObject({ something: 'one' })
  * true
  * > t.isPlainObject(new Date())
