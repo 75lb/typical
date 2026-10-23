@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 /**
  * Isomorphic, functional type-checking for Javascript.
  * @module typical
@@ -69,6 +67,8 @@ function isFiniteNumber (n) {
 
 /**
  * A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
+ *
+ * TODO: Update to use method 1 here: https://chat.qwen.ai/c/93a9951e-217a-4839-bd54-d95f9a8810aa
  *
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -310,26 +310,6 @@ function isAsyncFunction (input) {
   return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')
 }
 
-var index = {
-  isNumber,
-  isFiniteNumber,
-  isPlainObject,
-  isArrayLike,
-  isObject,
-  isDefined,
-  isUndefined,
-  isNull,
-  isDefinedValue,
-  isClass,
-  isPrimitive,
-  isPromise,
-  isIterable,
-  isString,
-  isFunction,
-  isAsyncFunction
-};
-
-exports.default = index;
 exports.isArrayLike = isArrayLike;
 exports.isAsyncFunction = isAsyncFunction;
 exports.isClass = isClass;

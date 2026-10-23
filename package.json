@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/75lb/typical.git"
   },
-  "license": "MIT",
+  "licence": "MIT",
   "type": "module",
   "exports": {
     "import": "./index.js",
