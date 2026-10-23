@@ -68,8 +68,6 @@ function isFiniteNumber (n) {
 /**
  * A plain object is a simple object literal, it is not an instance of a class. Returns true if the input `typeof` is `object` and directly decends from `Object`.
  *
- * TODO: Update to use method 1 here: https://chat.qwen.ai/c/93a9951e-217a-4839-bd54-d95f9a8810aa
- *
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
@@ -94,7 +92,12 @@ function isFiniteNumber (n) {
  * false
  */
 function isPlainObject (input) {
-  return input !== null && typeof input === 'object' && input.constructor === Object
+  if (typeof input !== 'object' || input === null) {
+    return false
+  } else {
+    const proto = Object.getPrototypeOf(input);
+    return proto === null || proto === Object.prototype
+  }
 }
 
 /**
