@@ -65,12 +65,19 @@
     },
     {
       "children": [],
+      "data": {
+        "id": "isFiniteNumber",
+        "parent": "typical",
+        "returns": "boolean"
+      },
       "type": "block",
       "source": {
         "url": "index.js"
       },
-      "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.\n\n@param {*} n - The input to test\n@returns {boolean}\n@static",
+      "code": "export function isFiniteNumber (n) {\n  return !isNaN(parseFloat(n)) && isFinite(n)\n}\n/*<",
+      "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
       "example": "> t.isFiniteNumber(0)\ntrue\n> t.isFiniteNumber(1)\ntrue\n> t.isFiniteNumber(1.1)\ntrue\n> t.isFiniteNumber(0xff)\ntrue\n> t.isFiniteNumber(0644)\ntrue\n> t.isFiniteNumber(6.2e5)\ntrue\n> t.isFiniteNumber(NaN)\nfalse\n> t.isFiniteNumber(Infinity)\nfalse",
+      "params": "n | * | The input to test",
       "sig": "isFiniteNumber (n)"
     },
     {
