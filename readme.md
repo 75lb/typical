@@ -12,7 +12,7 @@ Isomorphic, functional type-checking for Javascript.
 
 **Example**
 
-```
+```js
 import t from 'typical'
 const allDefined = array.every(t.isDefined)
 ```
@@ -33,7 +33,7 @@ n | * | The input to test
 
 **Example**
 
-```
+```js
 > t.isNumber(0)
 true
 > t.isNumber(1)
@@ -56,7 +56,7 @@ true
 
 ```js
 export function isNumber (n) {
-  return !isNaN(parseFloat(n))
+  return !isNaN(Number.parseFloat(n))
 }
 ```
 <a id="api-isFiniteNumber"></a>
@@ -73,7 +73,7 @@ n | * | The input to test
 
 **Example**
 
-```
+```js
 > t.isFiniteNumber(0)
 true
 > t.isFiniteNumber(1)

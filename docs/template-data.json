@@ -43,7 +43,10 @@
         "url": "index.js"
       },
       "description": "Isomorphic, functional type-checking for Javascript.",
-      "example": "import t from 'typical'\nconst allDefined = array.every(t.isDefined)",
+      "example": {
+        "lang": "js",
+        "text": "import t from 'typical'\nconst allDefined = array.every(t.isDefined)"
+      },
       "sig": "typical"
     },
     {
@@ -57,9 +60,12 @@
       "source": {
         "url": "index.js"
       },
-      "code": "export function isNumber (n) {\n  return !isNaN(parseFloat(n))\n}",
+      "code": "export function isNumber (n) {\n  return !isNaN(Number.parseFloat(n))\n}",
       "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.\n\ntypical > isNumber () => {string}",
-      "example": "> t.isNumber(0)\ntrue\n> t.isNumber(1)\ntrue\n> t.isNumber(1.1)\ntrue\n> t.isNumber(0xff)\ntrue\n> t.isNumber(0644)\ntrue\n> t.isNumber(6.2e5)\ntrue\n> t.isNumber(NaN)\nfalse\n> t.isNumber(Infinity)\ntrue",
+      "example": {
+        "lang": "js",
+        "text": "> t.isNumber(0)\ntrue\n> t.isNumber(1)\ntrue\n> t.isNumber(1.1)\ntrue\n> t.isNumber(0xff)\ntrue\n> t.isNumber(0644)\ntrue\n> t.isNumber(6.2e5)\ntrue\n> t.isNumber(NaN)\nfalse\n> t.isNumber(Infinity)\ntrue"
+      },
       "params": "n | * | The input to test",
       "sig": "isNumber"
     },
@@ -76,7 +82,10 @@
       },
       "code": "export function isFiniteNumber (n) {\n  return !isNaN(parseFloat(n)) && isFinite(n)\n}\n/*<",
       "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
-      "example": "> t.isFiniteNumber(0)\ntrue\n> t.isFiniteNumber(1)\ntrue\n> t.isFiniteNumber(1.1)\ntrue\n> t.isFiniteNumber(0xff)\ntrue\n> t.isFiniteNumber(0644)\ntrue\n> t.isFiniteNumber(6.2e5)\ntrue\n> t.isFiniteNumber(NaN)\nfalse\n> t.isFiniteNumber(Infinity)\nfalse",
+      "example": {
+        "lang": "js",
+        "text": "> t.isFiniteNumber(0)\ntrue\n> t.isFiniteNumber(1)\ntrue\n> t.isFiniteNumber(1.1)\ntrue\n> t.isFiniteNumber(0xff)\ntrue\n> t.isFiniteNumber(0644)\ntrue\n> t.isFiniteNumber(6.2e5)\ntrue\n> t.isFiniteNumber(NaN)\nfalse\n> t.isFiniteNumber(Infinity)\nfalse"
+      },
       "params": "n | * | The input to test",
       "sig": "isFiniteNumber (n)"
     },

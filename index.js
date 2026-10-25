@@ -3,7 +3,7 @@ typical
 
 Isomorphic, functional type-checking for Javascript.
 
-Example
+Example (js)
   import t from 'typical'
   const allDefined = array.every(t.isDefined)
 
@@ -26,7 +26,7 @@ Data
   parent: typical
   returns: boolean
 
-Example
+Example (js)
   > t.isNumber(0)
   true
   > t.isNumber(1)
@@ -46,7 +46,7 @@ Example
 
 Code /*>*/
 export function isNumber (n) {
-  return !isNaN(parseFloat(n))
+  return !isNaN(Number.parseFloat(n))
 }
 /*<*/
 
@@ -63,7 +63,7 @@ Data
   parent: typical
   returns: boolean
 
-Example
+Example (js)
   > t.isFiniteNumber(0)
   true
   > t.isFiniteNumber(1)

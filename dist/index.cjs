@@ -1,71 +1,95 @@
 'use strict';
 
-/**
- * Isomorphic, functional type-checking for Javascript.
- * @module typical
- * @typicalname t
- * @example
- * import t from 'typical'
- * const allDefined = array.every(t.isDefined)
- */
+/*~
+typical
 
-/**
- * Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
- *
- * @param {*} n - The input to test
- * @returns {boolean} `true` if input is a number
- * @static
- * @example
- * > t.isNumber(0)
- * true
- * > t.isNumber(1)
- * true
- * > t.isNumber(1.1)
- * true
- * > t.isNumber(0xff)
- * true
- * > t.isNumber(0644)
- * true
- * > t.isNumber(6.2e5)
- * true
- * > t.isNumber(NaN)
- * false
- * > t.isNumber(Infinity)
- * true
- */
+Isomorphic, functional type-checking for Javascript.
+
+Example
+  import t from 'typical'
+  const allDefined = array.every(t.isDefined)
+
+Data
+  id: typical
+*/
+
+/*~
+isNumber
+
+Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
+
+typical > isNumber () => {string}
+
+Params
+  n | * | The input to test
+
+Data
+  id: isNumber
+  parent: typical
+  returns: boolean
+
+Example
+  > t.isNumber(0)
+  true
+  > t.isNumber(1)
+  true
+  > t.isNumber(1.1)
+  true
+  > t.isNumber(0xff)
+  true
+  > t.isNumber(0644)
+  true
+  > t.isNumber(6.2e5)
+  true
+  > t.isNumber(NaN)
+  false
+  > t.isNumber(Infinity)
+  true
+
+Code /*>*/
 function isNumber (n) {
-  return !isNaN(parseFloat(n))
+  return !isNaN(Number.parseFloat(n))
 }
+/*<*/
 
-/**
- * Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
- *
- * @param {*} n - The input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isFiniteNumber(0)
- * true
- * > t.isFiniteNumber(1)
- * true
- * > t.isFiniteNumber(1.1)
- * true
- * > t.isFiniteNumber(0xff)
- * true
- * > t.isFiniteNumber(0644)
- * true
- * > t.isFiniteNumber(6.2e5)
- * true
- * > t.isFiniteNumber(NaN)
- * false
- * > t.isFiniteNumber(Infinity)
- * false
- */
+/*~
+isFiniteNumber (n)
+
+Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
+
+Params
+  n | * | The input to test
+
+Data
+  id: isFiniteNumber
+  parent: typical
+  returns: boolean
+
+Example
+  > t.isFiniteNumber(0)
+  true
+  > t.isFiniteNumber(1)
+  true
+  > t.isFiniteNumber(1.1)
+  true
+  > t.isFiniteNumber(0xff)
+  true
+  > t.isFiniteNumber(0644)
+  true
+  > t.isFiniteNumber(6.2e5)
+  true
+  > t.isFiniteNumber(NaN)
+  false
+  > t.isFiniteNumber(Infinity)
+  false
+
+Code /*>*/
 function isFiniteNumber (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n)
+  return !isNaN(Number.parseFloat(n)) && isFinite(n)
 }
+/*<*/
 
-/**
+/*~
  * A plain object is a simple object literal not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a prototype of `Object.prototype` or `null`.
  *
  * @param {*} input - The input to test
@@ -94,7 +118,7 @@ function isFiniteNumber (n) {
  * false
  * > t.isPlainObject(function * () {})
  * false
- */
+*/
 function isPlainObject (input) {
   if (typeof input !== 'object' || input === null) {
     return false
@@ -104,7 +128,7 @@ function isPlainObject (input) {
   }
 }
 
-/**
+/*~
  * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
  *
  * @param {*} input - The input to test
@@ -115,67 +139,67 @@ function isPlainObject (input) {
  *   console.log(t.isArrayLike(arguments))
  *   // prints `true`
  * }
- */
+*/
 function isArrayLike (input) {
   return isObject(input) && typeof input.length === 'number'
 }
 
-/**
+/*~
  * Returns true if the typeof input is `'object'` but not null.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isObject (input) {
   return typeof input === 'object' && input !== null
 }
 
-/**
+/*~
  * Returns true if the input value is defined.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isDefined (input) {
   return typeof input !== 'undefined'
 }
 
-/**
+/*~
  * Returns true if the input value is undefined.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isUndefined (input) {
   return !isDefined(input)
 }
 
-/**
+/*~
  * Returns true if the input value is null.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isNull (input) {
   return input === null
 }
 
-/**
+/*~
  * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isDefinedValue (input) {
   return isDefined(input) && !isNull(input) && !Number.isNaN(input)
 }
 
-/**
+/*~
  * Returns true if the input value is an ES2015 `class`.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isClass (input) {
   if (typeof input === 'function') {
     return /^class /.test(Function.prototype.toString.call(input))
@@ -184,12 +208,12 @@ function isClass (input) {
   }
 }
 
-/**
+/*~
  * Returns true if the input is a string, number, symbol, boolean, null or undefined value.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isPrimitive (input) {
   if (input === null) return true
   switch (typeof input) {
@@ -204,12 +228,12 @@ function isPrimitive (input) {
   }
 }
 
-/**
+/*~
  * Returns true if the input is a Promise.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isPromise (input) {
   if (input) {
     const isPromise = isDefined(Promise) && input instanceof Promise;
@@ -220,7 +244,7 @@ function isPromise (input) {
   }
 }
 
-/**
+/*~
  * Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -258,7 +282,7 @@ function isPromise (input) {
  * false
  * > t.isIterable({ then: function () {} })
  * false
- */
+*/
 function isIterable (input) {
   if (input === null || !isDefined(input)) {
     return false
@@ -270,27 +294,27 @@ function isIterable (input) {
   }
 }
 
-/**
+/*~
  * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isString (input) {
   return typeof input === 'string'
 }
 
-/**
+/*~
  * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
  * @param {*} input - The input to test
  * @returns {boolean}
  * @static
- */
+*/
 function isFunction (input) {
   return typeof input === 'function'
 }
 
-/**
+/*~
  * Returns true if the input value is an async function or method.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -312,7 +336,7 @@ function isFunction (input) {
  * > class Command { async execute () {} }
  * > t.isAsyncFunction(new Command().execute)
  * true
- */
+*/
 function isAsyncFunction (input) {
   return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')
 }
