@@ -1,7 +1,8 @@
 <a id="api-typical"></a>
 
 - [typical](#api-typical) 
-  - [isNumber](#api-isNumber)
+  - [isNumber](#api-isNumber) 
+  - [isFiniteNumber (n)](#api-isFiniteNumber)
 
 # typical
 
@@ -57,4 +58,45 @@ true
 export function isNumber (n) {
   return !isNaN(parseFloat(n))
 }
+```
+<a id="api-isFiniteNumber"></a>
+
+## isFiniteNumber (n)
+
+Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
+
+**Returns**: `boolean`
+
+**Params**
+
+n | * | The input to test
+
+**Example**
+
+```
+> t.isFiniteNumber(0)
+true
+> t.isFiniteNumber(1)
+true
+> t.isFiniteNumber(1.1)
+true
+> t.isFiniteNumber(0xff)
+true
+> t.isFiniteNumber(0644)
+true
+> t.isFiniteNumber(6.2e5)
+true
+> t.isFiniteNumber(NaN)
+false
+> t.isFiniteNumber(Infinity)
+false
+```
+
+**Implementation**
+
+```js
+export function isFiniteNumber (n) {
+  return !isNaN(parseFloat(n)) && isFinite(n)
+}
+/*<
 ```

@@ -44,7 +44,7 @@ Example
   > t.isNumber(Infinity)
   true
 
-Code/*>*/
+Code /*>*/
 export function isNumber (n) {
   return !isNaN(parseFloat(n))
 }
@@ -55,9 +55,13 @@ isFiniteNumber (n)
 
 Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
 
-@param {*} n - The input to test
-@returns {boolean}
-@static
+Params
+  n | * | The input to test
+
+Data
+  id: isFiniteNumber
+  parent: typical
+  returns: boolean
 
 Example
   > t.isFiniteNumber(0)
@@ -76,10 +80,12 @@ Example
   false
   > t.isFiniteNumber(Infinity)
   false
-*/
+
+Code /*>*/
 export function isFiniteNumber (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
+/*<*/
 
 /*~
  * A plain object is a simple object literal not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a prototype of `Object.prototype` or `null`.
