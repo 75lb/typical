@@ -16,12 +16,13 @@ import t from 'typical'
 const allDefined = array.every(t.isDefined)
 ```
 
-
 <a id="api-isNumber"></a>
 
 ## isNumber
 
 Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
+
+typical > isNumber () => {string}
 
 **Returns**: `boolean`
 
@@ -50,3 +51,10 @@ false
 true
 ```
 
+**Implementation**
+
+```js
+export function isNumber (n) {
+  return !isNaN(parseFloat(n))
+}
+```

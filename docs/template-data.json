@@ -1,0 +1,203 @@
+{
+  "cliOptions": {
+    "json": true,
+    "load": []
+  },
+  "steps": [
+    {
+      "Step": "IORead",
+      "options": {
+        "inputs": [
+          "index.js"
+        ],
+        "parseJson": [],
+        "amend": false
+      }
+    },
+    {
+      "Step": "Parse",
+      "options": {
+        "BlockMatchers": [
+          "BlockMatcherShort"
+        ],
+        "SectionMatchers": [
+          "ShortCodeSection",
+          "ShortDataSection",
+          "ShortDescriptionSection",
+          "ShortExampleSection",
+          "ShortParamsSection",
+          "ShortSigSection"
+        ],
+        "debug": false
+      }
+    }
+  ],
+  "body": [
+    {
+      "children": [],
+      "data": {
+        "id": "typical"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "Isomorphic, functional type-checking for Javascript.",
+      "example": "import t from 'typical'\nconst allDefined = array.every(t.isDefined)",
+      "sig": "typical"
+    },
+    {
+      "children": [],
+      "data": {
+        "id": "isNumber",
+        "parent": "typical",
+        "returns": "boolean"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "code": "export function isNumber (n) {\n  return !isNaN(parseFloat(n))\n}",
+      "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.\n\ntypical > isNumber () => {string}",
+      "example": "> t.isNumber(0)\ntrue\n> t.isNumber(1)\ntrue\n> t.isNumber(1.1)\ntrue\n> t.isNumber(0xff)\ntrue\n> t.isNumber(0644)\ntrue\n> t.isNumber(6.2e5)\ntrue\n> t.isNumber(NaN)\nfalse\n> t.isNumber(Infinity)\ntrue",
+      "params": "n | * | The input to test",
+      "sig": "isNumber"
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.\n\n@param {*} n - The input to test\n@returns {boolean}\n@static",
+      "example": "> t.isFiniteNumber(0)\ntrue\n> t.isFiniteNumber(1)\ntrue\n> t.isFiniteNumber(1.1)\ntrue\n> t.isFiniteNumber(0xff)\ntrue\n> t.isFiniteNumber(0644)\ntrue\n> t.isFiniteNumber(6.2e5)\ntrue\n> t.isFiniteNumber(NaN)\nfalse\n> t.isFiniteNumber(Infinity)\nfalse",
+      "sig": "isFiniteNumber (n)"
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "*\n* @param {*} input - The input to test\n* @returns {boolean}\n* @static\n* @example\n* > t.isPlainObject({ something: 'one' }) // object literal\n* true\n* > t.isPlainObject(Object.create(null)) // null-prototype plain object\n* true\n* > t.isPlainObject({ something: 'one' })\n* true\n* > t.isPlainObject(new Date())\n* false\n* > t.isPlainObject([ 0, 1 ])\n* false\n* > t.isPlainObject(/test/)\n* false\n* > t.isPlainObject(1)\n* false\n* > t.isPlainObject('one')\n* false\n* > t.isPlainObject(null)\n* false\n* > t.isPlainObject((function * () {})())\n* false\n* > t.isPlainObject(function * () {})\n* false",
+      "sig": "* A plain object is a simple object literal not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a prototype of `Object.prototype` or `null`."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "*\n* @param {*} input - The input to test\n* @returns {boolean}\n* @static\n* @example\n* function sum(x, y){\n*   console.log(t.isArrayLike(arguments))\n*   // prints `true`\n* }",
+      "sig": "* An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the typeof input is `'object'` but not null."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is defined."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is undefined."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is null."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is not one of `undefined`, `null`, or `NaN`."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is an ES2015 `class`."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input is a string, number, symbol, boolean, null or undefined value."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input is a Promise."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static\n* @example\n* > t.isIterable('string')\n* true\n* > t.isIterable(new Map())\n* true\n* > t.isIterable([])\n* true\n* > t.isIterable((function * () {})())\n* true\n* > t.isIterable(Promise.resolve())\n* false\n* > t.isIterable(Promise)\n* false\n* > t.isIterable(true)\n* false\n* > t.isIterable({})\n* false\n* > t.isIterable(0)\n* false\n* > t.isIterable(1.1)\n* false\n* > t.isIterable(NaN)\n* false\n* > t.isIterable(Infinity)\n* false\n* > t.isIterable(function () {})\n* false\n* > t.isIterable(Date)\n* false\n* > t.isIterable()\n* false\n* > t.isIterable({ then: function () {} })\n* false",
+      "sig": "* Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.)."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static",
+      "sig": "* Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts."
+    },
+    {
+      "children": [],
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "description": "* @param {*} input - The input to test\n* @returns {boolean}\n* @static\n* @example\n* > t.isAsyncFunction(function () {})\n* false\n* > t.isAsyncFunction(new Function())\n* false\n* > t.isAsyncFunction(() => {})\n* false\n* > t.isAsyncFunction(async function () {})\n* true\n* > const AsyncFunction = async function () {}.constructor\n* > t.isAsyncFunction(new AsyncFunction())\n* true\n* > t.isAsyncFunction(async () => {})\n* true\n* > class Command { async execute () {} }\n* > t.isAsyncFunction(new Command().execute)\n* true",
+      "sig": "* Returns true if the input value is an async function or method."
+    }
+  ]
+}

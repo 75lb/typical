@@ -4,6 +4,14 @@ dcdoc io-read \
         --inputs index.js \
       dcdoc-parse \
         --section-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
+        --block-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js \
+      --json \
+      > docs/template-data.json
+
+dcdoc io-read \
+        --inputs index.js \
+      dcdoc-parse \
+        --section-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
         --block-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js  \
       array-to-tree \
       render-tree \

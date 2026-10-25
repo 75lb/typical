@@ -16,6 +16,8 @@ isNumber
 
 Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
 
+typical > isNumber () => {string}
+
 Params
   n | * | The input to test
 
@@ -41,34 +43,39 @@ Example
   false
   > t.isNumber(Infinity)
   true
-*/
+
+Code/*>*/
 export function isNumber (n) {
   return !isNaN(parseFloat(n))
 }
+/*<*/
 
 /*~
- * Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
- *
- * @param {*} n - The input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isFiniteNumber(0)
- * true
- * > t.isFiniteNumber(1)
- * true
- * > t.isFiniteNumber(1.1)
- * true
- * > t.isFiniteNumber(0xff)
- * true
- * > t.isFiniteNumber(0644)
- * true
- * > t.isFiniteNumber(6.2e5)
- * true
- * > t.isFiniteNumber(NaN)
- * false
- * > t.isFiniteNumber(Infinity)
- * false
+isFiniteNumber (n)
+
+Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
+
+@param {*} n - The input to test
+@returns {boolean}
+@static
+
+Example
+  > t.isFiniteNumber(0)
+  true
+  > t.isFiniteNumber(1)
+  true
+  > t.isFiniteNumber(1.1)
+  true
+  > t.isFiniteNumber(0xff)
+  true
+  > t.isFiniteNumber(0644)
+  true
+  > t.isFiniteNumber(6.2e5)
+  true
+  > t.isFiniteNumber(NaN)
+  false
+  > t.isFiniteNumber(Infinity)
+  false
 */
 export function isFiniteNumber (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
