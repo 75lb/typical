@@ -12,19 +12,15 @@ Data
 */
 
 /*~
-isNumber
+isNumber (n) : boolean [boolFunc]
 
 Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
 
-typical > isNumber () => {string}
+Path
+  typical > isNumber
 
 Params
   n | * | The input to test
-
-Data
-  id: isNumber
-  parent: typical
-  returns: boolean
 
 Example (js)
   > t.isNumber(0)
@@ -51,17 +47,15 @@ export function isNumber (n) {
 /*<*/
 
 /*~
-isFiniteNumber (n)
+isFiniteNumber (n) : boolean [boolFunc]
 
 Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
 
 Params
   n | * | The input to test
 
-Data
-  id: isFiniteNumber
-  parent: typical
-  returns: boolean
+Path
+  typical > isFiniteNumber
 
 Example (js)
   > t.isFiniteNumber(0)
@@ -88,35 +82,35 @@ export function isFiniteNumber (n) {
 /*<*/
 
 /*~
- * A plain object is a simple object literal not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a prototype of `Object.prototype` or `null`.
- *
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isPlainObject({ something: 'one' }) // object literal
- * true
- * > t.isPlainObject(Object.create(null)) // null-prototype plain object
- * true
- * > t.isPlainObject({ something: 'one' })
- * true
- * > t.isPlainObject(new Date())
- * false
- * > t.isPlainObject([ 0, 1 ])
- * false
- * > t.isPlainObject(/test/)
- * false
- * > t.isPlainObject(1)
- * false
- * > t.isPlainObject('one')
- * false
- * > t.isPlainObject(null)
- * false
- * > t.isPlainObject((function * () {})())
- * false
- * > t.isPlainObject(function * () {})
- * false
-*/
+isPlainObject (input) : boolean [boolFunc]
+
+A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.
+
+@param {*} input - The input to test
+
+Example (js)
+  > t.isPlainObject({ something: 'one' }) // object literal
+  true
+  > t.isPlainObject(Object.create(null)) // null-prototype plain object
+  true
+  > t.isPlainObject(new Date())
+  false
+  > t.isPlainObject([ 0, 1 ])
+  false
+  > t.isPlainObject(/test/)
+  false
+  > t.isPlainObject(1)
+  false
+  > t.isPlainObject('one')
+  false
+  > t.isPlainObject(null)
+  false
+  > t.isPlainObject((function * () {})())
+  false
+  > t.isPlainObject(function * () {})
+  false
+
+Code /*>*/
 export function isPlainObject (input) {
   if (typeof input !== 'object' || input === null) {
     return false
@@ -125,6 +119,7 @@ export function isPlainObject (input) {
     return proto === null || proto === Object.prototype
   }
 }
+/*<*/
 
 /*~
  * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.

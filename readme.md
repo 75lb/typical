@@ -1,8 +1,8 @@
 <a id="api-typical"></a>
 
 - [typical](#api-typical) 
-  - [isNumber](#api-isNumber) 
-  - [isFiniteNumber (n)](#api-isFiniteNumber)
+  - [isNumber (n) : boolean](#api-isNumber) 
+  - [isFiniteNumber (n) : boolean](#api-isFiniteNumber)
 
 # typical
 
@@ -19,12 +19,11 @@ const allDefined = array.every(t.isDefined)
 
 <a id="api-isNumber"></a>
 
-## isNumber
+## isNumber (n) : boolean
 
 Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
 
-typical > isNumber () => {string}
-
+**Type**: Function  
 **Returns**: `boolean`
 
 **Params**
@@ -61,10 +60,11 @@ export function isNumber (n) {
 ```
 <a id="api-isFiniteNumber"></a>
 
-## isFiniteNumber (n)
+## isFiniteNumber (n) : boolean
 
 Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
 
+**Type**: Function  
 **Returns**: `boolean`
 
 **Params**
@@ -98,5 +98,4 @@ false
 export function isFiniteNumber (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
-/*<
 ```

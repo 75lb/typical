@@ -52,54 +52,66 @@
     {
       "children": [],
       "data": {
+        "codeType": "Function",
+        "returns": "boolean",
         "id": "isNumber",
-        "parent": "typical",
-        "returns": "boolean"
+        "parent": "typical"
       },
       "type": "block",
       "source": {
         "url": "index.js"
       },
       "code": "export function isNumber (n) {\n  return !isNaN(Number.parseFloat(n))\n}",
-      "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.\n\ntypical > isNumber () => {string}",
+      "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.",
       "example": {
         "lang": "js",
         "text": "> t.isNumber(0)\ntrue\n> t.isNumber(1)\ntrue\n> t.isNumber(1.1)\ntrue\n> t.isNumber(0xff)\ntrue\n> t.isNumber(0644)\ntrue\n> t.isNumber(6.2e5)\ntrue\n> t.isNumber(NaN)\nfalse\n> t.isNumber(Infinity)\ntrue"
       },
       "params": "n | * | The input to test",
-      "sig": "isNumber"
+      "sig": "isNumber (n) : boolean"
     },
     {
       "children": [],
       "data": {
+        "codeType": "Function",
+        "returns": "boolean",
         "id": "isFiniteNumber",
-        "parent": "typical",
-        "returns": "boolean"
+        "parent": "typical"
       },
       "type": "block",
       "source": {
         "url": "index.js"
       },
-      "code": "export function isFiniteNumber (n) {\n  return !isNaN(parseFloat(n)) && isFinite(n)\n}\n/*<",
+      "code": "export function isFiniteNumber (n) {\n  return !isNaN(parseFloat(n)) && isFinite(n)\n}",
       "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
       "example": {
         "lang": "js",
         "text": "> t.isFiniteNumber(0)\ntrue\n> t.isFiniteNumber(1)\ntrue\n> t.isFiniteNumber(1.1)\ntrue\n> t.isFiniteNumber(0xff)\ntrue\n> t.isFiniteNumber(0644)\ntrue\n> t.isFiniteNumber(6.2e5)\ntrue\n> t.isFiniteNumber(NaN)\nfalse\n> t.isFiniteNumber(Infinity)\nfalse"
       },
       "params": "n | * | The input to test",
-      "sig": "isFiniteNumber (n)"
+      "sig": "isFiniteNumber (n) : boolean"
     },
     {
       "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean"
+      },
       "type": "block",
       "source": {
         "url": "index.js"
       },
-      "description": "*\n* @param {*} input - The input to test\n* @returns {boolean}\n* @static\n* @example\n* > t.isPlainObject({ something: 'one' }) // object literal\n* true\n* > t.isPlainObject(Object.create(null)) // null-prototype plain object\n* true\n* > t.isPlainObject({ something: 'one' })\n* true\n* > t.isPlainObject(new Date())\n* false\n* > t.isPlainObject([ 0, 1 ])\n* false\n* > t.isPlainObject(/test/)\n* false\n* > t.isPlainObject(1)\n* false\n* > t.isPlainObject('one')\n* false\n* > t.isPlainObject(null)\n* false\n* > t.isPlainObject((function * () {})())\n* false\n* > t.isPlainObject(function * () {})\n* false",
-      "sig": "* A plain object is a simple object literal not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a prototype of `Object.prototype` or `null`."
+      "code": "export function isPlainObject (input) {\n  if (typeof input !== 'object' || input === null) {\n    return false\n  } else {\n    const proto = Object.getPrototypeOf(input)\n    return proto === null || proto === Object.prototype\n  }\n}",
+      "description": "A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.\n\n@param {*} input - The input to test",
+      "example": {
+        "lang": "js",
+        "text": "> t.isPlainObject({ something: 'one' }) // object literal\ntrue\n> t.isPlainObject(Object.create(null)) // null-prototype plain object\ntrue\n> t.isPlainObject(new Date())\nfalse\n> t.isPlainObject([ 0, 1 ])\nfalse\n> t.isPlainObject(/test/)\nfalse\n> t.isPlainObject(1)\nfalse\n> t.isPlainObject('one')\nfalse\n> t.isPlainObject(null)\nfalse\n> t.isPlainObject((function * () {})())\nfalse\n> t.isPlainObject(function * () {})\nfalse"
+      },
+      "sig": "isPlainObject (input) : boolean"
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -109,6 +121,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -118,6 +131,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -127,6 +141,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -136,6 +151,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -145,6 +161,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -154,6 +171,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -163,6 +181,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -172,6 +191,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -181,6 +201,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -190,6 +211,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -199,6 +221,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
@@ -208,6 +231,7 @@
     },
     {
       "children": [],
+      "data": {},
       "type": "block",
       "source": {
         "url": "index.js"
