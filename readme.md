@@ -1,8 +1,9 @@
 <a id="api-typical"></a>
 
 - [typical](#api-typical) 
-  - [isNumber (n) : boolean](#api-isNumber) 
-  - [isFiniteNumber (n) : boolean](#api-isFiniteNumber)
+  - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
+  - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
+  - [isPlainObject (input) : boolean](#api-isPlainObject)
 
 # typical
 
@@ -28,7 +29,9 @@ Returns true if input is a number (including infinity). It is a more reasonable 
 
 **Params**
 
-n | * | The input to test
+Param | Type | Description
+---   | ---  | ---
+n     | *    | The input to test
 
 **Example**
 
@@ -69,7 +72,9 @@ Returns true if input is a finite number. Identical to `isNumber` beside excludi
 
 **Params**
 
-n | * | The input to test
+Param | Type | Description
+---   | ---  | ---
+n     | *    | The input to test
 
 **Example**
 
@@ -97,5 +102,57 @@ false
 ```js
 export function isFiniteNumber (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
+}
+```
+<a id="api-isPlainObject"></a>
+
+## isPlainObject (input) : boolean
+
+A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.
+
+**Type**: Function  
+**Returns**: `boolean`
+
+**Params**
+
+Param | Type | Description
+---   | ---  | ---
+Input | *    | The input to test
+
+**Example**
+
+```js
+> t.isPlainObject({ something: 'one' }) // object literal
+true
+> t.isPlainObject(Object.create(null)) // null-prototype plain object
+true
+> t.isPlainObject(new Date())
+false
+> t.isPlainObject([ 0, 1 ])
+false
+> t.isPlainObject(/test/)
+false
+> t.isPlainObject(1)
+false
+> t.isPlainObject('one')
+false
+> t.isPlainObject(null)
+false
+> t.isPlainObject((function * () {})())
+false
+> t.isPlainObject(function * () {})
+false
+```
+
+**Implementation**
+
+```js
+export function isPlainObject (input) {
+  if (typeof input !== 'object' || input === null) {
+    return false
+  } else {
+    const proto = Object.getPrototypeOf(input)
+    return proto === null || proto === Object.prototype
+  }
 }
 ```

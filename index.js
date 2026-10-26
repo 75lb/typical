@@ -16,11 +16,16 @@ isNumber (n) : boolean [boolFunc]
 
 Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
 
+Data
+  exportType: Named
+
 Path
   typical > isNumber
 
 Params
-  n | * | The input to test
+  Param | Type | Description
+  ---   | ---  | ---
+  n     | *    | The input to test
 
 Example (js)
   > t.isNumber(0)
@@ -52,7 +57,12 @@ isFiniteNumber (n) : boolean [boolFunc]
 Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
 
 Params
-  n | * | The input to test
+  Param | Type | Description
+  ---   | ---  | ---
+  n     | *    | The input to test
+
+Data
+  exportType: Named
 
 Path
   typical > isFiniteNumber
@@ -86,7 +96,13 @@ isPlainObject (input) : boolean [boolFunc]
 
 A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.
 
-@param {*} input - The input to test
+Params
+  Param | Type | Description
+  ---   | ---  | ---
+  Input | *    | The input to test
+
+Path
+  typical > isPlainObject
 
 Example (js)
   > t.isPlainObject({ something: 'one' }) // object literal
@@ -121,7 +137,7 @@ export function isPlainObject (input) {
 }
 /*<*/
 
-/*~
+/*
  * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
  *
  * @param {*} input - The input to test
@@ -137,7 +153,7 @@ export function isArrayLike (input) {
   return isObject(input) && typeof input.length === 'number'
 }
 
-/*~
+/*
  * Returns true if the typeof input is `'object'` but not null.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -147,7 +163,7 @@ export function isObject (input) {
   return typeof input === 'object' && input !== null
 }
 
-/*~
+/*
  * Returns true if the input value is defined.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -157,7 +173,7 @@ export function isDefined (input) {
   return typeof input !== 'undefined'
 }
 
-/*~
+/*
  * Returns true if the input value is undefined.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -167,7 +183,7 @@ export function isUndefined (input) {
   return !isDefined(input)
 }
 
-/*~
+/*
  * Returns true if the input value is null.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -177,7 +193,7 @@ export function isNull (input) {
   return input === null
 }
 
-/*~
+/*
  * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -187,7 +203,7 @@ export function isDefinedValue (input) {
   return isDefined(input) && !isNull(input) && !Number.isNaN(input)
 }
 
-/*~
+/*
  * Returns true if the input value is an ES2015 `class`.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -201,7 +217,7 @@ export function isClass (input) {
   }
 }
 
-/*~
+/*
  * Returns true if the input is a string, number, symbol, boolean, null or undefined value.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -221,7 +237,7 @@ export function isPrimitive (input) {
   }
 }
 
-/*~
+/*
  * Returns true if the input is a Promise.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -237,7 +253,7 @@ export function isPromise (input) {
   }
 }
 
-/*~
+/*
  * Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -287,7 +303,7 @@ export function isIterable (input) {
   }
 }
 
-/*~
+/*
  * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -297,7 +313,7 @@ export function isString (input) {
   return typeof input === 'string'
 }
 
-/*~
+/*
  * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
  * @param {*} input - The input to test
  * @returns {boolean}
@@ -307,7 +323,7 @@ export function isFunction (input) {
   return typeof input === 'function'
 }
 
-/*~
+/*
  * Returns true if the input value is an async function or method.
  * @param {*} input - The input to test
  * @returns {boolean}
