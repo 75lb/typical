@@ -7,9 +7,7 @@
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
   - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
 
-Isomorphic, functional type-checking for Javascript. Packaging each test as a function results in very compact code where a callback function is expected.
-
-
+Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
 **Example**
 

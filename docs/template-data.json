@@ -8,7 +8,8 @@
       "Step": "IORead",
       "options": {
         "inputs": [
-          "index.js"
+          "index.js",
+          "test/test.js"
         ],
         "parseJson": [],
         "amend": false
@@ -21,6 +22,7 @@
           "BlockMatcherShort"
         ],
         "SectionMatchers": [
+          "Line1DataSection",
           "ShortCodeSection",
           "ShortDataSection",
           "ShortDescriptionSection",
@@ -42,7 +44,7 @@
       "source": {
         "url": "index.js"
       },
-      "description": "Isomorphic, functional type-checking for Javascript. Packaging each test as a function results in very compact code where a callback function is expected.",
+      "description": "Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.",
       "example": {
         "lang": "js",
         "text": "import { isDefined } from 'typical'\nconst allDefined = array.every(isDefined)"
@@ -114,6 +116,15 @@
       },
       "params": "Param | Type | Description\n---   | ---  | ---\nInput | *    | The input to test",
       "sig": "isPlainObject (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {},
+      "type": "block",
+      "source": {
+        "url": "test/test.js"
+      },
+      "sig": "==testFor: isPlainObject=="
     }
   ]
 }

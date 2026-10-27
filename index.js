@@ -1,7 +1,7 @@
 /*~
 typical
 
-Isomorphic, functional type-checking for Javascript. Packaging each test as a function results in very compact code where a callback function is expected.
+Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
 Example (js)
   import { isDefined } from 'typical'

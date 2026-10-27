@@ -23,18 +23,20 @@ test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(Infinity), false)
 })
 
+/*~
+==testFor: isPlainObject== */
 test.set('.isPlainObject(value)', function () {
-  a.equal(t.isPlainObject({ clive: 'hater' }), true, '{} is true')
-  a.equal(t.isPlainObject(new Date()), false, 'new Date() is false')
-  a.equal(t.isPlainObject([0, 1]), false, 'Array is false')
-  a.equal(t.isPlainObject(/test/), false, 'RegExp is false')
-  a.equal(t.isPlainObject(1), false, '1 is false')
-  a.equal(t.isPlainObject('one'), false, "'one' is false")
-  a.equal(t.isPlainObject(null), false, 'null is false')
+  a.equal(t.isPlainObject({ clive: 'hater' }), true)
+  a.equal(t.isPlainObject(new Date()), false)
+  a.equal(t.isPlainObject([0, 1]), false)
+  a.equal(t.isPlainObject(/test/), false)
+  a.equal(t.isPlainObject(1), false)
+  a.equal(t.isPlainObject('one'), false)
+  a.equal(t.isPlainObject(null), false)
   a.equal(t.isPlainObject((function * () {})()), false)
   a.equal(t.isPlainObject(function * () {}), false)
-  a.equal(t.isPlainObject(Object.create(null)), true, 'Null-prototype object')
-  a.equal(t.isPlainObject({ constructor: 'something' }), true, 'Object with own constructor property')
+  a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object */
+  a.equal(t.isPlainObject({ constructor: 'something' }), true) /* Object with own constructor property */
 })
 
 test.set('.isDefined(value)', function () {
