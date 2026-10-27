@@ -1,21 +1,21 @@
 <a id="api-typical"></a>
 
+# typical
+
 - [typical](#api-typical) 
   - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
-  - [isPlainObject (input) : boolean](#api-isPlainObject)
+  - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
 
-# typical
-
-Isomorphic, functional type-checking for Javascript.
+Isomorphic, functional type-checking for Javascript. Packaging each test as a function results in very compact code where a callback function is expected.
 
 
 
 **Example**
 
 ```js
-import t from 'typical'
-const allDefined = array.every(t.isDefined)
+import { isDefined } from 'typical'
+const allDefined = array.every(isDefined)
 ```
 
 <a id="api-isNumber"></a>

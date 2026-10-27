@@ -1,11 +1,11 @@
 /*~
 typical
 
-Isomorphic, functional type-checking for Javascript.
+Isomorphic, functional type-checking for Javascript. Packaging each test as a function results in very compact code where a callback function is expected.
 
 Example (js)
-  import t from 'typical'
-  const allDefined = array.every(t.isDefined)
+  import { isDefined } from 'typical'
+  const allDefined = array.every(isDefined)
 
 Data
   id: typical
@@ -100,6 +100,9 @@ Params
   Param | Type | Description
   ---   | ---  | ---
   Input | *    | The input to test
+
+Data
+  exportType: Named
 
 Path
   typical > isPlainObject

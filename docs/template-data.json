@@ -42,10 +42,10 @@
       "source": {
         "url": "index.js"
       },
-      "description": "Isomorphic, functional type-checking for Javascript.",
+      "description": "Isomorphic, functional type-checking for Javascript. Packaging each test as a function results in very compact code where a callback function is expected.",
       "example": {
         "lang": "js",
-        "text": "import t from 'typical'\nconst allDefined = array.every(t.isDefined)"
+        "text": "import { isDefined } from 'typical'\nconst allDefined = array.every(isDefined)"
       },
       "sig": "typical"
     },
@@ -99,7 +99,8 @@
         "codeType": "Function",
         "returns": "boolean",
         "id": "isPlainObject",
-        "parent": "typical"
+        "parent": "typical",
+        "exportType": "Named"
       },
       "type": "block",
       "source": {
