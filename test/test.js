@@ -43,6 +43,8 @@ test.set('.isFiniteNumber(value)', function () {
 })
 /*<*/
 
+/*# ==testFor: isPlainObject==
+/*>*/
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ clive: 'hater' }), true)
   a.equal(t.isPlainObject(new Date()), false)
@@ -56,6 +58,7 @@ test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object */
   a.equal(t.isPlainObject({ constructor: 'something' }), true) /* Object with own constructor property */
 })
+/*<*/
 
 test.set('.isDefined(value)', function () {
   a.equal(t.isDefined({}), true)

@@ -18,17 +18,124 @@
     {
       "Step": "Parse",
       "options": {
-        "BlockMatchers": [
-          "BlockMatcherShort"
-        ],
-        "SectionMatchers": [
-          "Line1DataSection",
-          "ShortCodeSection",
-          "ShortDataSection",
-          "ShortDescriptionSection",
-          "ShortExampleSection",
-          "ShortParamsSection",
-          "ShortSigSection"
+        "BlockMatchers": [],
+        "SectionMatchers": [],
+        "matchers": [
+          {
+            "block": {
+              "re": {},
+              "postMatchCommands": [],
+              "startIndicator": {},
+              "endIndicators": [
+                {}
+              ],
+              "reAll": {}
+            },
+            "sections": [
+              {
+                "re": {},
+                "postMatchCommands": [
+                  null
+                ],
+                "startIndicator": {},
+                "endIndicators": [
+                  {},
+                  {},
+                  {},
+                  {},
+                  {}
+                ],
+                "reAll": {},
+                "name": "code"
+              },
+              {
+                "re": {},
+                "postMatchCommands": [
+                  null,
+                  null
+                ],
+                "startIndicator": {},
+                "endIndicators": [
+                  {},
+                  {},
+                  {},
+                  {},
+                  {}
+                ],
+                "reAll": {},
+                "name": "data"
+              },
+              {
+                "re": {},
+                "postMatchCommands": [
+                  null
+                ],
+                "name": "description"
+              },
+              {
+                "re": {},
+                "postMatchCommands": [
+                  null
+                ],
+                "startIndicator": {},
+                "endIndicators": [
+                  {},
+                  {},
+                  {},
+                  {},
+                  {}
+                ],
+                "reAll": {},
+                "name": "example"
+              },
+              {
+                "re": {},
+                "postMatchCommands": [
+                  null
+                ],
+                "startIndicator": {},
+                "endIndicators": [
+                  {},
+                  {},
+                  {},
+                  {},
+                  {}
+                ],
+                "reAll": {},
+                "name": "params"
+              },
+              {
+                "re": {},
+                "postMatchCommands": [],
+                "name": "sig"
+              }
+            ]
+          },
+          {
+            "block": {
+              "re": {},
+              "postMatchCommands": [],
+              "startIndicator": {},
+              "endIndicators": [
+                {}
+              ],
+              "reAll": {}
+            },
+            "sections": [
+              {
+                "re": {},
+                "postMatchCommands": [
+                  null
+                ],
+                "name": "data"
+              },
+              {
+                "re": {},
+                "postMatchCommands": [],
+                "name": "content"
+              }
+            ]
+          }
         ],
         "debug": false
       }
@@ -144,6 +251,17 @@
       "code": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n})",
       "description": "isFiniteNumber test suite.",
       "sig": "tests"
+    },
+    {
+      "children": [],
+      "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ clive: 'hater' }), true)\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n  a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object",
+      "data": {
+        "testFor": "isPlainObject"
+      },
+      "type": "block",
+      "source": {
+        "url": "test/test.js"
+      }
     }
   ]
 }
