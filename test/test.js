@@ -21,7 +21,8 @@ tests for isFiniteNumber
 
 Path
   isFiniteNumber > isFiniteNumberTests
-/*>*/
+
+Code /*>*/
 test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(0), true)
   a.equal(t.isFiniteNumber(1), true)
