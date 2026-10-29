@@ -1,0 +1,152 @@
+{
+  "cliOptions": {
+    "json": true,
+    "load": []
+  },
+  "steps": [
+    {
+      "Step": "IORead",
+      "options": {
+        "inputs": [
+          "index.js",
+          "test/test.js"
+        ],
+        "parseJson": [],
+        "amend": false
+      }
+    },
+    {
+      "Step": "Parse",
+      "options": {
+        "BlockMatchers": [
+          "BlockMatcherShort"
+        ],
+        "SectionMatchers": [
+          "Line1DataSection",
+          "ShortCodeSection",
+          "ShortDataSection",
+          "ShortDescriptionSection",
+          "ShortExampleSection",
+          "ShortParamsSection",
+          "ShortSigSection"
+        ],
+        "debug": false
+      }
+    },
+    {
+      "Step": "ArrayToTree",
+      "options": {}
+    }
+  ],
+  "body": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [],
+            "data": {
+              "parent": "isNumber",
+              "id": "testIsNumber"
+            },
+            "type": "block",
+            "source": {
+              "url": "test/test.js"
+            },
+            "description": "test.set('.isNumber(value)', function () {\n  a.equal(t.isNumber(0), true)\n  a.equal(t.isNumber(1), true)\n  a.equal(t.isNumber(1.1), true)\n  a.equal(t.isNumber(0xff), true)\n  a.equal(t.isNumber(6.2e5), true)\n  a.equal(t.isNumber(NaN), false)\n  a.equal(t.isNumber(Infinity), true)\n})",
+            "sig": "==parent: isNumber, id: testIsNumber=="
+          }
+        ],
+        "data": {
+          "codeType": "Function",
+          "returns": "boolean",
+          "id": "isNumber",
+          "parent": "typical",
+          "exportType": "Named"
+        },
+        "type": "block",
+        "source": {
+          "url": "index.js"
+        },
+        "code": "export function isNumber (n) {\n  return !isNaN(Number.parseFloat(n))\n}",
+        "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.",
+        "example": {
+          "lang": "js",
+          "text": "> t.isNumber(0)\ntrue\n> t.isNumber(1)\ntrue\n> t.isNumber(1.1)\ntrue\n> t.isNumber(0xff)\ntrue\n> t.isNumber(0644)\ntrue\n> t.isNumber(6.2e5)\ntrue\n> t.isNumber(NaN)\nfalse\n> t.isNumber(Infinity)\ntrue"
+        },
+        "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
+        "sig": "isNumber (n) : boolean"
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "data": {
+              "id": "isFiniteNumberTests",
+              "parent": "isFiniteNumber"
+            },
+            "type": "block",
+            "source": {
+              "url": "test/test.js"
+            },
+            "description": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n})",
+            "sig": "tests for isFiniteNumber"
+          }
+        ],
+        "data": {
+          "codeType": "Function",
+          "returns": "boolean",
+          "id": "isFiniteNumber",
+          "parent": "typical",
+          "exportType": "Named"
+        },
+        "type": "block",
+        "source": {
+          "url": "index.js"
+        },
+        "code": "export function isFiniteNumber (n) {\n  return !isNaN(parseFloat(n)) && isFinite(n)\n}",
+        "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
+        "example": {
+          "lang": "js",
+          "text": "> t.isFiniteNumber(0)\ntrue\n> t.isFiniteNumber(1)\ntrue\n> t.isFiniteNumber(1.1)\ntrue\n> t.isFiniteNumber(0xff)\ntrue\n> t.isFiniteNumber(0644)\ntrue\n> t.isFiniteNumber(6.2e5)\ntrue\n> t.isFiniteNumber(NaN)\nfalse\n> t.isFiniteNumber(Infinity)\nfalse"
+        },
+        "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
+        "sig": "isFiniteNumber (n) : boolean"
+      },
+      {
+        "children": [],
+        "data": {
+          "codeType": "Function",
+          "returns": "boolean",
+          "id": "isPlainObject",
+          "parent": "typical",
+          "exportType": "Named"
+        },
+        "type": "block",
+        "source": {
+          "url": "index.js"
+        },
+        "code": "export function isPlainObject (input) {\n  if (typeof input !== 'object' || input === null) {\n    return false\n  } else {\n    const proto = Object.getPrototypeOf(input)\n    return proto === null || proto === Object.prototype\n  }\n}",
+        "description": "A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.",
+        "example": {
+          "lang": "js",
+          "text": "> t.isPlainObject({ something: 'one' }) // object literal\ntrue\n> t.isPlainObject(Object.create(null)) // null-prototype plain object\ntrue\n> t.isPlainObject(new Date())\nfalse\n> t.isPlainObject([ 0, 1 ])\nfalse\n> t.isPlainObject(/test/)\nfalse\n> t.isPlainObject(1)\nfalse\n> t.isPlainObject('one')\nfalse\n> t.isPlainObject(null)\nfalse\n> t.isPlainObject((function * () {})())\nfalse\n> t.isPlainObject(function * () {})\nfalse"
+        },
+        "params": "Param | Type | Description\n---   | ---  | ---\nInput | *    | The input to test",
+        "sig": "isPlainObject (input) : boolean"
+      }
+    ],
+    "data": {
+      "id": "typical"
+    },
+    "type": "block",
+    "source": {
+      "url": "index.js"
+    },
+    "description": "Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.",
+    "example": {
+      "lang": "js",
+      "text": "import { isDefined } from 'typical'\nconst allDefined = array.every(isDefined)"
+    },
+    "sig": "typical"
+  }
+}

@@ -3,6 +3,8 @@ import { strict as a } from 'assert'
 
 const [test, only, skip] = [new Map(), new Map(), new Map()]
 
+/*~ ==parent: isNumber, id: testIsNumber==
+/*>*/
 test.set('.isNumber(value)', function () {
   a.equal(t.isNumber(0), true)
   a.equal(t.isNumber(1), true)
@@ -12,7 +14,14 @@ test.set('.isNumber(value)', function () {
   a.equal(t.isNumber(NaN), false)
   a.equal(t.isNumber(Infinity), true)
 })
+/*<*/
 
+/*~
+tests for isFiniteNumber
+
+Path
+  isFiniteNumber > isFiniteNumberTests
+/*>*/
 test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(0), true)
   a.equal(t.isFiniteNumber(1), true)
@@ -22,9 +31,9 @@ test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(NaN), false)
   a.equal(t.isFiniteNumber(Infinity), false)
 })
+/*<*/
 
-/*~
-==testFor: isPlainObject== */
+/*~ ==testFor: isPlainObject== */
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ clive: 'hater' }), true)
   a.equal(t.isPlainObject(new Date()), false)
