@@ -5,7 +5,6 @@
 - [typical](#api-typical) 
   - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
-    - [tests](#api-isFiniteNumberTests) 
   - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
@@ -60,6 +59,26 @@ export function isNumber (n) {
   return !isNaN(Number.parseFloat(n))
 }
 ```
+
+<a id="api-isNumberTests"></a>
+
+### tests
+
+isNumber test suite.
+
+**Implementation**
+
+```js
+test.set('.isNumber(value)', function () {
+  a.equal(t.isNumber(0), true)
+  a.equal(t.isNumber(1), true)
+  a.equal(t.isNumber(1.1), true)
+  a.equal(t.isNumber(0xff), true)
+  a.equal(t.isNumber(6.2e5), true)
+  a.equal(t.isNumber(NaN), false)
+  a.equal(t.isNumber(Infinity), true)
+})
+```
 <a id="api-isFiniteNumber"></a>
 
 ## isFiniteNumber (n) : boolean
@@ -96,6 +115,14 @@ false
 false
 ```
 
+**Implementation**
+
+```js
+export function isFiniteNumber (n) {
+  return !isNaN(parseFloat(n)) && isFinite(n)
+}
+```
+
 <a id="api-isFiniteNumberTests"></a>
 
 ### tests
@@ -114,14 +141,6 @@ test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(NaN), false)
   a.equal(t.isFiniteNumber(Infinity), false)
 })
-```
-
-**Implementation**
-
-```js
-export function isFiniteNumber (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n)
-}
 ```
 <a id="api-isPlainObject"></a>
 
