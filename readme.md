@@ -102,19 +102,6 @@ false
 
 isFiniteNumber test suite.
 
-
-
-Code 
-test.set('.isFiniteNumber(value)', function () {
-  a.equal(t.isFiniteNumber(0), true)
-  a.equal(t.isFiniteNumber(1), true)
-  a.equal(t.isFiniteNumber(1.1), true)
-  a.equal(t.isFiniteNumber(0xff), true)
-  a.equal(t.isFiniteNumber(6.2e5), true)
-  a.equal(t.isFiniteNumber(NaN), false)
-  a.equal(t.isFiniteNumber(Infinity), false)
-})
-
 **Implementation**
 
 ```js

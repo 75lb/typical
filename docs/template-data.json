@@ -128,7 +128,7 @@
         "url": "test/test.js"
       },
       "code": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n})",
-      "description": "isFiniteNumber test suite.\n\n\n\nCode \ntest.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n})",
+      "description": "isFiniteNumber test suite.",
       "sig": "tests"
     }
   ]
