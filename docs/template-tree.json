@@ -157,7 +157,7 @@
           "parent": "typical",
           "id": "isPlainObjectTests"
         },
-        "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ clive: 'hater' }), true)\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n  a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object"
+        "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ clive: 'hater' }), true)\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object\n  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property\n})"
       }
     ],
     "data": {
