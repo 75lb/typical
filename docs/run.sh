@@ -8,14 +8,14 @@ dcdoc io-read \
       --json \
       > docs/template-data.json
 
-exit 0
+# exit 0
 
 
 dcdoc io-read \
         --inputs index.js test/test.js \
       dcdoc-parse \
-        --section-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
-        --block-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js \
+        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
+        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-2-onward-content.js \
       array-to-tree \
       --json \
       > docs/template-tree.json
@@ -23,8 +23,8 @@ dcdoc io-read \
 dcdoc io-read \
         --inputs index.js test/test.js \
       dcdoc-parse \
-        --section-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
-        --block-matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js  \
+        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
+        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-2-onward-content.js \
       array-to-tree \
       render-tree \
         --registry ~/Documents/dcdoc-zone/testbed/tree/byte-size/registry/markdown.js \

@@ -22,118 +22,21 @@
         "SectionMatchers": [],
         "matchers": [
           {
-            "block": {
-              "re": {},
-              "postMatchCommands": [],
-              "startIndicator": {},
-              "endIndicators": [
-                {}
-              ],
-              "reAll": {}
-            },
+            "block": "instance of: BlockMatcherShort",
             "sections": [
-              {
-                "re": {},
-                "postMatchCommands": [
-                  null
-                ],
-                "startIndicator": {},
-                "endIndicators": [
-                  {},
-                  {},
-                  {},
-                  {},
-                  {}
-                ],
-                "reAll": {},
-                "name": "code"
-              },
-              {
-                "re": {},
-                "postMatchCommands": [
-                  null,
-                  null
-                ],
-                "startIndicator": {},
-                "endIndicators": [
-                  {},
-                  {},
-                  {},
-                  {},
-                  {}
-                ],
-                "reAll": {},
-                "name": "data"
-              },
-              {
-                "re": {},
-                "postMatchCommands": [
-                  null
-                ],
-                "name": "description"
-              },
-              {
-                "re": {},
-                "postMatchCommands": [
-                  null
-                ],
-                "startIndicator": {},
-                "endIndicators": [
-                  {},
-                  {},
-                  {},
-                  {},
-                  {}
-                ],
-                "reAll": {},
-                "name": "example"
-              },
-              {
-                "re": {},
-                "postMatchCommands": [
-                  null
-                ],
-                "startIndicator": {},
-                "endIndicators": [
-                  {},
-                  {},
-                  {},
-                  {},
-                  {}
-                ],
-                "reAll": {},
-                "name": "params"
-              },
-              {
-                "re": {},
-                "postMatchCommands": [],
-                "name": "sig"
-              }
+              "instance of: ShortCodeSection",
+              "instance of: ShortDataSection",
+              "instance of: ShortDescriptionSection",
+              "instance of: ShortExampleSection",
+              "instance of: ShortParamsSection",
+              "instance of: ShortSigSection"
             ]
           },
           {
-            "block": {
-              "re": {},
-              "postMatchCommands": [],
-              "startIndicator": {},
-              "endIndicators": [
-                {}
-              ],
-              "reAll": {}
-            },
+            "block": "instance of: BlockMatcherShort2",
             "sections": [
-              {
-                "re": {},
-                "postMatchCommands": [
-                  null
-                ],
-                "name": "data"
-              },
-              {
-                "re": {},
-                "postMatchCommands": [],
-                "name": "content"
-              }
+              "instance of: Line1DataSection",
+              "instance of: Line2OnwardContentSection"
             ]
           }
         ],
@@ -256,7 +159,9 @@
       "children": [],
       "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ clive: 'hater' }), true)\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n  a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object",
       "data": {
-        "testFor": "isPlainObject"
+        "testFor": "isPlainObject",
+        "parent": "typical",
+        "id": "isPlainObjectTests"
       },
       "type": "block",
       "source": {

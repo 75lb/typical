@@ -43,8 +43,7 @@ test.set('.isFiniteNumber(value)', function () {
 })
 /*<*/
 
-/*# ==testFor: isPlainObject==
-/*>*/
+/*# ==testFor: isPlainObject, parent: typical, id: isPlainObjectTests == /*>*/
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ clive: 'hater' }), true)
   a.equal(t.isPlainObject(new Date()), false)

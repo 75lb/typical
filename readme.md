@@ -6,6 +6,7 @@
   - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
   - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
+  - [undefined](#api-isPlainObjectTests)
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
@@ -194,3 +195,6 @@ export function isPlainObject (input) {
   }
 }
 ```
+<a id="api-isPlainObjectTests"></a>
+
+## undefined
