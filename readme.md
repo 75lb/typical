@@ -6,9 +6,6 @@
   - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
   - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
-  - [undefined](#api-isNumberTests) 
-  - [undefined](#api-isFiniteNumberTests) 
-  - [undefined](#api-isPlainObjectTests)
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
@@ -131,6 +128,8 @@ test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(6.2e5), true)
   a.equal(t.isFiniteNumber(NaN), false)
   a.equal(t.isFiniteNumber(Infinity), false)
+  a.equal(t.isFiniteNumber(null), false)
+  a.equal(t.isFiniteNumber(undefined), false)
 })
 ```
 <a id="api-isPlainObject"></a>

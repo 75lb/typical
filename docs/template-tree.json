@@ -140,7 +140,7 @@
           "parent": "typical",
           "id": "isFiniteNumberTests"
         },
-        "content": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n})"
+        "content": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n  a.equal(t.isFiniteNumber(null), false)\n  a.equal(t.isFiniteNumber(undefined), false)\n})"
       },
       {
         "children": [],

@@ -24,6 +24,8 @@ test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(6.2e5), true)
   a.equal(t.isFiniteNumber(NaN), false)
   a.equal(t.isFiniteNumber(Infinity), false)
+  a.equal(t.isFiniteNumber(null), false)
+  a.equal(t.isFiniteNumber(undefined), false)
 })
 /*<*/
 
