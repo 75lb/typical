@@ -3,15 +3,7 @@ import { strict as a } from 'assert'
 
 const [test, only, skip] = [new Map(), new Map(), new Map()]
 
-/*~
-tests
-
-isNumber test suite.
-
-Path
-  isNumber > isNumberTests
-
-Code /*>*/
+/*# ==testFor: isNumber, parent: typical, id: isNumberTests== /*>*/
 test.set('.isNumber(value)', function () {
   a.equal(t.isNumber(0), true)
   a.equal(t.isNumber(1), true)
@@ -23,15 +15,7 @@ test.set('.isNumber(value)', function () {
 })
 /*<*/
 
-/*~
-tests
-
-isFiniteNumber test suite.
-
-Path
-  isFiniteNumber > isFiniteNumberTests
-
-Code /*>*/
+/*# ==testFor: isFiniteNumber, parent: typical, id: isFiniteNumberTests== /*>*/
 test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(0), true)
   a.equal(t.isFiniteNumber(1), true)
@@ -43,7 +27,7 @@ test.set('.isFiniteNumber(value)', function () {
 })
 /*<*/
 
-/*# ==testFor: isPlainObject, parent: typical, id: isPlainObjectTests == /*>*/
+/*# ==testFor: isPlainObject, parent: typical, id: isPlainObjectTests== /*>*/
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ clive: 'hater' }), true)
   a.equal(t.isPlainObject(new Date()), false)
