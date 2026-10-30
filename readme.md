@@ -195,6 +195,17 @@ export function isPlainObject (input) {
   }
 }
 ```
-<a id="api-isPlainObjectTests"></a>
 
-## undefined
+Tests
+
+test.set('.isPlainObject(value)', function () {
+  a.equal(t.isPlainObject({ clive: 'hater' }), true)
+  a.equal(t.isPlainObject(new Date()), false)
+  a.equal(t.isPlainObject([0, 1]), false)
+  a.equal(t.isPlainObject(/test/), false)
+  a.equal(t.isPlainObject(1), false)
+  a.equal(t.isPlainObject('one'), false)
+  a.equal(t.isPlainObject(null), false)
+  a.equal(t.isPlainObject((function * () {})()), false)
+  a.equal(t.isPlainObject(function * () {}), false)
+  a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object
