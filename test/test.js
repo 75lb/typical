@@ -12,6 +12,8 @@ test.set('.isNumber(value)', function () {
   a.equal(t.isNumber(6.2e5), true)
   a.equal(t.isNumber(NaN), false)
   a.equal(t.isNumber(Infinity), true)
+  a.equal(t.isNumber(null), false)
+  a.equal(t.isNumber(undefined), false)
 })
 /*<*/
 
@@ -31,7 +33,7 @@ test.set('.isFiniteNumber(value)', function () {
 
 /*# ==testFor: isPlainObject, parent: typical, id: isPlainObjectTests== /*>*/
 test.set('.isPlainObject(value)', function () {
-  a.equal(t.isPlainObject({ clive: 'hater' }), true)
+  a.equal(t.isPlainObject({ prop: 'val' }), true)
   a.equal(t.isPlainObject(new Date()), false)
   a.equal(t.isPlainObject([0, 1]), false)
   a.equal(t.isPlainObject(/test/), false)

@@ -31,27 +31,6 @@ Param | Type | Description
 ---   | ---  | ---
 n     | *    | The input to test
 
-**Example**
-
-```js
-> t.isNumber(0)
-true
-> t.isNumber(1)
-true
-> t.isNumber(1.1)
-true
-> t.isNumber(0xff)
-true
-> t.isNumber(0644)
-true
-> t.isNumber(6.2e5)
-true
-> t.isNumber(NaN)
-false
-> t.isNumber(Infinity)
-true
-```
-
 **Implementation**
 
 ```js
@@ -71,6 +50,8 @@ test.set('.isNumber(value)', function () {
   a.equal(t.isNumber(6.2e5), true)
   a.equal(t.isNumber(NaN), false)
   a.equal(t.isNumber(Infinity), true)
+  a.equal(t.isNumber(null), false)
+  a.equal(t.isNumber(undefined), false)
 })
 ```
 <a id="api-isFiniteNumber"></a>
@@ -87,27 +68,6 @@ Returns true if input is a finite number. Identical to `isNumber` beside excludi
 Param | Type | Description
 ---   | ---  | ---
 n     | *    | The input to test
-
-**Example**
-
-```js
-> t.isFiniteNumber(0)
-true
-> t.isFiniteNumber(1)
-true
-> t.isFiniteNumber(1.1)
-true
-> t.isFiniteNumber(0xff)
-true
-> t.isFiniteNumber(0644)
-true
-> t.isFiniteNumber(6.2e5)
-true
-> t.isFiniteNumber(NaN)
-false
-> t.isFiniteNumber(Infinity)
-false
-```
 
 **Implementation**
 
@@ -147,31 +107,6 @@ Param | Type | Description
 ---   | ---  | ---
 Input | *    | The input to test
 
-**Example**
-
-```js
-> t.isPlainObject({ something: 'one' }) // object literal
-true
-> t.isPlainObject(Object.create(null)) // null-prototype plain object
-true
-> t.isPlainObject(new Date())
-false
-> t.isPlainObject([ 0, 1 ])
-false
-> t.isPlainObject(/test/)
-false
-> t.isPlainObject(1)
-false
-> t.isPlainObject('one')
-false
-> t.isPlainObject(null)
-false
-> t.isPlainObject((function * () {})())
-false
-> t.isPlainObject(function * () {})
-false
-```
-
 **Implementation**
 
 ```js
@@ -189,7 +124,7 @@ export function isPlainObject (input) {
 
 ```js
 test.set('.isPlainObject(value)', function () {
-  a.equal(t.isPlainObject({ clive: 'hater' }), true)
+  a.equal(t.isPlainObject({ prop: 'val' }), true)
   a.equal(t.isPlainObject(new Date()), false)
   a.equal(t.isPlainObject([0, 1]), false)
   a.equal(t.isPlainObject(/test/), false)
