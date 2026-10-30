@@ -198,6 +198,7 @@ export function isPlainObject (input) {
 
 Tests
 
+```js
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ clive: 'hater' }), true)
   a.equal(t.isPlainObject(new Date()), false)
@@ -209,3 +210,4 @@ test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject((function * () {})()), false)
   a.equal(t.isPlainObject(function * () {}), false)
   a.equal(t.isPlainObject(Object.create(null)), true) /* Null-prototype object
+```
