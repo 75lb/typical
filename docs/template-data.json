@@ -84,8 +84,8 @@
       "data": {
         "codeType": "Function",
         "returns": "boolean",
-        "id": "isFiniteNumber",
         "parent": "typical",
+        "id": "isFiniteNumber",
         "exportType": "Named"
       },
       "type": "block",
@@ -102,8 +102,8 @@
       "data": {
         "codeType": "Function",
         "returns": "boolean",
-        "id": "isPlainObject",
         "parent": "typical",
+        "id": "isPlainObject",
         "exportType": "Named"
       },
       "type": "block",
@@ -114,6 +114,28 @@
       "description": "A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.",
       "params": "Param | Type | Description\n---   | ---  | ---\nInput | *    | The input to test",
       "sig": "isPlainObject (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isPlainObject",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "code": "export function isArrayLike (input) {\n  return isObject(input) && typeof input.length === 'number'\n}",
+      "description": "An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.",
+      "example": {
+        "lang": "js",
+        "text": "function sum(x, y){\n  console.log(t.isArrayLike(arguments))\n  // prints `true`\n}"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "sig": "isArrayLike (input) : boolean"
     },
     {
       "children": [],

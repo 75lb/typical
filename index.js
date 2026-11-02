@@ -6,9 +6,6 @@ Isomorphic, functional type-checking for Javascript. Packaging each test as a fu
 Example (js)
   import { isDefined } from 'typical'
   const allDefined = array.every(isDefined)
-
-Data
-  id: typical
 */
 
 /*~
@@ -24,14 +21,14 @@ Params
   ---   | ---  | ---
   n     | *    | The input to test
 
-Code /*>*/
+Code /*>>*/
 export function isNumber (n) {
   return !isNaN(Number.parseFloat(n))
 }
-/*<*/
+/*<<*/
 
 /*~
-isFiniteNumber (n) : boolean [boolFunc]
+isFiniteNumber (n) : boolean [boolFunc] ¬typical > isFiniteNumber¬
 
 Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.
 
@@ -43,17 +40,14 @@ Params
 Data
   exportType: Named
 
-Path
-  typical > isFiniteNumber
-
-Code /*>*/
+Code /*>>*/
 export function isFiniteNumber (n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
-/*<*/
+/*<<*/
 
 /*~
-isPlainObject (input) : boolean [boolFunc]
+isPlainObject (input) : boolean [boolFunc] ¬typical > isPlainObject¬
 
 A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.
 
@@ -65,10 +59,7 @@ Params
 Data
   exportType: Named
 
-Path
-  typical > isPlainObject
-
-Code /*>*/
+Code /*>>*/
 export function isPlainObject (input) {
   if (typeof input !== 'object' || input === null) {
     return false
@@ -77,23 +68,32 @@ export function isPlainObject (input) {
     return proto === null || proto === Object.prototype
   }
 }
-/*<*/
+/*<<*/
 
-/*
- * An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
- *
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
- * @example
- * function sum(x, y){
- *   console.log(t.isArrayLike(arguments))
- *   // prints `true`
- * }
-*/
+/*~
+isArrayLike (input) : boolean [boolFunc] ¬typical > isPlainObject¬
+
+An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
+
+Params
+  Param | Type | Description
+  ---   | ---  | ---
+  input | *    | The input to test
+
+Data
+  exportType: Named
+
+Example (js)
+  function sum(x, y){
+    console.log(t.isArrayLike(arguments))
+    // prints `true`
+  }
+
+Code /*>>*/
 export function isArrayLike (input) {
   return isObject(input) && typeof input.length === 'number'
 }
+/*<<*/
 
 /*
  * Returns true if the typeof input is `'object'` but not null.

@@ -6,6 +6,7 @@
   - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
   - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
+  - [isArrayLike (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
@@ -117,6 +118,55 @@ export function isPlainObject (input) {
     const proto = Object.getPrototypeOf(input)
     return proto === null || proto === Object.prototype
   }
+}
+```
+
+**Tests**
+
+```js
+test.set('.isPlainObject(value)', function () {
+  a.equal(t.isPlainObject({ prop: 'val' }), true)
+  a.equal(t.isPlainObject(new Date()), false)
+  a.equal(t.isPlainObject([0, 1]), false)
+  a.equal(t.isPlainObject(/test/), false)
+  a.equal(t.isPlainObject(1), false)
+  a.equal(t.isPlainObject('one'), false)
+  a.equal(t.isPlainObject(null), false)
+  a.equal(t.isPlainObject((function * () {})()), false)
+  a.equal(t.isPlainObject(function * () {}), false)
+  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object
+  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property
+})
+```
+<a id="api-isPlainObject"></a>
+
+## isArrayLike (input) : boolean
+
+An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
+
+**Type**: Function  
+**Returns**: `boolean`
+
+**Params**
+
+Param | Type | Description
+---   | ---  | ---
+input | *    | The input to test
+
+**Example**
+
+```js
+function sum(x, y){
+  console.log(t.isArrayLike(arguments))
+  // prints `true`
+}
+```
+
+**Implementation**
+
+```js
+export function isArrayLike (input) {
+  return isObject(input) && typeof input.length === 'number'
 }
 ```
 
