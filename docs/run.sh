@@ -8,9 +8,6 @@ dcdoc io-read \
       --json \
       > docs/template-data.json
 
-# exit 0
-
-
 dcdoc io-read \
         --inputs index.js test/test.js \
       dcdoc-parse \
@@ -19,6 +16,8 @@ dcdoc io-read \
       array-to-tree \
       --json \
       > docs/template-tree.json
+
+# exit 0
 
 dcdoc io-read \
         --inputs index.js test/test.js \

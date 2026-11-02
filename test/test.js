@@ -3,21 +3,21 @@ import { strict as a } from 'assert'
 
 const [test, only, skip] = [new Map(), new Map(), new Map()]
 
-/*# ==testFor: isNumber, parent: typical, id: isNumberTests== /*>*/
+/*# ==testFor: isNumber== /*>*/
 test.set('.isNumber(value)', function () {
   a.equal(t.isNumber(0), true)
   a.equal(t.isNumber(1), true)
   a.equal(t.isNumber(1.1), true)
   a.equal(t.isNumber(0xff), true)
   a.equal(t.isNumber(6.2e5), true)
-  a.equal(t.isNumber(NaN), false)
   a.equal(t.isNumber(Infinity), true)
+  a.equal(t.isNumber(NaN), false)
   a.equal(t.isNumber(null), false)
   a.equal(t.isNumber(undefined), false)
 })
 /*<*/
 
-/*# ==testFor: isFiniteNumber, parent: typical, id: isFiniteNumberTests== /*>*/
+/*# ==testFor: isFiniteNumber== /*>*/
 test.set('.isFiniteNumber(value)', function () {
   a.equal(t.isFiniteNumber(0), true)
   a.equal(t.isFiniteNumber(1), true)
@@ -31,7 +31,7 @@ test.set('.isFiniteNumber(value)', function () {
 })
 /*<*/
 
-/*# ==testFor: isPlainObject, parent: typical, id: isPlainObjectTests== /*>*/
+/*# ==testFor: isPlainObject== /*>*/
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ prop: 'val' }), true)
   a.equal(t.isPlainObject(new Date()), false)
