@@ -13,6 +13,9 @@ Isomorphic, functional type-checking for Javascript. Packaging each test as a fu
 Example (js)
   import { isDefined } from 'typical'
   const allDefined = array.every(isDefined)
+
+Data
+  codeType: Package
 */
 
 /*~
@@ -30,7 +33,7 @@ Params
 
 Code /*>>*/
 export function isNumber (n) {
-  return !isNaN(Number.parseFloat(n))
+  return !Number.isNaN(Number.parseFloat(n))
 }
 /*<<*/
 
@@ -49,7 +52,7 @@ Data
 
 Code /*>>*/
 export function isFiniteNumber (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n)
+  return isNumber(n) && isFinite(n)
 }
 /*<<*/
 
@@ -80,7 +83,7 @@ export function isPlainObject (input) {
 /*~
 isArrayLike (input) : boolean [boolFunc] ¬typical > isArrayLike¬
 
-An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
+An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true` if the input value is an object, not `null` and has a `length` property set with a numeric value.
 
 Params
   Param | Type | Description
@@ -92,8 +95,7 @@ Data
 
 Example (js)
   function sum(x, y){
-    console.log(t.isArrayLike(arguments))
-    // prints `true`
+    console.log(t.isArrayLike(arguments)) // prints `true`
   }
 
 Code /*>>*/

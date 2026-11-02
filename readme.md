@@ -28,17 +28,13 @@
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
+**Type**: Package
+
 **Example**
 
 ```js
 import { isDefined } from 'typical'
 const allDefined = array.every(isDefined)
-```
-
-**Tests**
-
-```js
-
 ```
 
 <a id="api-isNumber"></a>
@@ -60,7 +56,7 @@ n     | *    | The input to test
 
 ```js
 export function isNumber (n) {
-  return !isNaN(Number.parseFloat(n))
+  return !Number.isNaN(Number.parseFloat(n))
 }
 ```
 
@@ -98,7 +94,7 @@ n     | *    | The input to test
 
 ```js
 export function isFiniteNumber (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n)
+  return isNumber(n) && isFinite(n)
 }
 ```
 
@@ -150,6 +146,8 @@ export function isPlainObject (input) {
 ```js
 test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ prop: 'val' }), true)
+  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object
+  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property
   a.equal(t.isPlainObject(new Date()), false)
   a.equal(t.isPlainObject([0, 1]), false)
   a.equal(t.isPlainObject(/test/), false)
@@ -158,15 +156,13 @@ test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject(null), false)
   a.equal(t.isPlainObject((function * () {})()), false)
   a.equal(t.isPlainObject(function * () {}), false)
-  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object
-  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property
 })
 ```
 <a id="api-isArrayLike"></a>
 
 ## isArrayLike (input) : boolean
 
-An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
+An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true` if the input value is an object, not `null` and has a `length` property set with a numeric value.
 
 **Type**: Function  
 **Returns**: `boolean`
@@ -181,8 +177,7 @@ input | *    | The input to test
 
 ```js
 function sum(x, y){
-  console.log(t.isArrayLike(arguments))
-  // prints `true`
+  console.log(t.isArrayLike(arguments)) // prints `true`
 }
 ```
 
@@ -199,6 +194,7 @@ export function isArrayLike (input) {
 ```js
 test.set('.isArrayLike', function () {
   a.equal(t.isArrayLike(arguments), true)
+  a.equal(t.isArrayLike([]), true)
   a.equal(t.isArrayLike(Promise.resolve()), false)
   a.equal(t.isArrayLike(Promise), false)
   a.equal(t.isArrayLike(true), false)
@@ -212,7 +208,6 @@ test.set('.isArrayLike', function () {
   a.equal(t.isArrayLike(Date), false)
   a.equal(t.isArrayLike(), false)
   a.equal(t.isArrayLike(new Map()), false)
-  a.equal(t.isArrayLike([]), true)
   a.equal(t.isArrayLike({ then: function () {} }), false)
 })
 ```
@@ -244,9 +239,12 @@ export function isObject (input) {
 ```js
 test.set('.isObject', function () {
   a.equal(t.isObject(Promise.resolve()), true)
+  a.equal(t.isObject(new Map()), true)
+  a.equal(t.isObject([]), true)
+  a.equal(t.isObject({ then: function () {} }), true)
+  a.equal(t.isObject({}), true)
   a.equal(t.isObject(Promise), false)
   a.equal(t.isObject(true), false)
-  a.equal(t.isObject({}), true)
   a.equal(t.isObject(0), false)
   a.equal(t.isObject('1'), false)
   a.equal(t.isObject(1.1), false)
@@ -255,9 +253,6 @@ test.set('.isObject', function () {
   a.equal(t.isObject(function () {}), false)
   a.equal(t.isObject(Date), false)
   a.equal(t.isObject(), false)
-  a.equal(t.isObject(new Map()), true)
-  a.equal(t.isObject([]), true)
-  a.equal(t.isObject({ then: function () {} }), true)
 })
 ```
 <a id="api-isDefined"></a>
@@ -288,9 +283,9 @@ export function isDefined (input) {
 ```js
 test.set('.isDefined(value)', function () {
   a.equal(t.isDefined({}), true)
-  a.equal(t.isDefined({}.one), false)
   a.equal(t.isDefined(0), true)
   a.equal(t.isDefined(null), true)
+  a.equal(t.isDefined({}.one), false)
   a.equal(t.isDefined(undefined), false)
 })
 ```
@@ -321,11 +316,11 @@ export function isUndefined (input) {
 
 ```js
 test.set('.isUndefined(value)', function () {
-  a.equal(t.isUndefined({}), false)
+  a.equal(t.isUndefined(undefined), true)
   a.equal(t.isUndefined({}.one), true)
+  a.equal(t.isUndefined({}), false)
   a.equal(t.isUndefined(0), false)
   a.equal(t.isUndefined(null), false)
-  a.equal(t.isUndefined(undefined), true)
 })
 ```
 <a id="api-isNull"></a>
@@ -355,10 +350,10 @@ export function isNull (input) {
 
 ```js
 test.set('.isNull(value)', function () {
+  a.equal(t.isNull(null), true)
   a.equal(t.isNull({}), false)
   a.equal(t.isNull({}.one), false)
   a.equal(t.isNull(0), false)
-  a.equal(t.isNull(null), true)
   a.equal(t.isNull(undefined), false)
 })
 ```
@@ -394,10 +389,10 @@ test.set('.isDefinedValue(value)', function () {
   a.equal(t.isDefinedValue(0), true)
   a.equal(t.isDefinedValue('1'), true)
   a.equal(t.isDefinedValue(1.1), true)
-  a.equal(t.isDefinedValue(NaN), false)
   a.equal(t.isDefinedValue(Infinity), true)
   a.equal(t.isDefinedValue(function () {}), true)
   a.equal(t.isDefinedValue(Date), true)
+  a.equal(t.isDefinedValue(NaN), false)
   a.equal(t.isDefinedValue(null), false)
   a.equal(t.isDefinedValue(undefined), false)
 })
@@ -433,6 +428,7 @@ export function isClass (input) {
 
 ```js
 test.set('.isClass(value)', function () {
+  a.equal(t.isClass(class {}), true)
   a.equal(t.isClass(true), false)
   a.equal(t.isClass({}), false)
   a.equal(t.isClass(0), false)
@@ -443,7 +439,6 @@ test.set('.isClass(value)', function () {
   a.equal(t.isClass(function () {}), false)
   a.equal(t.isClass(Date), false)
   a.equal(t.isClass(), false)
-  a.equal(t.isClass(class {}), true)
 
   function broken () { }
   broken.toString = function () { throw new Error() }
@@ -488,20 +483,17 @@ export function isPrimitive (input) {
 ```js
 test.set('.isPrimitive(value)', function () {
   a.equal(t.isPrimitive(true), true)
-  a.equal(t.isPrimitive({}), false)
   a.equal(t.isPrimitive(0), true)
   a.equal(t.isPrimitive('1'), true)
   a.equal(t.isPrimitive(1.1), true)
   a.equal(t.isPrimitive(NaN), true)
   a.equal(t.isPrimitive(Infinity), true)
+  a.equal(t.isPrimitive(undefined), true)
+  a.equal(t.isPrimitive(null), true)
+  a.equal(t.isPrimitive(Symbol()), true)
+  a.equal(t.isPrimitive({}), false)
   a.equal(t.isPrimitive(function () {}), false)
   a.equal(t.isPrimitive(Date), false)
-  a.equal(t.isPrimitive(null), true)
-  a.equal(t.isPrimitive(undefined), true)
-})
-
-test.set('.isPrimitive(value) ES6', function () {
-  a.equal(t.isPrimitive(Symbol()), true)
 })
 ```
 <a id="api-isPromise"></a>
@@ -538,6 +530,7 @@ export function isPromise (input) {
 ```js
 test.set('.isPromise', function () {
   a.equal(t.isPromise(Promise.resolve()), true)
+  a.equal(t.isPromise({ then: function () {} }), true)
   a.equal(t.isPromise(Promise), false)
   a.equal(t.isPromise(true), false)
   a.equal(t.isPromise({}), false)
@@ -549,7 +542,6 @@ test.set('.isPromise', function () {
   a.equal(t.isPromise(function () {}), false)
   a.equal(t.isPromise(Date), false)
   a.equal(t.isPromise(), false)
-  a.equal(t.isPromise({ then: function () {} }), true)
 })
 ```
 <a id="api-isIterable"></a>
@@ -586,12 +578,16 @@ export function isIterable (input) {
 
 ```js
 test.set('.isIterable', function () {
+  a.equal(t.isIterable('1'), true)
+  a.equal(t.isIterable(new Map()), true)
+  a.equal(t.isIterable([]), true)
+  a.equal(t.isIterable((function * () {})()), true)
+  a.equal(t.isIterable((async function * () {})()), true)
   a.equal(t.isIterable(Promise.resolve()), false)
   a.equal(t.isIterable(Promise), false)
   a.equal(t.isIterable(true), false)
   a.equal(t.isIterable({}), false)
   a.equal(t.isIterable(0), false)
-  a.equal(t.isIterable('1'), true)
   a.equal(t.isIterable(1.1), false)
   a.equal(t.isIterable(null), false)
   a.equal(t.isIterable(undefined), false)
@@ -600,14 +596,7 @@ test.set('.isIterable', function () {
   a.equal(t.isIterable(function () {}), false)
   a.equal(t.isIterable(Date), false)
   a.equal(t.isIterable(), false)
-  a.equal(t.isIterable(new Map()), true)
-  a.equal(t.isIterable([]), true)
   a.equal(t.isIterable({ then: function () {} }), false)
-  a.equal(t.isIterable((function * () {})()), true)
-})
-
-test.set('.isIterable [v10]', function () {
-  a.equal(t.isIterable((async function * () {})()), true)
 })
 ```
 <a id="api-isString"></a>
@@ -700,13 +689,13 @@ export function isAsyncFunction (input) {
 
 ```js
 test.set('.isAsyncFunction', function () {
+  const AsyncFunction = async function () {}.constructor
+  a.equal(t.isAsyncFunction(async function () {}), true)
+  a.equal(t.isAsyncFunction(new AsyncFunction()), true)
+  a.equal(t.isAsyncFunction(async () => {}), true)
   a.equal(t.isAsyncFunction(function () {}), false)
   a.equal(t.isAsyncFunction(new Function()), false)
   a.equal(t.isAsyncFunction(() => {}), false)
-  a.equal(t.isAsyncFunction(async function () {}), true)
-  const AsyncFunction = async function () {}.constructor
-  a.equal(t.isAsyncFunction(new AsyncFunction()), true)
-  a.equal(t.isAsyncFunction(async () => {}), true)
 })
 ```
 
@@ -737,3 +726,4 @@ import t from './node_modules/typical/index.js'
 * * *
 
 &copy; 2014-26 Lloyd Brookes <opensource@75lb.com>.
+

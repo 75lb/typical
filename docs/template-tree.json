@@ -19,6 +19,7 @@
       "Step": "Parse",
       "options": {
         "BlockMatchers": [],
+        "quickMatch": {},
         "SectionMatchers": [],
         "matchers": [
           {
@@ -64,7 +65,7 @@
           "source": {
             "url": "index.js"
           },
-          "code": "export function isNumber (n) {\n  return !isNaN(Number.parseFloat(n))\n}",
+          "code": "export function isNumber (n) {\n  return !Number.isNaN(Number.parseFloat(n))\n}",
           "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.",
           "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
           "sig": "isNumber (n) : boolean"
@@ -82,7 +83,7 @@
           "source": {
             "url": "index.js"
           },
-          "code": "export function isFiniteNumber (n) {\n  return !isNaN(parseFloat(n)) && isFinite(n)\n}",
+          "code": "export function isFiniteNumber (n) {\n  return isNumber(n) && isFinite(n)\n}",
           "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
           "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
           "sig": "isFiniteNumber (n) : boolean"
@@ -119,10 +120,10 @@
             "url": "index.js"
           },
           "code": "export function isArrayLike (input) {\n  return isObject(input) && typeof input.length === 'number'\n}",
-          "description": "An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.",
+          "description": "An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true` if the input value is an object, not `null` and has a `length` property set with a numeric value.",
           "example": {
             "lang": "js",
-            "text": "function sum(x, y){\n  console.log(t.isArrayLike(arguments))\n  // prints `true`\n}"
+            "text": "function sum(x, y){\n  console.log(t.isArrayLike(arguments)) // prints `true`\n}"
           },
           "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
           "sig": "isArrayLike (input) : boolean"
@@ -345,7 +346,8 @@
         }
       ],
       "data": {
-        "id": "typical"
+        "id": "typical",
+        "codeType": "Package"
       },
       "type": "block",
       "source": {
@@ -390,7 +392,7 @@
         "data": {
           "testFor": "isPlainObject"
         },
-        "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ prop: 'val' }), true)\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object\n  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property\n})"
+        "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ prop: 'val' }), true)\n  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object\n  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n})"
       },
       {
         "children": [],
@@ -401,7 +403,7 @@
         "data": {
           "testFor": "isDefined"
         },
-        "content": "test.set('.isDefined(value)', function () {\n  a.equal(t.isDefined({}), true)\n  a.equal(t.isDefined({}.one), false)\n  a.equal(t.isDefined(0), true)\n  a.equal(t.isDefined(null), true)\n  a.equal(t.isDefined(undefined), false)\n})"
+        "content": "test.set('.isDefined(value)', function () {\n  a.equal(t.isDefined({}), true)\n  a.equal(t.isDefined(0), true)\n  a.equal(t.isDefined(null), true)\n  a.equal(t.isDefined({}.one), false)\n  a.equal(t.isDefined(undefined), false)\n})"
       },
       {
         "children": [],
@@ -412,7 +414,7 @@
         "data": {
           "testFor": "isUndefined"
         },
-        "content": "test.set('.isUndefined(value)', function () {\n  a.equal(t.isUndefined({}), false)\n  a.equal(t.isUndefined({}.one), true)\n  a.equal(t.isUndefined(0), false)\n  a.equal(t.isUndefined(null), false)\n  a.equal(t.isUndefined(undefined), true)\n})"
+        "content": "test.set('.isUndefined(value)', function () {\n  a.equal(t.isUndefined(undefined), true)\n  a.equal(t.isUndefined({}.one), true)\n  a.equal(t.isUndefined({}), false)\n  a.equal(t.isUndefined(0), false)\n  a.equal(t.isUndefined(null), false)\n})"
       },
       {
         "children": [],
@@ -423,7 +425,7 @@
         "data": {
           "testFor": "isNull"
         },
-        "content": "test.set('.isNull(value)', function () {\n  a.equal(t.isNull({}), false)\n  a.equal(t.isNull({}.one), false)\n  a.equal(t.isNull(0), false)\n  a.equal(t.isNull(null), true)\n  a.equal(t.isNull(undefined), false)\n})"
+        "content": "test.set('.isNull(value)', function () {\n  a.equal(t.isNull(null), true)\n  a.equal(t.isNull({}), false)\n  a.equal(t.isNull({}.one), false)\n  a.equal(t.isNull(0), false)\n  a.equal(t.isNull(undefined), false)\n})"
       },
       {
         "children": [],
@@ -434,7 +436,7 @@
         "data": {
           "testFor": "isPrimitive"
         },
-        "content": "test.set('.isPrimitive(value)', function () {\n  a.equal(t.isPrimitive(true), true)\n  a.equal(t.isPrimitive({}), false)\n  a.equal(t.isPrimitive(0), true)\n  a.equal(t.isPrimitive('1'), true)\n  a.equal(t.isPrimitive(1.1), true)\n  a.equal(t.isPrimitive(NaN), true)\n  a.equal(t.isPrimitive(Infinity), true)\n  a.equal(t.isPrimitive(function () {}), false)\n  a.equal(t.isPrimitive(Date), false)\n  a.equal(t.isPrimitive(null), true)\n  a.equal(t.isPrimitive(undefined), true)\n})"
+        "content": "test.set('.isPrimitive(value)', function () {\n  a.equal(t.isPrimitive(true), true)\n  a.equal(t.isPrimitive(0), true)\n  a.equal(t.isPrimitive('1'), true)\n  a.equal(t.isPrimitive(1.1), true)\n  a.equal(t.isPrimitive(NaN), true)\n  a.equal(t.isPrimitive(Infinity), true)\n  a.equal(t.isPrimitive(undefined), true)\n  a.equal(t.isPrimitive(null), true)\n  a.equal(t.isPrimitive(Symbol()), true)\n  a.equal(t.isPrimitive({}), false)\n  a.equal(t.isPrimitive(function () {}), false)\n  a.equal(t.isPrimitive(Date), false)\n})"
       },
       {
         "children": [],
@@ -445,18 +447,7 @@
         "data": {
           "testFor": "isDefinedValue"
         },
-        "content": "test.set('.isDefinedValue(value)', function () {\n  a.equal(t.isDefinedValue(true), true)\n  a.equal(t.isDefinedValue({}), true)\n  a.equal(t.isDefinedValue(0), true)\n  a.equal(t.isDefinedValue('1'), true)\n  a.equal(t.isDefinedValue(1.1), true)\n  a.equal(t.isDefinedValue(NaN), false)\n  a.equal(t.isDefinedValue(Infinity), true)\n  a.equal(t.isDefinedValue(function () {}), true)\n  a.equal(t.isDefinedValue(Date), true)\n  a.equal(t.isDefinedValue(null), false)\n  a.equal(t.isDefinedValue(undefined), false)\n})"
-      },
-      {
-        "children": [],
-        "type": "test",
-        "source": {
-          "url": "test/test.js"
-        },
-        "data": {
-          "testFor": "isPrimitive"
-        },
-        "content": "test.set('.isPrimitive(value) ES6', function () {\n  a.equal(t.isPrimitive(Symbol()), true)\n})"
+        "content": "test.set('.isDefinedValue(value)', function () {\n  a.equal(t.isDefinedValue(true), true)\n  a.equal(t.isDefinedValue({}), true)\n  a.equal(t.isDefinedValue(0), true)\n  a.equal(t.isDefinedValue('1'), true)\n  a.equal(t.isDefinedValue(1.1), true)\n  a.equal(t.isDefinedValue(Infinity), true)\n  a.equal(t.isDefinedValue(function () {}), true)\n  a.equal(t.isDefinedValue(Date), true)\n  a.equal(t.isDefinedValue(NaN), false)\n  a.equal(t.isDefinedValue(null), false)\n  a.equal(t.isDefinedValue(undefined), false)\n})"
       },
       {
         "children": [],
@@ -467,7 +458,7 @@
         "data": {
           "testFor": "isClass"
         },
-        "content": "test.set('.isClass(value)', function () {\n  a.equal(t.isClass(true), false)\n  a.equal(t.isClass({}), false)\n  a.equal(t.isClass(0), false)\n  a.equal(t.isClass('1'), false)\n  a.equal(t.isClass(1.1), false)\n  a.equal(t.isClass(NaN), false)\n  a.equal(t.isClass(Infinity), false)\n  a.equal(t.isClass(function () {}), false)\n  a.equal(t.isClass(Date), false)\n  a.equal(t.isClass(), false)\n  a.equal(t.isClass(class {}), true)\n\n  function broken () { }\n  broken.toString = function () { throw new Error() }\n  a.equal(t.isClass(broken), false)\n})"
+        "content": "test.set('.isClass(value)', function () {\n  a.equal(t.isClass(class {}), true)\n  a.equal(t.isClass(true), false)\n  a.equal(t.isClass({}), false)\n  a.equal(t.isClass(0), false)\n  a.equal(t.isClass('1'), false)\n  a.equal(t.isClass(1.1), false)\n  a.equal(t.isClass(NaN), false)\n  a.equal(t.isClass(Infinity), false)\n  a.equal(t.isClass(function () {}), false)\n  a.equal(t.isClass(Date), false)\n  a.equal(t.isClass(), false)\n\n  function broken () { }\n  broken.toString = function () { throw new Error() }\n  a.equal(t.isClass(broken), false)\n})"
       },
       {
         "children": [],
@@ -478,7 +469,7 @@
         "data": {
           "testFor": "isPromise"
         },
-        "content": "test.set('.isPromise', function () {\n  a.equal(t.isPromise(Promise.resolve()), true)\n  a.equal(t.isPromise(Promise), false)\n  a.equal(t.isPromise(true), false)\n  a.equal(t.isPromise({}), false)\n  a.equal(t.isPromise(0), false)\n  a.equal(t.isPromise('1'), false)\n  a.equal(t.isPromise(1.1), false)\n  a.equal(t.isPromise(NaN), false)\n  a.equal(t.isPromise(Infinity), false)\n  a.equal(t.isPromise(function () {}), false)\n  a.equal(t.isPromise(Date), false)\n  a.equal(t.isPromise(), false)\n  a.equal(t.isPromise({ then: function () {} }), true)\n})"
+        "content": "test.set('.isPromise', function () {\n  a.equal(t.isPromise(Promise.resolve()), true)\n  a.equal(t.isPromise({ then: function () {} }), true)\n  a.equal(t.isPromise(Promise), false)\n  a.equal(t.isPromise(true), false)\n  a.equal(t.isPromise({}), false)\n  a.equal(t.isPromise(0), false)\n  a.equal(t.isPromise('1'), false)\n  a.equal(t.isPromise(1.1), false)\n  a.equal(t.isPromise(NaN), false)\n  a.equal(t.isPromise(Infinity), false)\n  a.equal(t.isPromise(function () {}), false)\n  a.equal(t.isPromise(Date), false)\n  a.equal(t.isPromise(), false)\n})"
       },
       {
         "children": [],
@@ -489,7 +480,7 @@
         "data": {
           "testFor": "isObject"
         },
-        "content": "test.set('.isObject', function () {\n  a.equal(t.isObject(Promise.resolve()), true)\n  a.equal(t.isObject(Promise), false)\n  a.equal(t.isObject(true), false)\n  a.equal(t.isObject({}), true)\n  a.equal(t.isObject(0), false)\n  a.equal(t.isObject('1'), false)\n  a.equal(t.isObject(1.1), false)\n  a.equal(t.isObject(NaN), false)\n  a.equal(t.isObject(Infinity), false)\n  a.equal(t.isObject(function () {}), false)\n  a.equal(t.isObject(Date), false)\n  a.equal(t.isObject(), false)\n  a.equal(t.isObject(new Map()), true)\n  a.equal(t.isObject([]), true)\n  a.equal(t.isObject({ then: function () {} }), true)\n})"
+        "content": "test.set('.isObject', function () {\n  a.equal(t.isObject(Promise.resolve()), true)\n  a.equal(t.isObject(new Map()), true)\n  a.equal(t.isObject([]), true)\n  a.equal(t.isObject({ then: function () {} }), true)\n  a.equal(t.isObject({}), true)\n  a.equal(t.isObject(Promise), false)\n  a.equal(t.isObject(true), false)\n  a.equal(t.isObject(0), false)\n  a.equal(t.isObject('1'), false)\n  a.equal(t.isObject(1.1), false)\n  a.equal(t.isObject(NaN), false)\n  a.equal(t.isObject(Infinity), false)\n  a.equal(t.isObject(function () {}), false)\n  a.equal(t.isObject(Date), false)\n  a.equal(t.isObject(), false)\n})"
       },
       {
         "children": [],
@@ -500,7 +491,7 @@
         "data": {
           "testFor": "isArrayLike"
         },
-        "content": "test.set('.isArrayLike', function () {\n  a.equal(t.isArrayLike(arguments), true)\n  a.equal(t.isArrayLike(Promise.resolve()), false)\n  a.equal(t.isArrayLike(Promise), false)\n  a.equal(t.isArrayLike(true), false)\n  a.equal(t.isArrayLike({}), false)\n  a.equal(t.isArrayLike(0), false)\n  a.equal(t.isArrayLike('1'), false)\n  a.equal(t.isArrayLike(1.1), false)\n  a.equal(t.isArrayLike(NaN), false)\n  a.equal(t.isArrayLike(Infinity), false)\n  a.equal(t.isArrayLike(function () {}), false)\n  a.equal(t.isArrayLike(Date), false)\n  a.equal(t.isArrayLike(), false)\n  a.equal(t.isArrayLike(new Map()), false)\n  a.equal(t.isArrayLike([]), true)\n  a.equal(t.isArrayLike({ then: function () {} }), false)\n})"
+        "content": "test.set('.isArrayLike', function () {\n  a.equal(t.isArrayLike(arguments), true)\n  a.equal(t.isArrayLike([]), true)\n  a.equal(t.isArrayLike(Promise.resolve()), false)\n  a.equal(t.isArrayLike(Promise), false)\n  a.equal(t.isArrayLike(true), false)\n  a.equal(t.isArrayLike({}), false)\n  a.equal(t.isArrayLike(0), false)\n  a.equal(t.isArrayLike('1'), false)\n  a.equal(t.isArrayLike(1.1), false)\n  a.equal(t.isArrayLike(NaN), false)\n  a.equal(t.isArrayLike(Infinity), false)\n  a.equal(t.isArrayLike(function () {}), false)\n  a.equal(t.isArrayLike(Date), false)\n  a.equal(t.isArrayLike(), false)\n  a.equal(t.isArrayLike(new Map()), false)\n  a.equal(t.isArrayLike({ then: function () {} }), false)\n})"
       },
       {
         "children": [],
@@ -511,18 +502,7 @@
         "data": {
           "testFor": "isIterable"
         },
-        "content": "test.set('.isIterable', function () {\n  a.equal(t.isIterable(Promise.resolve()), false)\n  a.equal(t.isIterable(Promise), false)\n  a.equal(t.isIterable(true), false)\n  a.equal(t.isIterable({}), false)\n  a.equal(t.isIterable(0), false)\n  a.equal(t.isIterable('1'), true)\n  a.equal(t.isIterable(1.1), false)\n  a.equal(t.isIterable(null), false)\n  a.equal(t.isIterable(undefined), false)\n  a.equal(t.isIterable(NaN), false)\n  a.equal(t.isIterable(Infinity), false)\n  a.equal(t.isIterable(function () {}), false)\n  a.equal(t.isIterable(Date), false)\n  a.equal(t.isIterable(), false)\n  a.equal(t.isIterable(new Map()), true)\n  a.equal(t.isIterable([]), true)\n  a.equal(t.isIterable({ then: function () {} }), false)\n  a.equal(t.isIterable((function * () {})()), true)\n})"
-      },
-      {
-        "children": [],
-        "type": "test",
-        "source": {
-          "url": "test/test.js"
-        },
-        "data": {
-          "testFor": "isIterable"
-        },
-        "content": "test.set('.isIterable [v10]', function () {\n  a.equal(t.isIterable((async function * () {})()), true)\n})"
+        "content": "test.set('.isIterable', function () {\n  a.equal(t.isIterable('1'), true)\n  a.equal(t.isIterable(new Map()), true)\n  a.equal(t.isIterable([]), true)\n  a.equal(t.isIterable((function * () {})()), true)\n  a.equal(t.isIterable((async function * () {})()), true)\n  a.equal(t.isIterable(Promise.resolve()), false)\n  a.equal(t.isIterable(Promise), false)\n  a.equal(t.isIterable(true), false)\n  a.equal(t.isIterable({}), false)\n  a.equal(t.isIterable(0), false)\n  a.equal(t.isIterable(1.1), false)\n  a.equal(t.isIterable(null), false)\n  a.equal(t.isIterable(undefined), false)\n  a.equal(t.isIterable(NaN), false)\n  a.equal(t.isIterable(Infinity), false)\n  a.equal(t.isIterable(function () {}), false)\n  a.equal(t.isIterable(Date), false)\n  a.equal(t.isIterable(), false)\n  a.equal(t.isIterable({ then: function () {} }), false)\n})"
       },
       {
         "children": [],
@@ -555,7 +535,7 @@
         "data": {
           "testFor": "isAsyncFunction"
         },
-        "content": "test.set('.isAsyncFunction', function () {\n  a.equal(t.isAsyncFunction(function () {}), false)\n  a.equal(t.isAsyncFunction(new Function()), false)\n  a.equal(t.isAsyncFunction(() => {}), false)\n  a.equal(t.isAsyncFunction(async function () {}), true)\n  const AsyncFunction = async function () {}.constructor\n  a.equal(t.isAsyncFunction(new AsyncFunction()), true)\n  a.equal(t.isAsyncFunction(async () => {}), true)\n})"
+        "content": "test.set('.isAsyncFunction', function () {\n  const AsyncFunction = async function () {}.constructor\n  a.equal(t.isAsyncFunction(async function () {}), true)\n  a.equal(t.isAsyncFunction(new AsyncFunction()), true)\n  a.equal(t.isAsyncFunction(async () => {}), true)\n  a.equal(t.isAsyncFunction(function () {}), false)\n  a.equal(t.isAsyncFunction(new Function()), false)\n  a.equal(t.isAsyncFunction(() => {}), false)\n})"
       }
     ]
   }

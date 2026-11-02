@@ -1,13 +1,35 @@
-const map = new Map()
+const quickMatch = new Map()
 
-map.add(/[boolFunc]/, function boolFunc (block, matches) {
+quickMatch.set(/\[boolFunc\]/, function boolFunc (block, matches) {
+  block.data ||= {}
   block.data.codeType = 'Function'
   block.data.returns = 'boolean'
 })
 
-map.add(/Path\s+(\w+) > (\w+)/, function boolFunc (block, matches) {
-  block.data.id = 'id'
-  block.data.parent = 'parent'
+quickMatch.set(/Path\s+(\w+) > (\w+)/, function pathFunc (block, matches) {
+  block.data ||= {}
+  block.data.id = matches[2]
+  block.data.parent = matches[1]
 })
 
-export default map
+quickMatch.set(/¬\s*([\w> ]+)\s*¬/, function breadcrumb (block, matches) {
+  const ids = matches[1].split(' > ')
+  if (ids.length === 1) {
+    block.data ||= {}
+    block.data.id = ids[0].trim()
+  } else if (ids.length === 2) {
+    block.data ||= {}
+    block.data.parent = ids[0].trim()
+    block.data.id = ids[1].trim()
+  } else {
+    throw new Error('Invalid breadcrumb: ' + matches[1])
+  }
+})
+
+quickMatch.set(/\[P1\]/, function params1 (block, matches) {
+  block.params = `Param | Type | Description
+---   | ---  | ---
+input | *    | The input to test`
+})
+
+export default quickMatch
