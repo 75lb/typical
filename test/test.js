@@ -47,6 +47,7 @@ test.set('.isPlainObject(value)', function () {
 })
 /*<*/
 
+/*# ==testFor: isDefined== /*>*/
 test.set('.isDefined(value)', function () {
   a.equal(t.isDefined({}), true)
   a.equal(t.isDefined({}.one), false)
@@ -54,7 +55,9 @@ test.set('.isDefined(value)', function () {
   a.equal(t.isDefined(null), true)
   a.equal(t.isDefined(undefined), false)
 })
+/*<*/
 
+/*# ==testFor: isUndefined== /*>*/
 test.set('.isUndefined(value)', function () {
   a.equal(t.isUndefined({}), false)
   a.equal(t.isUndefined({}.one), true)
@@ -62,7 +65,9 @@ test.set('.isUndefined(value)', function () {
   a.equal(t.isUndefined(null), false)
   a.equal(t.isUndefined(undefined), true)
 })
+/*<*/
 
+/*# ==testFor: isNull== /*>*/
 test.set('.isNull(value)', function () {
   a.equal(t.isNull({}), false)
   a.equal(t.isNull({}.one), false)
@@ -70,7 +75,9 @@ test.set('.isNull(value)', function () {
   a.equal(t.isNull(null), true)
   a.equal(t.isNull(undefined), false)
 })
+/*<*/
 
+/*# ==testFor: isPrimitive== /*>*/
 test.set('.isPrimitive(value)', function () {
   a.equal(t.isPrimitive(true), true)
   a.equal(t.isPrimitive({}), false)
@@ -84,7 +91,9 @@ test.set('.isPrimitive(value)', function () {
   a.equal(t.isPrimitive(null), true)
   a.equal(t.isPrimitive(undefined), true)
 })
+/*<*/
 
+/*# ==testFor: isDefinedValue== /*>*/
 test.set('.isDefinedValue(value)', function () {
   a.equal(t.isDefinedValue(true), true)
   a.equal(t.isDefinedValue({}), true)
@@ -98,11 +107,15 @@ test.set('.isDefinedValue(value)', function () {
   a.equal(t.isDefinedValue(null), false)
   a.equal(t.isDefinedValue(undefined), false)
 })
+/*<*/
 
+/*# ==testFor: isPrimitive== /*>*/
 test.set('.isPrimitive(value) ES6', function () {
   a.equal(t.isPrimitive(Symbol()), true)
 })
+/*<*/
 
+/*# ==testFor: isClass== /*>*/
 test.set('.isClass(value)', function () {
   a.equal(t.isClass(true), false)
   a.equal(t.isClass({}), false)
@@ -120,7 +133,9 @@ test.set('.isClass(value)', function () {
   broken.toString = function () { throw new Error() }
   a.equal(t.isClass(broken), false)
 })
+/*<*/
 
+/*# ==testFor: isPromise== /*>*/
 test.set('.isPromise', function () {
   a.equal(t.isPromise(Promise.resolve()), true)
   a.equal(t.isPromise(Promise), false)
@@ -136,7 +151,9 @@ test.set('.isPromise', function () {
   a.equal(t.isPromise(), false)
   a.equal(t.isPromise({ then: function () {} }), true)
 })
+/*<*/
 
+/*# ==testFor: isObject== /*>*/
 test.set('.isObject', function () {
   a.equal(t.isObject(Promise.resolve()), true)
   a.equal(t.isObject(Promise), false)
@@ -154,7 +171,9 @@ test.set('.isObject', function () {
   a.equal(t.isObject([]), true)
   a.equal(t.isObject({ then: function () {} }), true)
 })
+/*<*/
 
+/*# ==testFor: isArrayLike== /*>*/
 test.set('.isArrayLike', function () {
   a.equal(t.isArrayLike(arguments), true)
   a.equal(t.isArrayLike(Promise.resolve()), false)
@@ -173,7 +192,9 @@ test.set('.isArrayLike', function () {
   a.equal(t.isArrayLike([]), true)
   a.equal(t.isArrayLike({ then: function () {} }), false)
 })
+/*<*/
 
+/*# ==testFor: isIterable== /*>*/
 test.set('.isIterable', function () {
   a.equal(t.isIterable(Promise.resolve()), false)
   a.equal(t.isIterable(Promise), false)
@@ -194,22 +215,30 @@ test.set('.isIterable', function () {
   a.equal(t.isIterable({ then: function () {} }), false)
   a.equal(t.isIterable((function * () {})()), true)
 })
+/*<*/
 
+/*# ==testFor: isIterable== /*>*/
 test.set('.isIterable [v10]', function () {
   a.equal(t.isIterable((async function * () {})()), true)
 })
+/*<*/
 
+/*# ==testFor: isString== /*>*/
 test.set('.isString', function () {
   a.equal(t.isString('1'), true)
   a.equal(t.isString(1), false)
 })
+/*<*/
 
+/*# ==testFor: isFunction== /*>*/
 test.set('.isFunction', function () {
   a.equal(t.isFunction(function () {}), true)
   a.equal(t.isFunction(new Function()), true)
   a.equal(t.isFunction(() => {}), true)
 })
+/*<*/
 
+/*# ==testFor: isAsyncFunction== /*>*/
 test.set('.isAsyncFunction', function () {
   a.equal(t.isAsyncFunction(function () {}), false)
   a.equal(t.isAsyncFunction(new Function()), false)
@@ -219,5 +248,6 @@ test.set('.isAsyncFunction', function () {
   a.equal(t.isAsyncFunction(new AsyncFunction()), true)
   a.equal(t.isAsyncFunction(async () => {}), true)
 })
+/*<*/
 
 export { test, only, skip }

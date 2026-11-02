@@ -1,5 +1,5 @@
 /*~
-typical
+typical ¬typical¬
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
@@ -12,15 +12,12 @@ Data
 */
 
 /*~
-isNumber (n) : boolean [boolFunc]
+isNumber (n) : boolean [boolFunc] ¬typical > isNumber¬
 
 Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.
 
 Data
   exportType: Named
-
-Path
-  typical > isNumber
 
 Params
   Param | Type | Description
