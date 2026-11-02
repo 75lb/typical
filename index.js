@@ -1,6 +1,7 @@
 /* TODO:
 - quickMatch function to replace the most common Params
 - quickMatch for named export
+- combine into one quickMatch for all common data
  */
 
 
@@ -158,32 +159,43 @@ export function isUndefined (input) {
 }
 /*<<*/
 
-/*
- * Returns true if the input value is null.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isNull (input) : boolean [boolFunc][P1] ¬typical > isNull¬
+
+Returns true if the input value is null.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isNull (input) {
   return input === null
 }
+/*<<*/
 
-/*
- * Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isDefinedValue (input) : boolean [boolFunc][P1] ¬typical > isDefinedValue¬
+
+Returns true if the input value is not one of `undefined`, `null`, or `NaN`.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isDefinedValue (input) {
   return isDefined(input) && !isNull(input) && !Number.isNaN(input)
 }
+/*<<*/
 
-/*
- * Returns true if the input value is an ES2015 `class`.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isClass (input) : boolean [boolFunc][P1] ¬typical > isClass¬
+
+Returns true if the input value is an ES2015 `class`.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isClass (input) {
   if (typeof input === 'function') {
     return /^class /.test(Function.prototype.toString.call(input))
@@ -191,13 +203,22 @@ export function isClass (input) {
     return false
   }
 }
+/*<<*/
 
-/*
- * Returns true if the input is a string, number, symbol, boolean, null or undefined value.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isPrimitive (input) : boolean [boolFunc] ¬typical > isPrimitive¬
+
+Returns true if the input is a string, number, symbol, boolean, null or undefined value.
+
+Params
+  Param | Type | Description
+  ---   | ---  | ---
+  input | *    | The input to test
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isPrimitive (input) {
   if (input === null) return true
   switch (typeof input) {
@@ -211,6 +232,7 @@ export function isPrimitive (input) {
       return false
   }
 }
+/*<<*/
 
 /*
  * Returns true if the input is a Promise.
@@ -218,6 +240,16 @@ export function isPrimitive (input) {
  * @returns {boolean}
  * @static
 */
+
+/*~
+isPromise (input) : boolean [boolFunc][P1] ¬typical > isPromise¬
+
+Returns true if the input is a Promise.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isPromise (input) {
   if (input) {
     const isPromise = isDefined(Promise) && input instanceof Promise
@@ -227,46 +259,17 @@ export function isPromise (input) {
     return false
   }
 }
+/*<<*/
 
-/*
- * Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isIterable('string')
- * true
- * > t.isIterable(new Map())
- * true
- * > t.isIterable([])
- * true
- * > t.isIterable((function * () {})())
- * true
- * > t.isIterable(Promise.resolve())
- * false
- * > t.isIterable(Promise)
- * false
- * > t.isIterable(true)
- * false
- * > t.isIterable({})
- * false
- * > t.isIterable(0)
- * false
- * > t.isIterable(1.1)
- * false
- * > t.isIterable(NaN)
- * false
- * > t.isIterable(Infinity)
- * false
- * > t.isIterable(function () {})
- * false
- * > t.isIterable(Date)
- * false
- * > t.isIterable()
- * false
- * > t.isIterable({ then: function () {} })
- * false
-*/
+/*~
+isIterable (input) : boolean [boolFunc][P1] ¬typical > isIterable¬
+
+Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isIterable (input) {
   if (input === null || !isDefined(input)) {
     return false
@@ -277,50 +280,46 @@ export function isIterable (input) {
     )
   }
 }
+/*<<*/
 
-/*
- * Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isString (input) : boolean [boolFunc][P1] ¬typical > isString¬
+
+Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isString (input) {
   return typeof input === 'string'
 }
+/*<<*/
 
-/*
- * Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isFunction (input) : boolean [boolFunc][P1] ¬typical > isFunction¬
+
+Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isFunction (input) {
   return typeof input === 'function'
 }
+/*<<*/
 
-/*
- * Returns true if the input value is an async function or method.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
- * @example
- * > t.isAsyncFunction(function () {})
- * false
- * > t.isAsyncFunction(new Function())
- * false
- * > t.isAsyncFunction(() => {})
- * false
- * > t.isAsyncFunction(async function () {})
- * true
- * > const AsyncFunction = async function () {}.constructor
- * > t.isAsyncFunction(new AsyncFunction())
- * true
- * > t.isAsyncFunction(async () => {})
- * true
- * > class Command { async execute () {} }
- * > t.isAsyncFunction(new Command().execute)
- * true
-*/
+/*~
+isAsyncFunction (input) : boolean [boolFunc][P1] ¬typical > isAsyncFunction¬
+
+Returns true if the input value is an async function or method.
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isAsyncFunction (input) {
   return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')
 }
+/*<<*/

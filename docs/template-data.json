@@ -193,6 +193,168 @@
     },
     {
       "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isNull",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isNull (input) {\n  return input === null\n}",
+      "description": "Returns true if the input value is null.",
+      "sig": "isNull (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isDefinedValue",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isDefinedValue (input) {\n  return isDefined(input) && !isNull(input) && !Number.isNaN(input)\n}",
+      "description": "Returns true if the input value is not one of `undefined`, `null`, or `NaN`.",
+      "sig": "isDefinedValue (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isClass",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isClass (input) {\n  if (typeof input === 'function') {\n    return /^class /.test(Function.prototype.toString.call(input))\n  } else {\n    return false\n  }\n}",
+      "description": "Returns true if the input value is an ES2015 `class`.",
+      "sig": "isClass (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isPrimitive",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "code": "export function isPrimitive (input) {\n  if (input === null) return true\n  switch (typeof input) {\n    case 'string':\n    case 'number':\n    case 'symbol':\n    case 'undefined':\n    case 'boolean':\n      return true\n    default:\n      return false\n  }\n}",
+      "description": "Returns true if the input is a string, number, symbol, boolean, null or undefined value.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "sig": "isPrimitive (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isPromise",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isPromise (input) {\n  if (input) {\n    const isPromise = isDefined(Promise) && input instanceof Promise\n    const isThenable = input.then && typeof input.then === 'function'\n    return !!(isPromise || isThenable)\n  } else {\n    return false\n  }\n}",
+      "description": "Returns true if the input is a Promise.",
+      "sig": "isPromise (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isIterable",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isIterable (input) {\n  if (input === null || !isDefined(input)) {\n    return false\n  } else {\n    return (\n      typeof input[Symbol.iterator] === 'function' ||\n      typeof input[Symbol.asyncIterator] === 'function'\n    )\n  }\n}",
+      "description": "Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).",
+      "sig": "isIterable (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isString",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isString (input) {\n  return typeof input === 'string'\n}",
+      "description": "Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.",
+      "sig": "isString (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isFunction",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isFunction (input) {\n  return typeof input === 'function'\n}",
+      "description": "Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.",
+      "sig": "isFunction (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isAsyncFunction",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isAsyncFunction (input) {\n  return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')\n}",
+      "description": "Returns true if the input value is an async function or method.",
+      "sig": "isAsyncFunction (input) : boolean"
+    },
+    {
+      "children": [],
       "type": "test",
       "source": {
         "url": "test/test.js"
