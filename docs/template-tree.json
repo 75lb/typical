@@ -162,6 +162,24 @@
           "description": "Returns true if the input value is defined.",
           "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
           "sig": "isDefined (input) : boolean"
+        },
+        {
+          "children": [],
+          "data": {
+            "codeType": "Function",
+            "returns": "boolean",
+            "parent": "typical",
+            "id": "isUndefined",
+            "exportType": "Named"
+          },
+          "type": "block",
+          "source": {
+            "url": "index.js"
+          },
+          "code": "export function isUndefined (input) {\n  return !isDefined(input)\n}",
+          "description": "Returns true if the input value is undefined.",
+          "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+          "sig": "isUndefined (input) : boolean"
         }
       ],
       "data": {

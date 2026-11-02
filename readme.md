@@ -9,6 +9,7 @@
   - [isArrayLike (input) : boolean](#api-isArrayLike) <sup><mark>Named Export</mark></sup>
   - [isObject (input) : boolean](#api-isObject) <sup><mark>Named Export</mark></sup>
   - [isDefined (input) : boolean](#api-isDefined) <sup><mark>Named Export</mark></sup>
+  - [isUndefined (input) : boolean](#api-isUndefined) <sup><mark>Named Export</mark></sup>
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
@@ -270,5 +271,39 @@ test.set('.isDefined(value)', function () {
   a.equal(t.isDefined(0), true)
   a.equal(t.isDefined(null), true)
   a.equal(t.isDefined(undefined), false)
+})
+```
+<a id="api-isUndefined"></a>
+
+## isUndefined (input) : boolean
+
+Returns true if the input value is undefined.
+
+**Type**: Function  
+**Returns**: `boolean`
+
+**Params**
+
+Param | Type | Description
+---   | ---  | ---
+input | *    | The input to test
+
+**Implementation**
+
+```js
+export function isUndefined (input) {
+  return !isDefined(input)
+}
+```
+
+**Tests**
+
+```js
+test.set('.isUndefined(value)', function () {
+  a.equal(t.isUndefined({}), false)
+  a.equal(t.isUndefined({}.one), true)
+  a.equal(t.isUndefined(0), false)
+  a.equal(t.isUndefined(null), false)
+  a.equal(t.isUndefined(undefined), true)
 })
 ```

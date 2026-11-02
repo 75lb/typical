@@ -1,5 +1,6 @@
 /* TODO:
 - quickMatch function to replace the most common Params
+- quickMatch for named export
  */
 
 
@@ -138,15 +139,24 @@ export function isDefined (input) {
 }
 /*<<*/
 
-/*
- * Returns true if the input value is undefined.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isUndefined (input) : boolean [boolFunc] ¬typical > isUndefined¬
+
+Returns true if the input value is undefined.
+
+Params
+  Param | Type | Description
+  ---   | ---  | ---
+  input | *    | The input to test
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isUndefined (input) {
   return !isDefined(input)
 }
+/*<<*/
 
 /*
  * Returns true if the input value is null.
