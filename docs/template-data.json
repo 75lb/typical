@@ -121,7 +121,7 @@
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
-        "id": "isPlainObject",
+        "id": "isArrayLike",
         "exportType": "Named"
       },
       "type": "block",
@@ -136,6 +136,42 @@
       },
       "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
       "sig": "isArrayLike (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isObject",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "code": "export function isObject (input) {\n  return typeof input === 'object' && input !== null\n}",
+      "description": "Returns true if the typeof input is `'object'` but not null.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "sig": "isObject (input) : boolean"
+    },
+    {
+      "children": [],
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isDefined",
+        "exportType": "Named"
+      },
+      "type": "block",
+      "source": {
+        "url": "index.js"
+      },
+      "code": "export function isDefined (input) {\n  return typeof input !== 'undefined'\n}",
+      "description": "Returns true if the input value is defined.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "sig": "isDefined (input) : boolean"
     },
     {
       "children": [],

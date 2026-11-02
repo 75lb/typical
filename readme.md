@@ -6,7 +6,9 @@
   - [isNumber (n) : boolean](#api-isNumber) <sup><mark>Named Export</mark></sup>
   - [isFiniteNumber (n) : boolean](#api-isFiniteNumber) <sup><mark>Named Export</mark></sup>
   - [isPlainObject (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
-  - [isArrayLike (input) : boolean](#api-isPlainObject) <sup><mark>Named Export</mark></sup>
+  - [isArrayLike (input) : boolean](#api-isArrayLike) <sup><mark>Named Export</mark></sup>
+  - [isObject (input) : boolean](#api-isObject) <sup><mark>Named Export</mark></sup>
+  - [isDefined (input) : boolean](#api-isDefined) <sup><mark>Named Export</mark></sup>
 
 Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.
 
@@ -138,7 +140,7 @@ test.set('.isPlainObject(value)', function () {
   a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property
 })
 ```
-<a id="api-isPlainObject"></a>
+<a id="api-isArrayLike"></a>
 
 ## isArrayLike (input) : boolean
 
@@ -173,17 +175,100 @@ export function isArrayLike (input) {
 **Tests**
 
 ```js
-test.set('.isPlainObject(value)', function () {
-  a.equal(t.isPlainObject({ prop: 'val' }), true)
-  a.equal(t.isPlainObject(new Date()), false)
-  a.equal(t.isPlainObject([0, 1]), false)
-  a.equal(t.isPlainObject(/test/), false)
-  a.equal(t.isPlainObject(1), false)
-  a.equal(t.isPlainObject('one'), false)
-  a.equal(t.isPlainObject(null), false)
-  a.equal(t.isPlainObject((function * () {})()), false)
-  a.equal(t.isPlainObject(function * () {}), false)
-  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object
-  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property
+test.set('.isArrayLike', function () {
+  a.equal(t.isArrayLike(arguments), true)
+  a.equal(t.isArrayLike(Promise.resolve()), false)
+  a.equal(t.isArrayLike(Promise), false)
+  a.equal(t.isArrayLike(true), false)
+  a.equal(t.isArrayLike({}), false)
+  a.equal(t.isArrayLike(0), false)
+  a.equal(t.isArrayLike('1'), false)
+  a.equal(t.isArrayLike(1.1), false)
+  a.equal(t.isArrayLike(NaN), false)
+  a.equal(t.isArrayLike(Infinity), false)
+  a.equal(t.isArrayLike(function () {}), false)
+  a.equal(t.isArrayLike(Date), false)
+  a.equal(t.isArrayLike(), false)
+  a.equal(t.isArrayLike(new Map()), false)
+  a.equal(t.isArrayLike([]), true)
+  a.equal(t.isArrayLike({ then: function () {} }), false)
+})
+```
+<a id="api-isObject"></a>
+
+## isObject (input) : boolean
+
+Returns true if the typeof input is `'object'` but not null.
+
+**Type**: Function  
+**Returns**: `boolean`
+
+**Params**
+
+Param | Type | Description
+---   | ---  | ---
+input | *    | The input to test
+
+**Implementation**
+
+```js
+export function isObject (input) {
+  return typeof input === 'object' && input !== null
+}
+```
+
+**Tests**
+
+```js
+test.set('.isObject', function () {
+  a.equal(t.isObject(Promise.resolve()), true)
+  a.equal(t.isObject(Promise), false)
+  a.equal(t.isObject(true), false)
+  a.equal(t.isObject({}), true)
+  a.equal(t.isObject(0), false)
+  a.equal(t.isObject('1'), false)
+  a.equal(t.isObject(1.1), false)
+  a.equal(t.isObject(NaN), false)
+  a.equal(t.isObject(Infinity), false)
+  a.equal(t.isObject(function () {}), false)
+  a.equal(t.isObject(Date), false)
+  a.equal(t.isObject(), false)
+  a.equal(t.isObject(new Map()), true)
+  a.equal(t.isObject([]), true)
+  a.equal(t.isObject({ then: function () {} }), true)
+})
+```
+<a id="api-isDefined"></a>
+
+## isDefined (input) : boolean
+
+Returns true if the input value is defined.
+
+**Type**: Function  
+**Returns**: `boolean`
+
+**Params**
+
+Param | Type | Description
+---   | ---  | ---
+input | *    | The input to test
+
+**Implementation**
+
+```js
+export function isDefined (input) {
+  return typeof input !== 'undefined'
+}
+```
+
+**Tests**
+
+```js
+test.set('.isDefined(value)', function () {
+  a.equal(t.isDefined({}), true)
+  a.equal(t.isDefined({}.one), false)
+  a.equal(t.isDefined(0), true)
+  a.equal(t.isDefined(null), true)
+  a.equal(t.isDefined(undefined), false)
 })
 ```

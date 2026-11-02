@@ -1,3 +1,8 @@
+/* TODO:
+- quickMatch function to replace the most common Params
+ */
+
+
 /*~
 typical ¬typical¬
 
@@ -71,7 +76,7 @@ export function isPlainObject (input) {
 /*<<*/
 
 /*~
-isArrayLike (input) : boolean [boolFunc] ¬typical > isPlainObject¬
+isArrayLike (input) : boolean [boolFunc] ¬typical > isArrayLike¬
 
 An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true`` if the input value is an object, not `null`` and has a `length` property set with a numeric value.
 
@@ -95,25 +100,43 @@ export function isArrayLike (input) {
 }
 /*<<*/
 
-/*
- * Returns true if the typeof input is `'object'` but not null.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isObject (input) : boolean [boolFunc] ¬typical > isObject¬
+
+Returns true if the typeof input is `'object'` but not null.
+
+Params
+  Param | Type | Description
+  ---   | ---  | ---
+  input | *    | The input to test
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isObject (input) {
   return typeof input === 'object' && input !== null
 }
+/*<<*/
 
-/*
- * Returns true if the input value is defined.
- * @param {*} input - The input to test
- * @returns {boolean}
- * @static
-*/
+/*~
+isDefined (input) : boolean [boolFunc] ¬typical > isDefined¬
+
+Returns true if the input value is defined.
+
+Params
+  Param | Type | Description
+  ---   | ---  | ---
+  input | *    | The input to test
+
+Data
+  exportType: Named
+
+Code /*>>*/
 export function isDefined (input) {
   return typeof input !== 'undefined'
 }
+/*<<*/
 
 /*
  * Returns true if the input value is undefined.
