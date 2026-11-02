@@ -1,3 +1,9 @@
+[![view on npm](https://badgen.net/npm/v/typical)](https://www.npmjs.org/package/typical)
+[![npm module downloads](https://badgen.net/npm/dt/typical)](https://www.npmjs.org/package/typical)
+[![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/typical)](https://github.com/75lb/typical/network/dependents?dependent_type=REPOSITORY)
+[![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/typical)](https://github.com/75lb/typical/network/dependents?dependent_type=PACKAGE)
+[![Node.js CI](https://github.com/75lb/typical/actions/workflows/node.js.yml/badge.svg)](https://github.com/75lb/typical/actions/workflows/node.js.yml)
+
 <a id="api-typical"></a>
 
 # typical
@@ -703,3 +709,31 @@ test.set('.isAsyncFunction', function () {
   a.equal(t.isAsyncFunction(async () => {}), true)
 })
 ```
+
+## Load anywhere
+
+This library is compatible with Node.js, the Web and any style of module loader. It can be loaded anywhere, natively without transpilation.
+
+Within a Node.js ECMAScript Module:
+
+```js
+import t from 'typical'
+import { isNumber } from 'typical'
+```
+
+CommonJS:
+
+```js
+const t = require('typical')
+const { isNumber } = require('typical')
+```
+
+Within a modern browser ECMAScript Module:
+
+```js
+import t from './node_modules/typical/index.js'
+```
+
+* * *
+
+&copy; 2014-26 Lloyd Brookes <opensource@75lb.com>.

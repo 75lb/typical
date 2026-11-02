@@ -29,9 +29,7 @@ dcdoc io-read \
         --registry ~/Documents/dcdoc-zone/testbed/tree/byte-size/registry/markdown.js \
         --type-template block BlockTree \
         --var baseLevel 0 \
+      insert-into-template \
+        --template docs/readme.template \
       body-to-stdout \
       > readme.md
-      # insert-into-template \
-      #   --template docs/readme.template \
-      # body-to-stdout \
-      # > readme.md
