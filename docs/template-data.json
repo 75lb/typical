@@ -19,26 +19,32 @@
       "Step": "Parse",
       "options": {
         "BlockMatchers": [],
-        "quickMatch": {},
+        "quickMatch": "Typical quickMatch",
         "SectionMatchers": [],
         "matchers": [
           {
-            "block": "instance of: BlockMatcherShort",
-            "sections": [
-              "instance of: ShortCodeSection",
-              "instance of: ShortDataSection",
-              "instance of: ShortDescriptionSection",
-              "instance of: ShortExampleSection",
-              "instance of: ShortParamsSection",
-              "instance of: ShortSigSection"
-            ]
+            "Block": "BlockShort",
+            "matchers": {
+              "block": "instance of: BlockMatcherShort",
+              "sections": [
+                "instance of: ShortCodeSection",
+                "instance of: ShortDataSection",
+                "instance of: ShortDescriptionSection",
+                "instance of: ShortExampleSection",
+                "instance of: ShortParamsSection",
+                "instance of: ShortSigSection"
+              ]
+            }
           },
           {
-            "block": "instance of: BlockMatcherShort2",
-            "sections": [
-              "instance of: Line1DataSection",
-              "instance of: Line2OnwardContentSection"
-            ]
+            "Block": "Block",
+            "matchers": {
+              "block": "instance of: BlockMatcherShort2",
+              "sections": [
+                "instance of: Line1DataSection",
+                "instance of: Line2OnwardContentSection"
+              ]
+            }
           }
         ],
         "debug": false
@@ -48,488 +54,488 @@
   "body": [
     {
       "children": [],
-      "data": {
-        "id": "typical",
-        "codeType": "Package"
-      },
-      "type": "block",
+      "type": "block-short",
       "source": {
         "url": "index.js"
       },
+      "sig": "typical",
       "description": "Isomorphic, functional type-checking for Javascript. Packaging each test as a function facilitates compact code where a callback is expected.",
       "example": {
         "lang": "js",
         "text": "import { isDefined } from 'typical'\nconst allDefined = array.every(isDefined)"
       },
-      "sig": "typical"
+      "data": {
+        "id": "typical",
+        "codeType": "Package"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isNumber (n) : boolean",
+      "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.",
+      "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
+      "code": "export function isNumber (n) {\n  return !Number.isNaN(Number.parseFloat(n))\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isNumber",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isNumber (n) {\n  return !Number.isNaN(Number.parseFloat(n))\n}",
-      "description": "Returns true if input is a number (including infinity). It is a more reasonable alternative to `typeof n` which returns `number` for `NaN`.",
-      "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
-      "sig": "isNumber (n) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isFiniteNumber (n) : boolean",
+      "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
+      "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
+      "code": "export function isFiniteNumber (n) {\n  return isNumber(n) && isFinite(n)\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isFiniteNumber",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isFiniteNumber (n) {\n  return isNumber(n) && isFinite(n)\n}",
-      "description": "Returns true if input is a finite number. Identical to `isNumber` beside excluding infinity.",
-      "params": "Param | Type | Description\n---   | ---  | ---\nn     | *    | The input to test",
-      "sig": "isFiniteNumber (n) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isPlainObject (input) : boolean",
+      "description": "A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.",
+      "params": "Param | Type | Description\n---   | ---  | ---\nInput | *    | The input to test",
+      "code": "export function isPlainObject (input) {\n  if (typeof input !== 'object' || input === null) {\n    return false\n  } else {\n    const proto = Object.getPrototypeOf(input)\n    return proto === null || proto === Object.prototype\n  }\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isPlainObject",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isPlainObject (input) {\n  if (typeof input !== 'object' || input === null) {\n    return false\n  } else {\n    const proto = Object.getPrototypeOf(input)\n    return proto === null || proto === Object.prototype\n  }\n}",
-      "description": "A plain object is a simple object literal that is not an instance of a class. Returns `true` if the input `typeof` is `object` and is not `null` plus either has a _direct_ prototype of `Object.prototype` or `null`.",
-      "params": "Param | Type | Description\n---   | ---  | ---\nInput | *    | The input to test",
-      "sig": "isPlainObject (input) : boolean"
+      }
     },
     {
       "children": [],
-      "data": {
-        "codeType": "Function",
-        "returns": "boolean",
-        "parent": "typical",
-        "id": "isArrayLike",
-        "exportType": "Named"
-      },
-      "type": "block",
+      "type": "block-short",
       "source": {
         "url": "index.js"
       },
-      "code": "export function isArrayLike (input) {\n  return isObject(input) && typeof input.length === 'number'\n}",
+      "sig": "isArrayLike (input) : boolean",
       "description": "An array-like value has all the properties of an array yet is not an array instance. An example is the `arguments` object. Returns `true` if the input value is an object, not `null` and has a `length` property set with a numeric value.",
       "example": {
         "lang": "js",
         "text": "function sum(x, y){\n  console.log(t.isArrayLike(arguments)) // prints `true`\n}"
       },
       "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "sig": "isArrayLike (input) : boolean"
+      "code": "export function isArrayLike (input) {\n  return isObject(input) && typeof input.length === 'number'\n}",
+      "data": {
+        "codeType": "Function",
+        "returns": "boolean",
+        "parent": "typical",
+        "id": "isArrayLike",
+        "exportType": "Named"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isObject (input) : boolean",
+      "description": "Returns true if the typeof input is `'object'` but not null.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isObject (input) {\n  return typeof input === 'object' && input !== null\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isObject",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isObject (input) {\n  return typeof input === 'object' && input !== null\n}",
-      "description": "Returns true if the typeof input is `'object'` but not null.",
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "sig": "isObject (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isDefined (input) : boolean",
+      "description": "Returns true if the input value is defined.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isDefined (input) {\n  return typeof input !== 'undefined'\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isDefined",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isDefined (input) {\n  return typeof input !== 'undefined'\n}",
-      "description": "Returns true if the input value is defined.",
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "sig": "isDefined (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isUndefined (input) : boolean",
+      "description": "Returns true if the input value is undefined.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isUndefined (input) {\n  return !isDefined(input)\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isUndefined",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isUndefined (input) {\n  return !isDefined(input)\n}",
-      "description": "Returns true if the input value is undefined.",
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "sig": "isUndefined (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isNull (input) : boolean",
+      "description": "Returns true if the input value is null.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isNull (input) {\n  return input === null\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isNull",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isNull (input) {\n  return input === null\n}",
-      "description": "Returns true if the input value is null.",
-      "sig": "isNull (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isDefinedValue (input) : boolean",
+      "description": "Returns true if the input value is not one of `undefined`, `null`, or `NaN`.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isDefinedValue (input) {\n  return isDefined(input) && !isNull(input) && !Number.isNaN(input)\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isDefinedValue",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isDefinedValue (input) {\n  return isDefined(input) && !isNull(input) && !Number.isNaN(input)\n}",
-      "description": "Returns true if the input value is not one of `undefined`, `null`, or `NaN`.",
-      "sig": "isDefinedValue (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isClass (input) : boolean",
+      "description": "Returns true if the input value is an ES2015 `class`.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isClass (input) {\n  if (typeof input === 'function') {\n    return /^class /.test(Function.prototype.toString.call(input))\n  } else {\n    return false\n  }\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isClass",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isClass (input) {\n  if (typeof input === 'function') {\n    return /^class /.test(Function.prototype.toString.call(input))\n  } else {\n    return false\n  }\n}",
-      "description": "Returns true if the input value is an ES2015 `class`.",
-      "sig": "isClass (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isPrimitive (input) : boolean",
+      "description": "Returns true if the input is a string, number, symbol, boolean, null or undefined value.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isPrimitive (input) {\n  if (input === null) return true\n  switch (typeof input) {\n    case 'string':\n    case 'number':\n    case 'symbol':\n    case 'undefined':\n    case 'boolean':\n      return true\n    default:\n      return false\n  }\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isPrimitive",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "code": "export function isPrimitive (input) {\n  if (input === null) return true\n  switch (typeof input) {\n    case 'string':\n    case 'number':\n    case 'symbol':\n    case 'undefined':\n    case 'boolean':\n      return true\n    default:\n      return false\n  }\n}",
-      "description": "Returns true if the input is a string, number, symbol, boolean, null or undefined value.",
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "sig": "isPrimitive (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isPromise (input) : boolean",
+      "description": "Returns true if the input is a Promise.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isPromise (input) {\n  if (input) {\n    const isPromise = isDefined(Promise) && input instanceof Promise\n    const isThenable = input.then && typeof input.then === 'function'\n    return !!(isPromise || isThenable)\n  } else {\n    return false\n  }\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isPromise",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isPromise (input) {\n  if (input) {\n    const isPromise = isDefined(Promise) && input instanceof Promise\n    const isThenable = input.then && typeof input.then === 'function'\n    return !!(isPromise || isThenable)\n  } else {\n    return false\n  }\n}",
-      "description": "Returns true if the input is a Promise.",
-      "sig": "isPromise (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isIterable (input) : boolean",
+      "description": "Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isIterable (input) {\n  if (input === null || !isDefined(input)) {\n    return false\n  } else {\n    return (\n      typeof input[Symbol.iterator] === 'function' ||\n      typeof input[Symbol.asyncIterator] === 'function'\n    )\n  }\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isIterable",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isIterable (input) {\n  if (input === null || !isDefined(input)) {\n    return false\n  } else {\n    return (\n      typeof input[Symbol.iterator] === 'function' ||\n      typeof input[Symbol.asyncIterator] === 'function'\n    )\n  }\n}",
-      "description": "Returns true if the input is an iterable (`Map`, `Set`, `Array`, Generator etc.).",
-      "sig": "isIterable (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isString (input) : boolean",
+      "description": "Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isString (input) {\n  return typeof input === 'string'\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isString",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isString (input) {\n  return typeof input === 'string'\n}",
-      "description": "Returns true if the input value is a string. The equivalent of `typeof input === 'string'` for use in funcitonal contexts.",
-      "sig": "isString (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isFunction (input) : boolean",
+      "description": "Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isFunction (input) {\n  return typeof input === 'function'\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isFunction",
         "exportType": "Named"
-      },
-      "type": "block",
-      "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isFunction (input) {\n  return typeof input === 'function'\n}",
-      "description": "Returns true if the input value is a function. The equivalent of `typeof input === 'function'` for use in funcitonal contexts.",
-      "sig": "isFunction (input) : boolean"
+      }
     },
     {
       "children": [],
+      "type": "block-short",
+      "source": {
+        "url": "index.js"
+      },
+      "sig": "isAsyncFunction (input) : boolean",
+      "description": "Returns true if the input value is an async function or method.",
+      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
+      "code": "export function isAsyncFunction (input) {\n  return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')\n}",
       "data": {
         "codeType": "Function",
         "returns": "boolean",
         "parent": "typical",
         "id": "isAsyncFunction",
         "exportType": "Named"
-      },
+      }
+    },
+    {
+      "children": [],
       "type": "block",
       "source": {
-        "url": "index.js"
-      },
-      "params": "Param | Type | Description\n---   | ---  | ---\ninput | *    | The input to test",
-      "code": "export function isAsyncFunction (input) {\n  return (typeof input === 'function' && input.constructor.name === 'AsyncFunction')\n}",
-      "description": "Returns true if the input value is an async function or method.",
-      "sig": "isAsyncFunction (input) : boolean"
-    },
-    {
-      "children": [],
-      "type": "test",
-      "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isNumber(value)', function () {\n  a.equal(t.isNumber(0), true)\n  a.equal(t.isNumber(1), true)\n  a.equal(t.isNumber(1.1), true)\n  a.equal(t.isNumber(0xff), true)\n  a.equal(t.isNumber(6.2e5), true)\n  a.equal(t.isNumber(Infinity), true)\n  a.equal(t.isNumber(NaN), false)\n  a.equal(t.isNumber(null), false)\n  a.equal(t.isNumber(undefined), false)\n})",
       "data": {
         "testFor": "isNumber"
-      },
-      "content": "test.set('.isNumber(value)', function () {\n  a.equal(t.isNumber(0), true)\n  a.equal(t.isNumber(1), true)\n  a.equal(t.isNumber(1.1), true)\n  a.equal(t.isNumber(0xff), true)\n  a.equal(t.isNumber(6.2e5), true)\n  a.equal(t.isNumber(Infinity), true)\n  a.equal(t.isNumber(NaN), false)\n  a.equal(t.isNumber(null), false)\n  a.equal(t.isNumber(undefined), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n  a.equal(t.isFiniteNumber(null), false)\n  a.equal(t.isFiniteNumber(undefined), false)\n})",
       "data": {
         "testFor": "isFiniteNumber"
-      },
-      "content": "test.set('.isFiniteNumber(value)', function () {\n  a.equal(t.isFiniteNumber(0), true)\n  a.equal(t.isFiniteNumber(1), true)\n  a.equal(t.isFiniteNumber(1.1), true)\n  a.equal(t.isFiniteNumber(0xff), true)\n  a.equal(t.isFiniteNumber(6.2e5), true)\n  a.equal(t.isFiniteNumber(NaN), false)\n  a.equal(t.isFiniteNumber(Infinity), false)\n  a.equal(t.isFiniteNumber(null), false)\n  a.equal(t.isFiniteNumber(undefined), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ prop: 'val' }), true)\n  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object\n  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n})",
       "data": {
         "testFor": "isPlainObject"
-      },
-      "content": "test.set('.isPlainObject(value)', function () {\n  a.equal(t.isPlainObject({ prop: 'val' }), true)\n  a.equal(t.isPlainObject(Object.create(null)), true) // Null-prototype object\n  a.equal(t.isPlainObject({ constructor: 'something' }), true) // Object with own constructor property\n  a.equal(t.isPlainObject(new Date()), false)\n  a.equal(t.isPlainObject([0, 1]), false)\n  a.equal(t.isPlainObject(/test/), false)\n  a.equal(t.isPlainObject(1), false)\n  a.equal(t.isPlainObject('one'), false)\n  a.equal(t.isPlainObject(null), false)\n  a.equal(t.isPlainObject((function * () {})()), false)\n  a.equal(t.isPlainObject(function * () {}), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isDefined(value)', function () {\n  a.equal(t.isDefined({}), true)\n  a.equal(t.isDefined(0), true)\n  a.equal(t.isDefined(null), true)\n  a.equal(t.isDefined({}.one), false)\n  a.equal(t.isDefined(undefined), false)\n})",
       "data": {
         "testFor": "isDefined"
-      },
-      "content": "test.set('.isDefined(value)', function () {\n  a.equal(t.isDefined({}), true)\n  a.equal(t.isDefined(0), true)\n  a.equal(t.isDefined(null), true)\n  a.equal(t.isDefined({}.one), false)\n  a.equal(t.isDefined(undefined), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isUndefined(value)', function () {\n  a.equal(t.isUndefined(undefined), true)\n  a.equal(t.isUndefined({}.one), true)\n  a.equal(t.isUndefined({}), false)\n  a.equal(t.isUndefined(0), false)\n  a.equal(t.isUndefined(null), false)\n})",
       "data": {
         "testFor": "isUndefined"
-      },
-      "content": "test.set('.isUndefined(value)', function () {\n  a.equal(t.isUndefined(undefined), true)\n  a.equal(t.isUndefined({}.one), true)\n  a.equal(t.isUndefined({}), false)\n  a.equal(t.isUndefined(0), false)\n  a.equal(t.isUndefined(null), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isNull(value)', function () {\n  a.equal(t.isNull(null), true)\n  a.equal(t.isNull({}), false)\n  a.equal(t.isNull({}.one), false)\n  a.equal(t.isNull(0), false)\n  a.equal(t.isNull(undefined), false)\n})",
       "data": {
         "testFor": "isNull"
-      },
-      "content": "test.set('.isNull(value)', function () {\n  a.equal(t.isNull(null), true)\n  a.equal(t.isNull({}), false)\n  a.equal(t.isNull({}.one), false)\n  a.equal(t.isNull(0), false)\n  a.equal(t.isNull(undefined), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isPrimitive(value)', function () {\n  a.equal(t.isPrimitive(true), true)\n  a.equal(t.isPrimitive(0), true)\n  a.equal(t.isPrimitive('1'), true)\n  a.equal(t.isPrimitive(1.1), true)\n  a.equal(t.isPrimitive(NaN), true)\n  a.equal(t.isPrimitive(Infinity), true)\n  a.equal(t.isPrimitive(undefined), true)\n  a.equal(t.isPrimitive(null), true)\n  a.equal(t.isPrimitive(Symbol()), true)\n  a.equal(t.isPrimitive({}), false)\n  a.equal(t.isPrimitive(function () {}), false)\n  a.equal(t.isPrimitive(Date), false)\n})",
       "data": {
         "testFor": "isPrimitive"
-      },
-      "content": "test.set('.isPrimitive(value)', function () {\n  a.equal(t.isPrimitive(true), true)\n  a.equal(t.isPrimitive(0), true)\n  a.equal(t.isPrimitive('1'), true)\n  a.equal(t.isPrimitive(1.1), true)\n  a.equal(t.isPrimitive(NaN), true)\n  a.equal(t.isPrimitive(Infinity), true)\n  a.equal(t.isPrimitive(undefined), true)\n  a.equal(t.isPrimitive(null), true)\n  a.equal(t.isPrimitive(Symbol()), true)\n  a.equal(t.isPrimitive({}), false)\n  a.equal(t.isPrimitive(function () {}), false)\n  a.equal(t.isPrimitive(Date), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isDefinedValue(value)', function () {\n  a.equal(t.isDefinedValue(true), true)\n  a.equal(t.isDefinedValue({}), true)\n  a.equal(t.isDefinedValue(0), true)\n  a.equal(t.isDefinedValue('1'), true)\n  a.equal(t.isDefinedValue(1.1), true)\n  a.equal(t.isDefinedValue(Infinity), true)\n  a.equal(t.isDefinedValue(function () {}), true)\n  a.equal(t.isDefinedValue(Date), true)\n  a.equal(t.isDefinedValue(NaN), false)\n  a.equal(t.isDefinedValue(null), false)\n  a.equal(t.isDefinedValue(undefined), false)\n})",
       "data": {
         "testFor": "isDefinedValue"
-      },
-      "content": "test.set('.isDefinedValue(value)', function () {\n  a.equal(t.isDefinedValue(true), true)\n  a.equal(t.isDefinedValue({}), true)\n  a.equal(t.isDefinedValue(0), true)\n  a.equal(t.isDefinedValue('1'), true)\n  a.equal(t.isDefinedValue(1.1), true)\n  a.equal(t.isDefinedValue(Infinity), true)\n  a.equal(t.isDefinedValue(function () {}), true)\n  a.equal(t.isDefinedValue(Date), true)\n  a.equal(t.isDefinedValue(NaN), false)\n  a.equal(t.isDefinedValue(null), false)\n  a.equal(t.isDefinedValue(undefined), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isClass(value)', function () {\n  a.equal(t.isClass(class {}), true)\n  a.equal(t.isClass(true), false)\n  a.equal(t.isClass({}), false)\n  a.equal(t.isClass(0), false)\n  a.equal(t.isClass('1'), false)\n  a.equal(t.isClass(1.1), false)\n  a.equal(t.isClass(NaN), false)\n  a.equal(t.isClass(Infinity), false)\n  a.equal(t.isClass(function () {}), false)\n  a.equal(t.isClass(Date), false)\n  a.equal(t.isClass(), false)\n\n  function broken () { }\n  broken.toString = function () { throw new Error() }\n  a.equal(t.isClass(broken), false)\n})",
       "data": {
         "testFor": "isClass"
-      },
-      "content": "test.set('.isClass(value)', function () {\n  a.equal(t.isClass(class {}), true)\n  a.equal(t.isClass(true), false)\n  a.equal(t.isClass({}), false)\n  a.equal(t.isClass(0), false)\n  a.equal(t.isClass('1'), false)\n  a.equal(t.isClass(1.1), false)\n  a.equal(t.isClass(NaN), false)\n  a.equal(t.isClass(Infinity), false)\n  a.equal(t.isClass(function () {}), false)\n  a.equal(t.isClass(Date), false)\n  a.equal(t.isClass(), false)\n\n  function broken () { }\n  broken.toString = function () { throw new Error() }\n  a.equal(t.isClass(broken), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isPromise', function () {\n  a.equal(t.isPromise(Promise.resolve()), true)\n  a.equal(t.isPromise({ then: function () {} }), true)\n  a.equal(t.isPromise(Promise), false)\n  a.equal(t.isPromise(true), false)\n  a.equal(t.isPromise({}), false)\n  a.equal(t.isPromise(0), false)\n  a.equal(t.isPromise('1'), false)\n  a.equal(t.isPromise(1.1), false)\n  a.equal(t.isPromise(NaN), false)\n  a.equal(t.isPromise(Infinity), false)\n  a.equal(t.isPromise(function () {}), false)\n  a.equal(t.isPromise(Date), false)\n  a.equal(t.isPromise(), false)\n})",
       "data": {
         "testFor": "isPromise"
-      },
-      "content": "test.set('.isPromise', function () {\n  a.equal(t.isPromise(Promise.resolve()), true)\n  a.equal(t.isPromise({ then: function () {} }), true)\n  a.equal(t.isPromise(Promise), false)\n  a.equal(t.isPromise(true), false)\n  a.equal(t.isPromise({}), false)\n  a.equal(t.isPromise(0), false)\n  a.equal(t.isPromise('1'), false)\n  a.equal(t.isPromise(1.1), false)\n  a.equal(t.isPromise(NaN), false)\n  a.equal(t.isPromise(Infinity), false)\n  a.equal(t.isPromise(function () {}), false)\n  a.equal(t.isPromise(Date), false)\n  a.equal(t.isPromise(), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isObject', function () {\n  a.equal(t.isObject(Promise.resolve()), true)\n  a.equal(t.isObject(new Map()), true)\n  a.equal(t.isObject([]), true)\n  a.equal(t.isObject({ then: function () {} }), true)\n  a.equal(t.isObject({}), true)\n  a.equal(t.isObject(Promise), false)\n  a.equal(t.isObject(true), false)\n  a.equal(t.isObject(0), false)\n  a.equal(t.isObject('1'), false)\n  a.equal(t.isObject(1.1), false)\n  a.equal(t.isObject(NaN), false)\n  a.equal(t.isObject(Infinity), false)\n  a.equal(t.isObject(function () {}), false)\n  a.equal(t.isObject(Date), false)\n  a.equal(t.isObject(), false)\n})",
       "data": {
         "testFor": "isObject"
-      },
-      "content": "test.set('.isObject', function () {\n  a.equal(t.isObject(Promise.resolve()), true)\n  a.equal(t.isObject(new Map()), true)\n  a.equal(t.isObject([]), true)\n  a.equal(t.isObject({ then: function () {} }), true)\n  a.equal(t.isObject({}), true)\n  a.equal(t.isObject(Promise), false)\n  a.equal(t.isObject(true), false)\n  a.equal(t.isObject(0), false)\n  a.equal(t.isObject('1'), false)\n  a.equal(t.isObject(1.1), false)\n  a.equal(t.isObject(NaN), false)\n  a.equal(t.isObject(Infinity), false)\n  a.equal(t.isObject(function () {}), false)\n  a.equal(t.isObject(Date), false)\n  a.equal(t.isObject(), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isArrayLike', function () {\n  a.equal(t.isArrayLike(arguments), true)\n  a.equal(t.isArrayLike([]), true)\n  a.equal(t.isArrayLike(Promise.resolve()), false)\n  a.equal(t.isArrayLike(Promise), false)\n  a.equal(t.isArrayLike(true), false)\n  a.equal(t.isArrayLike({}), false)\n  a.equal(t.isArrayLike(0), false)\n  a.equal(t.isArrayLike('1'), false)\n  a.equal(t.isArrayLike(1.1), false)\n  a.equal(t.isArrayLike(NaN), false)\n  a.equal(t.isArrayLike(Infinity), false)\n  a.equal(t.isArrayLike(function () {}), false)\n  a.equal(t.isArrayLike(Date), false)\n  a.equal(t.isArrayLike(), false)\n  a.equal(t.isArrayLike(new Map()), false)\n  a.equal(t.isArrayLike({ then: function () {} }), false)\n})",
       "data": {
         "testFor": "isArrayLike"
-      },
-      "content": "test.set('.isArrayLike', function () {\n  a.equal(t.isArrayLike(arguments), true)\n  a.equal(t.isArrayLike([]), true)\n  a.equal(t.isArrayLike(Promise.resolve()), false)\n  a.equal(t.isArrayLike(Promise), false)\n  a.equal(t.isArrayLike(true), false)\n  a.equal(t.isArrayLike({}), false)\n  a.equal(t.isArrayLike(0), false)\n  a.equal(t.isArrayLike('1'), false)\n  a.equal(t.isArrayLike(1.1), false)\n  a.equal(t.isArrayLike(NaN), false)\n  a.equal(t.isArrayLike(Infinity), false)\n  a.equal(t.isArrayLike(function () {}), false)\n  a.equal(t.isArrayLike(Date), false)\n  a.equal(t.isArrayLike(), false)\n  a.equal(t.isArrayLike(new Map()), false)\n  a.equal(t.isArrayLike({ then: function () {} }), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isIterable', function () {\n  a.equal(t.isIterable('1'), true)\n  a.equal(t.isIterable(new Map()), true)\n  a.equal(t.isIterable([]), true)\n  a.equal(t.isIterable((function * () {})()), true)\n  a.equal(t.isIterable((async function * () {})()), true)\n  a.equal(t.isIterable(Promise.resolve()), false)\n  a.equal(t.isIterable(Promise), false)\n  a.equal(t.isIterable(true), false)\n  a.equal(t.isIterable({}), false)\n  a.equal(t.isIterable(0), false)\n  a.equal(t.isIterable(1.1), false)\n  a.equal(t.isIterable(null), false)\n  a.equal(t.isIterable(undefined), false)\n  a.equal(t.isIterable(NaN), false)\n  a.equal(t.isIterable(Infinity), false)\n  a.equal(t.isIterable(function () {}), false)\n  a.equal(t.isIterable(Date), false)\n  a.equal(t.isIterable(), false)\n  a.equal(t.isIterable({ then: function () {} }), false)\n})",
       "data": {
         "testFor": "isIterable"
-      },
-      "content": "test.set('.isIterable', function () {\n  a.equal(t.isIterable('1'), true)\n  a.equal(t.isIterable(new Map()), true)\n  a.equal(t.isIterable([]), true)\n  a.equal(t.isIterable((function * () {})()), true)\n  a.equal(t.isIterable((async function * () {})()), true)\n  a.equal(t.isIterable(Promise.resolve()), false)\n  a.equal(t.isIterable(Promise), false)\n  a.equal(t.isIterable(true), false)\n  a.equal(t.isIterable({}), false)\n  a.equal(t.isIterable(0), false)\n  a.equal(t.isIterable(1.1), false)\n  a.equal(t.isIterable(null), false)\n  a.equal(t.isIterable(undefined), false)\n  a.equal(t.isIterable(NaN), false)\n  a.equal(t.isIterable(Infinity), false)\n  a.equal(t.isIterable(function () {}), false)\n  a.equal(t.isIterable(Date), false)\n  a.equal(t.isIterable(), false)\n  a.equal(t.isIterable({ then: function () {} }), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isString', function () {\n  a.equal(t.isString('1'), true)\n  a.equal(t.isString(1), false)\n})",
       "data": {
         "testFor": "isString"
-      },
-      "content": "test.set('.isString', function () {\n  a.equal(t.isString('1'), true)\n  a.equal(t.isString(1), false)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isFunction', function () {\n  a.equal(t.isFunction(function () {}), true)\n  a.equal(t.isFunction(new Function()), true)\n  a.equal(t.isFunction(() => {}), true)\n})",
       "data": {
         "testFor": "isFunction"
-      },
-      "content": "test.set('.isFunction', function () {\n  a.equal(t.isFunction(function () {}), true)\n  a.equal(t.isFunction(new Function()), true)\n  a.equal(t.isFunction(() => {}), true)\n})"
+      }
     },
     {
       "children": [],
-      "type": "test",
+      "type": "block",
       "source": {
         "url": "test/test.js"
       },
+      "content": "test.set('.isAsyncFunction', function () {\n  const AsyncFunction = async function () {}.constructor\n  a.equal(t.isAsyncFunction(async function () {}), true)\n  a.equal(t.isAsyncFunction(new AsyncFunction()), true)\n  a.equal(t.isAsyncFunction(async () => {}), true)\n  a.equal(t.isAsyncFunction(function () {}), false)\n  a.equal(t.isAsyncFunction(new Function()), false)\n  a.equal(t.isAsyncFunction(() => {}), false)\n})",
       "data": {
         "testFor": "isAsyncFunction"
-      },
-      "content": "test.set('.isAsyncFunction', function () {\n  const AsyncFunction = async function () {}.constructor\n  a.equal(t.isAsyncFunction(async function () {}), true)\n  a.equal(t.isAsyncFunction(new AsyncFunction()), true)\n  a.equal(t.isAsyncFunction(async () => {}), true)\n  a.equal(t.isAsyncFunction(function () {}), false)\n  a.equal(t.isAsyncFunction(new Function()), false)\n  a.equal(t.isAsyncFunction(() => {}), false)\n})"
+      }
     }
   ]
 }

@@ -3,8 +3,8 @@
 dcdoc io-read \
         --inputs index.js test/test.js \
       dcdoc-parse \
-        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
-        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-2-onward-content.js \
+        --matchers ~/Documents/dcdoc-zone/model/lib/block-short.js ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
+        --matchers ~/Documents/dcdoc-zone/model/lib/block.js ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line/*.js \
         --quick-match docs/quick-match.js \
       --json \
       > docs/template-data.json
@@ -12,8 +12,8 @@ dcdoc io-read \
 dcdoc io-read \
         --inputs index.js test/test.js \
       dcdoc-parse \
-        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
-        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-2-onward-content.js \
+        --matchers ~/Documents/dcdoc-zone/model/lib/block-short.js ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
+        --matchers ~/Documents/dcdoc-zone/model/lib/block.js ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line/*.js \
         --quick-match docs/quick-match.js \
       array-to-tree \
       --json \
@@ -24,8 +24,8 @@ dcdoc io-read \
 dcdoc io-read \
         --inputs index.js test/test.js \
       dcdoc-parse \
-        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
-        --matchers ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-1-data.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line-2-onward-content.js \
+        --matchers ~/Documents/dcdoc-zone/model/lib/block-short.js ~/Documents/dcdoc-zone/parse/lib/matcher/block/short.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/short/*.js \
+        --matchers ~/Documents/dcdoc-zone/model/lib/block.js ~/Documents/dcdoc-zone/parse/lib/matcher/block/short2.js ~/Documents/dcdoc-zone/parse/lib/matcher/section/line/*.js \
         --quick-match docs/quick-match.js \
       array-to-tree \
       render-tree \

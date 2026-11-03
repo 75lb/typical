@@ -32,4 +32,8 @@ quickMatch.set(/\[P1\]/, function params1 (block, matches) {
 input | *    | The input to test`
 })
 
+quickMatch.toJSON = function () {
+  return 'Typical quickMatch'
+}
+
 export default quickMatch
